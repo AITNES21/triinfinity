@@ -1,0 +1,340 @@
+/* ==========================================================================
+   LAS RETADAS - ESTILOS ESPECÍFICOS
+   Solo los estilos que no están en inde.css
+   ========================================================================== */
+
+/* Variables específicas de las retadas */
+:root {
+    --rosa-principal: #c2185b;
+    --rosa-claro: #f8bbd9;
+    --rosa-oscuro: #8e0038;
+    --rosa-suave: #e91e63;
+}
+
+/* Hero específico para las retadas */
+.hero-retadas {
+    background: linear-gradient(135deg, var(--rosa-principal), var(--rosa-oscuro));
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.hero-retadas h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-retadas p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Estadísticas del hero */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Contenido principal */
+.content-retadas {
+    padding: 4rem 0;
+}
+
+.content-section {
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content-section h2 {
+    color: var(--rosa-principal);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.content-section p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.content-section strong {
+    color: var(--rosa-principal);
+}
+
+/* Imagen destacada en el contenido */
+.imagen-destacada {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.imagen-destacada img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Quote destacada */
+.quote-destacada {
+    background: var(--rosa-claro);
+    padding: 2rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--rosa-principal);
+    margin: 2rem 0;
+    font-style: italic;
+    position: relative;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.quote-destacada::before {
+    content: '"';
+    font-size: 4rem;
+    color: var(--rosa-principal);
+    position: absolute;
+    top: -10px;
+    left: 1rem;
+}
+
+/* Sedes de entrenamiento */
+.sedes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.sede-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.sede-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--rosa-principal);
+}
+
+.sede-card h3 {
+    color: var(--rosa-principal);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.sede-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sede-card li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.sede-card li::before {
+    content: '▶';
+    color: var(--rosa-principal);
+    position: absolute;
+    left: 0;
+}
+
+/* Ventajas grid */
+.ventajas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.ventaja-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.ventaja-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--rosa-principal);
+}
+
+.ventaja-item i {
+    font-size: 2.5rem;
+    color: var(--rosa-principal);
+    margin-bottom: 1rem;
+}
+
+.ventaja-item h3 {
+    color: var(--negro);
+    margin-bottom: 0.5rem;
+}
+
+/* Galería en grid */
+.gallery-section {
+    margin: 3rem 0;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.gallery-item {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+/* Imagen en línea con texto */
+.contenido-con-imagen {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+    align-items: center;
+}
+
+.contenido-con-imagen img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* CTA específico */
+.cta-retadas {
+    background: var(--rosa-principal);
+    color: white;
+    padding: 3rem 2rem;
+    border-radius: 8px;
+    text-align: center;
+    margin: 3rem 0;
+}
+
+.cta-retadas h2 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.cta-retadas p {
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.btn-retadas {
+    background: white;
+    color: var(--rosa-principal);
+    padding: 0.8rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.btn-retadas:hover {
+    background: var(--rosa-claro);
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-retadas {
+        padding: 3rem 0;
+    }
+
+    .hero-retadas h1 {
+        font-size: 2rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        max-width: 400px;
+    }
+
+    .content-retadas {
+        padding: 3rem 0;
+    }
+
+    .sedes-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .ventajas-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .contenido-con-imagen {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .gallery-item img {
+        height: 200px;
+    }
+
+    .cta-retadas {
+        padding: 2rem 1rem;
+    }
+}

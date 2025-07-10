@@ -1,0 +1,485 @@
+/* ==========================================================================
+   INICIACIÓN - ESTILOS ESPECÍFICOS
+   Diseño infantil pero elegante para edades 6-12 años
+   ========================================================================== */
+
+/* Variables específicas */
+:root {
+    --rojo-principal: #e63946;
+    --rojo-claro: #ff6b7a;
+    --rojo-suave: #ffecee;
+    --azul-infantil: #4fc3f7;
+    --verde-infantil: #81c784;
+    --amarillo-infantil: #ffb74d;
+    --morado-infantil: #ba68c8;
+    --negro-texto: #2c2c2c;
+    --gris-claro: #f8f9fa;
+    --blanco: #ffffff;
+}
+
+/* Hero infantil con formas divertidas */
+.hero-iniciacion {
+    background: linear-gradient(135deg, var(--rojo-principal), var(--rojo-claro));
+    color: white;
+    padding: 3rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-iniciacion::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.hero-iniciacion::after {
+    content: '';
+    position: absolute;
+    top: 100px;
+    right: -80px;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.hero-content-iniciacion {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.badge-iniciacion {
+    background: var(--amarillo-infantil);
+    color: var(--negro-texto);
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 700;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(255, 183, 77, 0.4);
+}
+
+.hero-iniciacion h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-iniciacion .subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+    font-weight: 500;
+}
+
+.hero-iniciacion p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+}
+
+/* Edades destacadas */
+.edades-highlight {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.edad-item {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Contenido principal */
+.content-iniciacion {
+    padding: 4rem 0;
+    background: var(--gris-claro);
+}
+
+.section-iniciacion {
+    margin-bottom: 4rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-iniciacion h2 {
+    font-size: 2.3rem;
+    color: var(--negro-texto);
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+    position: relative;
+}
+
+.section-iniciacion h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--rojo-principal), var(--azul-infantil));
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+}
+
+/* Imagen destacada con marco divertido */
+.imagen-iniciacion {
+    text-align: center;
+    margin: 3rem 0;
+    position: relative;
+}
+
+.imagen-iniciacion img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: 5px solid var(--blanco);
+}
+
+.imagen-iniciacion::before {
+    content: '⭐';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    z-index: 2;
+}
+
+/* Etapas en cards coloridas */
+.etapas-section {
+    background: var(--blanco);
+    padding: 3rem;
+    border-radius: 20px;
+    margin: 3rem 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.etapas-section h3 {
+    color: var(--rojo-principal);
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.etapas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.etapa-card {
+    background: linear-gradient(135deg, var(--rojo-suave), var(--blanco));
+    padding: 2rem;
+    border-radius: 15px;
+    border: 3px solid var(--rojo-claro);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.etapa-card::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 80px;
+    height: 80px;
+    background: var(--azul-infantil);
+    border-radius: 50%;
+    opacity: 0.2;
+}
+
+.etapa-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(230, 57, 70, 0.2);
+}
+
+.etapa-card h4 {
+    color: var(--rojo-principal);
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.etapa-card p {
+    color: var(--negro-texto);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* Capacidades que desarrollamos */
+.capacidades-section {
+    background: var(--negro-texto);
+    color: white;
+    padding: 4rem 2rem;
+    border-radius: 20px;
+    margin: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.capacidades-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('img/Logo.jpg') center/100px no-repeat;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.capacidades-content {
+    position: relative;
+    z-index: 2;
+}
+
+.capacidades-section h3 {
+    color: var(--amarillo-infantil);
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.capacidades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.capacidad-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.capacidad-item:hover {
+    border-color: var(--azul-infantil);
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.capacidad-item .emoji {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.capacidad-item h4 {
+    color: var(--azul-infantil);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.capacidad-item p {
+    opacity: 0.9;
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+/* Valores del deporte */
+.valores-section {
+    background: linear-gradient(135deg, var(--verde-infantil), var(--azul-infantil));
+    color: white;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    margin: 3rem 0;
+    text-align: center;
+}
+
+.valores-section h3 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.valores-grid {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+}
+
+.valor-item {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1.5rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    min-width: 150px;
+    transition: transform 0.3s ease;
+}
+
+.valor-item:hover {
+    transform: scale(1.05);
+}
+
+.valor-item .emoji {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.valor-item span {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* CTA infantil pero elegante */
+.cta-iniciacion {
+    background: linear-gradient(135deg, var(--rojo-principal), var(--morado-infantil));
+    color: white;
+    padding: 4rem 2rem;
+    border-radius: 20px;
+    text-align: center;
+    margin: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-iniciacion::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.cta-iniciacion .container {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-iniciacion h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.cta-iniciacion p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+    line-height: 1.7;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-iniciacion {
+    background: var(--amarillo-infantil);
+    color: var(--negro-texto);
+    padding: 1.2rem 3rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+    box-shadow: 0 5px 20px rgba(255, 183, 77, 0.4);
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.btn-iniciacion:hover {
+    background: var(--verde-infantil);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(129, 199, 132, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-iniciacion {
+        padding: 2rem 0;
+    }
+
+    .hero-iniciacion h1 {
+        font-size: 2.2rem;
+    }
+
+    .edades-highlight {
+        gap: 1rem;
+    }
+
+    .edad-item {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .content-iniciacion {
+        padding: 3rem 0;
+    }
+
+    .section-iniciacion h2 {
+        font-size: 1.8rem;
+    }
+
+    .etapas-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .capacidades-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .valores-grid {
+        gap: 1.5rem;
+    }
+
+    .cta-iniciacion {
+        padding: 3rem 1rem;
+    }
+
+    .cta-iniciacion h2 {
+        font-size: 2rem;
+    }
+}

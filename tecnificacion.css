@@ -1,0 +1,391 @@
+/* ==========================================================================
+   TECNIFICACIÓN - ESTILOS ESPECÍFICOS
+   Diseño limpio y profesional para adolescentes (13+ años)
+   ========================================================================== */
+
+/* Variables específicas */
+:root {
+    --rojo-principal: #e63946;
+    --rojo-oscuro: #d62839;
+    --negro: #212529;
+    --gris-oscuro: #495057;
+    --gris-claro: #f8f9fa;
+    --azul: #0d6efd;
+    --verde: #198754;
+    --blanco: #ffffff;
+}
+
+/* Hero profesional */
+.hero-tech {
+    background: linear-gradient(135deg, var(--negro), var(--gris-oscuro));
+    color: white;
+    padding: 5rem 0;
+    text-align: center;
+}
+
+.hero-tech h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.hero-tech .subtitle {
+    font-size: 1.2rem;
+    color: var(--rojo-principal);
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.hero-tech .quote {
+    font-size: 1.3rem;
+    font-style: italic;
+    margin-bottom: 2rem;
+    border-left: 4px solid var(--rojo-principal);
+    padding-left: 1rem;
+    display: inline-block;
+}
+
+.hero-tech p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+}
+
+/* Stats sencillas */
+.stats-tech {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.stat-tech {
+    background: white;
+    color: var(--negro);
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 150px;
+}
+
+.stat-tech-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--azul);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.stat-tech-label {
+    font-size: 0.9rem;
+    color: var(--gris-oscuro);
+    text-transform: uppercase;
+}
+
+/* Contenido principal */
+.content-tech {
+    padding: 5rem 0;
+    background: var(--gris-claro);
+}
+
+.section-tech {
+    max-width: 1100px;
+    margin: 0 auto 4rem;
+}
+
+.section-tech h2 {
+    font-size: 2.5rem;
+    color: var(--negro);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.section-tech h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--rojo-principal);
+    margin: 1rem auto;
+}
+
+/* Imagen principal */
+.imagen-principal {
+    text-align: center;
+    margin: 3rem 0;
+}
+
+.imagen-principal img {
+    width: 100%;
+    max-width: 700px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Cards limpias */
+.card-tech {
+    background: white;
+    padding: 3rem;
+    border-radius: 12px;
+    margin: 3rem 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-tech h3 {
+    color: var(--negro);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.card-tech p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--gris-oscuro);
+    margin-bottom: 1.5rem;
+}
+
+.card-tech strong {
+    color: var(--rojo-principal);
+}
+
+/* Grid de dos columnas */
+.grid-dos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+/* Lista destacada */
+.lista-destacada {
+    background: var(--gris-claro);
+    padding: 2rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--azul);
+}
+
+.lista-destacada h4 {
+    color: var(--negro);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.lista-destacada ul {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-destacada li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.lista-destacada li::before {
+    content: '✓';
+    color: var(--azul);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+/* Características en grid */
+.caracteristicas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.caracteristica {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.caracteristica:hover {
+    transform: translateY(-5px);
+}
+
+.caracteristica i {
+    font-size: 3rem;
+    color: var(--azul);
+    margin-bottom: 1rem;
+}
+
+.caracteristica h4 {
+    color: var(--negro);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.caracteristica p {
+    color: var(--gris-oscuro);
+    line-height: 1.6;
+}
+
+/* Sección negra */
+.seccion-negra {
+    background: var(--negro);
+    color: white;
+    padding: 4rem 2rem;
+    border-radius: 12px;
+    margin: 4rem 0;
+}
+
+.seccion-negra h3 {
+    color: white;
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* Sedes */
+.sedes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+    margin: 3rem 0;
+}
+
+.sede {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.sede:hover {
+    transform: translateY(-5px);
+}
+
+.sede h4 {
+    color: var(--rojo-principal);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sede i {
+    color: var(--azul);
+}
+
+.sede p {
+    color: var(--gris-oscuro);
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+.sede strong {
+    color: var(--negro);
+}
+
+.contacto-sede {
+    background: var(--gris-claro);
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+}
+
+.contacto-sede a {
+    color: var(--azul);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* CTA */
+.cta-tech {
+    background: var(--rojo-principal);
+    color: white;
+    padding: 4rem 2rem;
+    border-radius: 12px;
+    text-align: center;
+    margin: 4rem 0;
+}
+
+.cta-tech h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.cta-tech p {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-tech {
+    background: white;
+    color: var(--negro);
+    padding: 1.2rem 3rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-tech:hover {
+    background: var(--verde);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-tech {
+        padding: 3rem 0;
+    }
+
+    .hero-tech h1 {
+        font-size: 2.3rem;
+    }
+
+    .stats-tech {
+        gap: 1rem;
+    }
+
+    .stat-tech {
+        min-width: 120px;
+        padding: 1rem;
+    }
+
+    .grid-dos {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .caracteristicas {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .sedes {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .cta-tech {
+        padding: 3rem 1rem;
+    }
+
+    .cta-tech h2 {
+        font-size: 2rem;
+    }
+}

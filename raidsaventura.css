@@ -1,0 +1,395 @@
+/* ==========================================================================
+   RAIDS AVENTURA - ESTILOS ESPECÍFICOS
+   Diseño dinámico y aventurero con layout compacto
+   ========================================================================== */
+
+/* Variables específicas */
+:root {
+    --negro-aventura: #1a1a1a;
+    --gris-oscuro: #2e2e2e;
+    --gris-medio: #424242;
+    --gris-claro: #f5f5f5;
+    --rojo-aventura: #d32f2f;
+    --rojo-oscuro: #b71c1c;
+    --rojo-claro: #ef5350;
+    --naranja-aventura: #ff6f00;
+    --blanco-puro: #ffffff;
+}
+
+/* Hero compacto con diseño de aventura */
+.hero-aventura {
+    background: var(--negro-aventura);
+    color: white;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-aventura::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://triinfinity.es/wp-content/uploads/2024/09/raids-aventura.png') center/cover;
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.hero-aventura::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(211, 47, 47, 0.3));
+    z-index: 2;
+}
+
+.hero-content-aventura {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.aventura-badge {
+    background: linear-gradient(45deg, var(--rojo-aventura), var(--naranja-aventura));
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    display: inline-block;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 5px 15px rgba(211, 47, 47, 0.4);
+}
+
+.hero-aventura h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 900;
+    line-height: 1.1;
+    color: white;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.hero-aventura .subtitle {
+    color: var(--naranja-aventura);
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-aventura p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    opacity: 0.95;
+    margin-bottom: 3rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Elementos dinámicos en el hero */
+.aventura-elements {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.aventura-element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.element-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, var(--rojo-aventura), var(--naranja-aventura));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: 0 5px 15px rgba(211, 47, 47, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.element-icon:hover {
+    transform: translateY(-5px) scale(1.1);
+}
+
+.element-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--naranja-aventura);
+}
+
+/* Contenido principal compacto */
+.content-aventura {
+    padding: 4rem 0;
+    background: var(--gris-claro);
+}
+
+.intro-aventura {
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    text-align: center;
+    background: white;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.intro-aventura::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, var(--rojo-aventura), var(--naranja-aventura));
+    border-radius: 12px;
+    z-index: -1;
+}
+
+.intro-aventura h2 {
+    font-size: 2.5rem;
+    color: var(--negro-aventura);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.intro-aventura p {
+    font-size: 1.1rem;
+    color: var(--gris-oscuro);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.intro-aventura .highlight {
+    color: var(--rojo-aventura);
+    font-weight: 600;
+}
+
+/* Características en formato compacto */
+.caracteristicas-aventura {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.caracteristica-aventura {
+    background: var(--gris-oscuro);
+    color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.caracteristica-aventura::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 111, 0, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.caracteristica-aventura:hover::before {
+    left: 100%;
+}
+
+.caracteristica-aventura:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(211, 47, 47, 0.3);
+}
+
+.caracteristica-aventura i {
+    font-size: 3rem;
+    color: var(--naranja-aventura);
+    margin-bottom: 1rem;
+}
+
+.caracteristica-aventura h3 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.caracteristica-aventura p {
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* Call to action dinámico */
+.cta-aventura {
+    background: linear-gradient(135deg, var(--negro-aventura), var(--gris-oscuro));
+    color: white;
+    padding: 4rem 2rem;
+    border-radius: 12px;
+    text-align: center;
+    margin: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-aventura::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('img/Logo.jpg') center/80px no-repeat;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.cta-aventura .container {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-aventura h2 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, white, var(--naranja-aventura));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.cta-aventura p {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+    line-height: 1.7;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-aventura {
+    background: linear-gradient(45deg, var(--rojo-aventura), var(--naranja-aventura));
+    color: white;
+    padding: 1.2rem 3rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+    box-shadow: 0 5px 20px rgba(211, 47, 47, 0.4);
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.btn-aventura:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(211, 47, 47, 0.6);
+    color: white;
+}
+
+/* Decoración adicional */
+.decoracion-aventura {
+    text-align: center;
+    margin: 3rem 0;
+    padding: 2rem;
+    background: linear-gradient(45deg, rgba(211, 47, 47, 0.1), rgba(255, 111, 0, 0.1));
+    border-radius: 8px;
+}
+
+.decoracion-aventura .quote {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--gris-oscuro);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.decoracion-aventura .author {
+    color: var(--rojo-aventura);
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-aventura {
+        height: 60vh;
+    }
+
+    .hero-aventura h1 {
+        font-size: 2.5rem;
+    }
+
+    .aventura-elements {
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .element-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+
+    .intro-aventura {
+        padding: 2rem;
+        margin: 0 1rem 3rem;
+    }
+
+    .intro-aventura h2 {
+        font-size: 2rem;
+    }
+
+    .caracteristicas-aventura {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin: 2rem 1rem;
+    }
+
+    .cta-aventura {
+        padding: 3rem 1rem;
+        margin: 3rem 1rem;
+    }
+
+    .cta-aventura h2 {
+        font-size: 2.2rem;
+    }
+
+    .btn-aventura {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+}

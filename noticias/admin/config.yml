@@ -2,7 +2,6 @@ backend:
   name: github
   repo: AITNES21/triinfinity
   branch: main
-
 media_folder: "img/noticias"
 public_folder: "/img/noticias"
 
@@ -19,9 +18,25 @@ collections:
     fields:
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Fecha", name: "date", widget: "datetime" }
-      - { label: "Autor", name: "author", widget: "string", default: "TriInfinity" }
-      - { label: "Categoría", name: "category", widget: "select", options: ["competiciones", "club", "eventos", "entrenamientos", "logros"] }
+      - {
+          label: "Autor",
+          name: "author",
+          widget: "string",
+          default: "TriInfinity",
+        }
+      - {
+          label: "Categoría",
+          name: "category",
+          widget: "select",
+          options:
+            ["competiciones", "club", "eventos", "entrenamientos", "logros"],
+        }
       - { label: "Imagen", name: "image", widget: "image", required: false }
       - { label: "Resumen", name: "excerpt", widget: "text" }
       - { label: "Contenido", name: "body", widget: "markdown" }
-      - { label: "Destacada", name: "featured", widget: "boolean", default: false }
+      - {
+          label: "Destacada",
+          name: "featured",
+          widget: "boolean",
+          default: false,
+        }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,7 +11,6 @@
       padding: 0;
       min-height: 100vh;
     }
-
     .loading {
       display: flex;
       align-items: center;
@@ -22,7 +20,6 @@
       color: white;
       flex-direction: column;
     }
-
     .access-denied {
       display: flex;
       align-items: center;
@@ -33,9 +30,8 @@
       flex-direction: column;
       text-align: center;
     }
-
     .spinner {
-      border: 3px solid rgba(255, 255, 255, 0.3);
+      border: 3px solid rgba(255,255,255,0.3);
       border-top: 3px solid white;
       border-radius: 50%;
       width: 30px;
@@ -43,17 +39,10 @@
       animation: spin 1s linear infinite;
       margin-bottom: 1rem;
     }
-
     @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      100% {
-        transform: rotate(360deg);
-      }
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
-
     .cms-container {
       display: none;
       width: 100vw;
@@ -61,7 +50,6 @@
     }
   </style>
 </head>
-
 <body>
   <div id="loading" class="loading">
     <div class="spinner"></div>
@@ -89,7 +77,7 @@
     const cmsContainer = document.getElementById('cms-container');
 
     // Verificación automática al cargar la página
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
       checkAccess();
     });
 
@@ -97,7 +85,7 @@
       try {
         // Verificar si hay usuario logueado
         const currentUser = netlifyIdentity.currentUser();
-
+        
         if (currentUser && isAuthorized(currentUser.email)) {
           // Usuario autorizado - cargar CMS
           loadCMS();
@@ -122,7 +110,7 @@
       // Verificar si hay token de invitación en URL
       const urlParams = new URLSearchParams(window.location.hash.substring(1));
       const hasInviteToken = urlParams.has('invite_token') || urlParams.has('confirmation_token');
-
+      
       if (hasInviteToken) {
         // Hay token de invitación - abrir modal de confirmación
         netlifyIdentity.open('signup');
@@ -139,10 +127,10 @@
       // Cargar Netlify CMS
       const script = document.createElement('script');
       script.src = 'https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js';
-      script.onload = function () {
+      script.onload = function() {
         console.log('CMS cargado correctamente');
       };
-      script.onerror = function () {
+      script.onerror = function() {
         console.error('Error cargando CMS');
         showAccessDenied();
       };
@@ -155,7 +143,7 @@
     }
 
     // Listeners para cambios de estado de autenticación
-    netlifyIdentity.on('login', function (user) {
+    netlifyIdentity.on('login', function(user) {
       if (isAuthorized(user.email)) {
         loadCMS();
       } else {
@@ -164,7 +152,7 @@
       }
     });
 
-    netlifyIdentity.on('signup', function (user) {
+    netlifyIdentity.on('signup', function(user) {
       if (isAuthorized(user.email)) {
         loadCMS();
       } else {
@@ -173,7 +161,7 @@
       }
     });
 
-    netlifyIdentity.on('logout', function () {
+    netlifyIdentity.on('logout', function() {
       window.location.reload();
     });
 
@@ -183,13 +171,6 @@
       writable: false,
       configurable: false
     });
-    // Debug temporal
-    setTimeout(() => {
-      const user = netlifyIdentity.currentUser();
-      console.log('Usuario actual:', user);
-      if (user) console.log('Email:', user.email);
-    }, 2000);
   </script>
 </body>
-
 </html>

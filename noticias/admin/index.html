@@ -1,62 +1,15 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <title>Admin - TriInfinity</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <style>
-  body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background: #f8f9fa;
-  }
-  #login-btn {
-    background: #e63946;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  #login-btn:hover {
-    background: #d62839;
-  }
-</style>
 </head>
-
 <body>
-  <div id="netlify-modal"></div>
-  <button id="login-btn" onclick="netlifyIdentity.open()">Login/Registro</button>
-
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
   <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          document.getElementById('login-btn').style.display = 'block';
-        } else {
-          loadCMS();
-        }
-      });
-
-      window.netlifyIdentity.on("login", () => {
-        loadCMS();
-      });
-    }
-
-    function loadCMS() {
-      if (!document.querySelector('script[src*="netlify-cms"]')) {
-        const script = document.createElement('script');
-        script.src = 'https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js';
-        document.body.appendChild(script);
-      }
-    }
+    netlifyIdentity.init();
+    netlifyIdentity.on('login', () => location.reload());
   </script>
 </body>
-
 </html>

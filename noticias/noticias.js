@@ -18,13 +18,13 @@ class NoticiasManager {
     async cargarNoticias() {
         try {
             // Intentar cargar noticias desde Netlify CMS
-            const noticias = await this.cargarNoticiasDesdeNetlify();
-            if (noticias && noticias.length > 0) {
-                this.noticias = noticias;
-            } else {
-                console.log('No se encontraron noticias en Netlify CMS, usando noticias de ejemplo');
-                this.noticias = this.obtenerNoticiasEjemplo();
-            }
+            //   const noticias = await this.cargarNoticiasDesdeNetlify();
+            //   if (noticias && noticias.length > 0) {
+            //   this.noticias = noticias;
+            //  } else {
+            console.log('No se encontraron noticias en Netlify CMS, usando noticias de ejemplo');
+            this.noticias = this.obtenerNoticiasEjemplo();
+            //  }
 
             this.filtrarNoticias();
             this.mostrarNoticias();

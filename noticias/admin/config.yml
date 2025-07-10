@@ -2,8 +2,8 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "img"
-public_folder: "/img"
+media_folder: "img/noticias"
+public_folder: "/img/noticias"
 
 collections:
   - name: "noticias"
@@ -20,3 +20,8 @@ collections:
       - {label: "Resumen", name: "excerpt", widget: "text"}
       - {label: "Contenido", name: "body", widget: "markdown"}
       - {label: "Destacada", name: "featured", widget: "boolean", default: false}
+
+# Configuración adicional para solucionar problemas comunes
+site_url: https://tu-sitio.netlify.app
+display_url: https://tu-sitio.netlify.app
+logo_url: /img/Logo.jpg

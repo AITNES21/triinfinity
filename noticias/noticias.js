@@ -17,44 +17,110 @@ class NoticiasManager {
 
     async cargarNoticias() {
         try {
-            // Intentar cargar noticias desde archivos markdown
-            const response = await this.cargarNoticiasDesdeArchivos();
-            if (response && response.length > 0) {
-                this.noticias = response;
+            // Intentar cargar noticias desde Netlify CMS
+            const noticias = await this.cargarNoticiasDesdeNetlify();
+            if (noticias && noticias.length > 0) {
+                this.noticias = noticias;
             } else {
-                // Si no hay noticias, mostrar noticias de ejemplo
+                console.log('No se encontraron noticias en Netlify CMS, usando noticias de ejemplo');
                 this.noticias = this.obtenerNoticiasEjemplo();
             }
 
             this.filtrarNoticias();
             this.mostrarNoticias();
         } catch (error) {
-            console.log('Cargando noticias de ejemplo...');
+            console.error('Error cargando noticias:', error);
             this.noticias = this.obtenerNoticiasEjemplo();
             this.filtrarNoticias();
             this.mostrarNoticias();
         }
     }
 
-    async cargarNoticiasDesdeArchivos() {
-        // Esta función intentará cargar las noticias desde los archivos markdown
-        // generados por Netlify CMS
+    async cargarNoticiasDesdeNetlify() {
         try {
-            const response = await fetch('/_noticias/');
+            // Intentar cargar desde la API de Netlify
+            const response = await fetch('/.netlify/functions/get-noticias');
             if (response.ok) {
-                // Procesar archivos markdown si existen
-                return await this.procesarArchivosMarkdown();
+                return await response.json();
             }
+
+            // Si no hay función, intentar cargar archivos directamente
+            return await this.cargarArchivosMarkdown();
         } catch (error) {
-            console.log('No se pueden cargar noticias desde archivos:', error);
+            console.log('Error cargando desde Netlify:', error);
+            return null;
         }
-        return null;
     }
 
-    async procesarArchivosMarkdown() {
-        // Esta función procesaría los archivos markdown
-        // Por ahora retorna null para usar las noticias de ejemplo
-        return null;
+    async cargarArchivosMarkdown() {
+        try {
+            // Lista de archivos que podrían existir
+            const archivos = [
+                '_noticias/2025-01-15-gran-exito-triatlon-madrid.md',
+                '_noticias/2025-01-10-nuevo-entrenador-natacion.md',
+                '_noticias/2025-01-08-apertura-inscripciones-escuela.md'
+            ];
+
+            const noticias = [];
+
+            for (const archivo of archivos) {
+                try {
+                    const response = await fetch(`/${archivo}`);
+                    if (response.ok) {
+                        const contenido = await response.text();
+                        const noticia = this.parsearMarkdown(contenido);
+                        if (noticia) {
+                            noticias.push(noticia);
+                        }
+                    }
+                } catch (e) {
+                    console.log(`No se pudo cargar ${archivo}:`, e);
+                }
+            }
+
+            return noticias.length > 0 ? noticias : null;
+        } catch (error) {
+            console.log('Error cargando archivos markdown:', error);
+            return null;
+        }
+    }
+
+    parsearMarkdown(contenido) {
+        try {
+            // Separar frontmatter del contenido
+            const frontmatterMatch = contenido.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+            if (!frontmatterMatch) {
+                return null;
+            }
+
+            const frontmatter = frontmatterMatch[1];
+            const body = frontmatterMatch[2];
+
+            // Parsear frontmatter básico
+            const metadata = {};
+            frontmatter.split('\n').forEach(line => {
+                const [key, ...valueParts] = line.split(':');
+                if (key && valueParts.length > 0) {
+                    const value = valueParts.join(':').trim().replace(/^["']|["']$/g, '');
+                    metadata[key.trim()] = value;
+                }
+            });
+
+            return {
+                id: Date.now() + Math.random(),
+                title: metadata.title || 'Sin título',
+                date: metadata.date || new Date().toISOString(),
+                author: metadata.author || 'TriInfinity',
+                category: metadata.category || 'club',
+                image: metadata.image || null,
+                excerpt: metadata.excerpt || body.substring(0, 200) + '...',
+                content: body,
+                featured: metadata.featured === 'true'
+            };
+        } catch (error) {
+            console.error('Error parseando markdown:', error);
+            return null;
+        }
     }
 
     obtenerNoticiasEjemplo() {
@@ -163,45 +229,6 @@ Carmen se enfocará en:
             },
             {
                 id: 4,
-                title: 'Concentración de invierno en la Sierra de Madrid',
-                date: '2025-01-05',
-                author: 'TriInfinity',
-                category: 'entrenamientos',
-                image: '/img/noticias/concentracion-invierno.jpg',
-                excerpt: 'Los grupos de alto rendimiento realizarán una concentración especial en la Sierra de Madrid.',
-                content: `# Concentración de invierno en la Sierra de Madrid
-
-Del 20 al 25 de enero, nuestros grupos de tecnificación y alto rendimiento participarán en una concentración especial en la Sierra de Madrid.
-
-## Programa de entrenamiento
-
-**Días 1-2: Adaptación a la altitud**
-- Entrenamientos de natación técnica
-- Rodajes suaves en bicicleta
-- Carrera continua de baja intensidad
-
-**Días 3-4: Intensidad progresiva**
-- Series en piscina
-- Entrenamientos de fuerza en ciclismo
-- Trabajo de velocidad en carrera
-
-**Día 5: Test y evaluación**
-- Test de 1000m natación
-- Test de 20 minutos en bicicleta
-- Test de 3000m carrera
-
-## Objetivos
-
-- Preparación para la temporada 2025
-- Mejora de la capacidad aeróbica
-- Fortalecimiento del grupo
-- Evaluación del estado de forma
-
-¡Esperamos grandes resultados!`,
-                featured: false
-            },
-            {
-                id: 5,
                 title: 'Las Retadas consiguen 3 podios en el Duatlón de Móstoles',
                 date: '2025-01-03',
                 author: 'TriInfinity',
@@ -227,50 +254,8 @@ Este grupo, formado por madres y mujeres trabajadoras, demuestra que con constan
 
 Su lema "Si quieres, puedes" se hace realidad una vez más.
 
-## Próximos objetivos
-
-Las Retadas ya se preparan para:
-- Triatlón Sprint de Tres Cantos
-- Media Maratón de Madrid
-- Duatlón de Soto del Real
-
 ¡Enhorabuena a todas!`,
                 featured: true
-            },
-            {
-                id: 6,
-                title: 'Nuevo convenio con el Centro Deportivo Municipal',
-                date: '2025-01-01',
-                author: 'TriInfinity',
-                category: 'club',
-                image: '/img/noticias/convenio-municipal.jpg',
-                excerpt: 'Ampliamos nuestras instalaciones con un nuevo convenio que beneficia a todos los socios.',
-                content: `# Nuevo convenio con el Centro Deportivo Municipal
-
-Comenzamos el 2025 con una excelente noticia: hemos firmado un nuevo convenio con el Centro Deportivo Municipal que ampliará nuestras posibilidades de entrenamiento.
-
-## Qué incluye el convenio
-
-- Acceso a piscina olímpica de 50 metros
-- Uso de gimnasio de última generación
-- Pista de atletismo homologada
-- Salas de spinning y ciclo indoor
-
-## Beneficios para nuestros socios
-
-- Más horarios de entrenamiento disponibles
-- Mejores instalaciones
-- Actividades complementarias
-- Tarifas especiales para socios
-
-## Cuándo entra en vigor
-
-El convenio será efectivo a partir del **15 de enero de 2025**.
-
-Pronto publicaremos los nuevos horarios y cómo acceder a estas instalaciones.
-
-¡Seguimos creciendo!`,
-                featured: false
             }
         ];
     }
@@ -307,22 +292,25 @@ Pronto publicaremos los nuevos horarios y cómo acceder a estas instalaciones.
         }
 
         // Modal
-        const modalClose = document.getElementById('modalClose');
-        const modalNoticia = document.getElementById('modalNoticia');
+        this.configurarModal();
+    }
 
-        if (modalClose) {
-            modalClose.addEventListener('click', () => {
+    configurarModal() {
+        const modal = document.getElementById('modalNoticia');
+
+        // Cerrar modal con ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.style.display === 'flex') {
                 this.cerrarModal();
-            });
-        }
+            }
+        });
 
-        if (modalNoticia) {
-            modalNoticia.addEventListener('click', (e) => {
-                if (e.target.id === 'modalNoticia') {
-                    this.cerrarModal();
-                }
-            });
-        }
+        // Cerrar modal al hacer clic fuera
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                this.cerrarModal();
+            }
+        });
     }
 
     cambiarFiltro(categoria) {
@@ -412,22 +400,18 @@ Pronto publicaremos los nuevos horarios y cómo acceder a estas instalaciones.
             <div class="noticia-card ${noticia.featured ? 'destacada' : ''}" data-id="${noticia.id}">
                 <div class="noticia-imagen ${!noticia.image ? 'no-image' : ''}">
                     ${noticia.image
-                ? `<img src="${noticia.image}" alt="${noticia.title}" onerror="this.parentElement.innerHTML='<i class=\\"fas fa-newspaper\\"></i>'">`
+                ? `<img src="${noticia.image}" alt="${noticia.title}" onerror="this.parentElement.classList.add('no-image'); this.style.display='none'; this.parentElement.innerHTML+='<i class=\\"fas fa-newspaper\\"></i>'">`
                 : '<i class="fas fa-newspaper"></i>'
             }
-                    ${noticia.featured ? '<div class="badge-destacada">Destacada</div>' : ''}
                 </div>
-                <div class="noticia-contenido">
+                <div class="noticia-content">
                     <div class="noticia-meta">
-                        <span class="noticia-categoria">${categoriaTexto}</span>
                         <span class="noticia-fecha">${fecha}</span>
+                        <span class="noticia-categoria">${categoriaTexto}</span>
                     </div>
                     <h3 class="noticia-titulo">${noticia.title}</h3>
-                    <p class="noticia-resumen">${noticia.excerpt}</p>
-                    <div class="noticia-footer">
-                        <span class="noticia-autor">Por ${noticia.author}</span>
-                        <span class="leer-mas">Leer más <i class="fas fa-arrow-right"></i></span>
-                    </div>
+                    <p class="noticia-excerpt">${noticia.excerpt}</p>
+                    <div class="noticia-autor">Por ${noticia.author}</div>
                 </div>
             </div>
         `;
@@ -495,49 +479,33 @@ Pronto publicaremos los nuevos horarios y cómo acceder a estas instalaciones.
         const contenidoHTML = this.convertirMarkdownAHTML(noticia.content);
 
         modal.innerHTML = `
-            <div class="modal-contenido">
-                <div class="modal-header">
-                    <button class="modal-close" id="modalClose">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="modal-imagen">
-                        ${noticia.image
-                ? `<img src="${noticia.image}" alt="${noticia.title}" onerror="this.style.display='none'">`
-                : '<div class="no-image-modal"><i class="fas fa-newspaper"></i></div>'
+            <div class="modal-content">
+                <button class="modal-close" onclick="noticiasManager.cerrarModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="modal-noticia-header ${!noticia.image ? 'no-image' : ''}">
+                    ${noticia.image
+                ? `<img src="${noticia.image}" alt="${noticia.title}" onerror="this.parentElement.classList.add('no-image'); this.style.display='none'; this.parentElement.innerHTML+='<i class=\\"fas fa-newspaper\\"></i>'">`
+                : '<i class="fas fa-newspaper"></i>'
             }
+                </div>
+                <div class="modal-noticia-body">
+                    <div class="modal-noticia-meta">
+                        <div>
+                            <span class="noticia-categoria">${categoriaTexto}</span>
+                            <span class="noticia-fecha">${fecha}</span>
+                        </div>
+                        <div class="noticia-autor">Por ${noticia.author}</div>
                     </div>
-                    <div class="modal-info">
-                        <div class="modal-meta">
-                            <span class="modal-categoria">${categoriaTexto}</span>
-                            <span class="modal-fecha">${fecha}</span>
-                        </div>
-                        <h1 class="modal-titulo">${noticia.title}</h1>
-                        <div class="modal-autor">Por ${noticia.author}</div>
-                        <div class="modal-contenido-texto">
-                            ${contenidoHTML}
-                        </div>
+                    <h1 class="modal-noticia-titulo">${noticia.title}</h1>
+                    <div class="modal-noticia-content">
+                        ${contenidoHTML}
                     </div>
                 </div>
             </div>
         `;
 
-        // Reconfigurar evento de cerrar modal
-        const modalClose = modal.querySelector('#modalClose');
-        if (modalClose) {
-            modalClose.addEventListener('click', () => {
-                this.cerrarModal();
-            });
-        }
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                this.cerrarModal();
-            }
-        });
-
-        modal.style.display = 'flex';
+        modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
 
@@ -566,34 +534,14 @@ Pronto publicaremos los nuevos horarios y cómo acceder a estas instalaciones.
             document.body.style.overflow = 'auto';
         }
     }
-
-    // Método para agregar nuevas noticias (para uso futuro con CMS)
-    agregarNoticia(noticia) {
-        noticia.id = this.noticias.length > 0 ? Math.max(...this.noticias.map(n => n.id)) + 1 : 1;
-        this.noticias.unshift(noticia);
-        this.filtrarNoticias();
-        this.mostrarNoticias();
-    }
-
-    // Método para buscar noticias
-    buscarNoticias(termino) {
-        const terminoLower = termino.toLowerCase();
-        this.noticiasFiltradas = this.noticias.filter(noticia =>
-            noticia.title.toLowerCase().includes(terminoLower) ||
-            noticia.excerpt.toLowerCase().includes(terminoLower) ||
-            noticia.content.toLowerCase().includes(terminoLower)
-        );
-        this.paginaActual = 1;
-        this.mostrarNoticias();
-    }
 }
 
-// Inicializar el gestor de noticias cuando se carga la página
+// Inicializar el gestor de noticias
 document.addEventListener('DOMContentLoaded', () => {
     window.noticiasManager = new NoticiasManager();
 });
 
-// Función global para buscar noticias (para uso desde HTML)
+// Función global para buscar noticias
 function buscarNoticias(termino) {
     if (window.noticiasManager) {
         window.noticiasManager.buscarNoticias(termino);

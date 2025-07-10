@@ -1,8 +1,6 @@
 backend:
-  name: github
-  repo: AITNES21/triinfinity
+  name: git-gateway
   branch: main
-  client_id: Ov23lipquvktFJHGiWFq
 
 media_folder: "img/noticias"
 public_folder: "/img/noticias"
@@ -10,6 +8,12 @@ public_folder: "/img/noticias"
 site_url: https://incomparable-puffpuff-56cda0.netlify.app
 display_url: https://incomparable-puffpuff-56cda0.netlify.app
 logo_url: /img/Logo.jpg
+
+# Configuración de autenticación
+publish_mode: editorial_workflow
+slug:
+  encoding: "ascii"
+  clean_accents: true
 
 collections:
   - name: "noticias"
@@ -19,7 +23,12 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Título", name: "title", widget: "string" }
-      - { label: "Fecha", name: "date", widget: "datetime" }
+      - {
+          label: "Fecha",
+          name: "date",
+          widget: "datetime",
+          format: "YYYY-MM-DD HH:mm:ss",
+        }
       - {
           label: "Autor",
           name: "author",
@@ -31,14 +40,26 @@ collections:
           name: "category",
           widget: "select",
           options:
-            ["competiciones", "club", "eventos", "entrenamientos", "logros"],
+            [
+              { label: "Competiciones", value: "competiciones" },
+              { label: "Club", value: "club" },
+              { label: "Eventos", value: "eventos" },
+              { label: "Entrenamientos", value: "entrenamientos" },
+              { label: "Logros", value: "logros" },
+            ],
         }
       - { label: "Imagen", name: "image", widget: "image", required: false }
-      - { label: "Resumen", name: "excerpt", widget: "text" }
+      - {
+          label: "Resumen",
+          name: "excerpt",
+          widget: "text",
+          hint: "Breve descripción de la noticia (máx. 200 caracteres)",
+        }
       - { label: "Contenido", name: "body", widget: "markdown" }
       - {
           label: "Destacada",
           name: "featured",
           widget: "boolean",
           default: false,
+          hint: "Marca esta casilla si quieres que la noticia aparezca destacada",
         }

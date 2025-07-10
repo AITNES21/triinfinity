@@ -7,169 +7,324 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e63946, #212529);
       margin: 0;
       padding: 0;
       min-height: 100vh;
-    }
-    .loading {
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #e63946, #212529);
-      color: white;
-      flex-direction: column;
     }
-    .access-denied {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #dc3545, #6c757d);
-      color: white;
-      flex-direction: column;
+    .auth-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       text-align: center;
+      max-width: 400px;
+      width: 90%;
     }
-    .spinner {
-      border: 3px solid rgba(255,255,255,0.3);
-      border-top: 3px solid white;
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1rem;
+      background: #e63946;
       border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      animation: spin 1s linear infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    h1 {
+      color: #212529;
       margin-bottom: 1rem;
     }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .auth-button {
+      background: #e63946;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin: 0.5rem;
+      transition: background 0.3s;
+    }
+    .auth-button:hover {
+      background: #d62839;
+    }
+    .auth-button.secondary {
+      background: #6c757d;
+    }
+    .auth-button.secondary:hover {
+      background: #5a6268;
+    }
+    .status {
+      margin: 1rem 0;
+      padding: 0.5rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
     }
     .cms-container {
       display: none;
       width: 100vw;
       height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: white;
+    }
+    .logout-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div id="loading" class="loading">
-    <div class="spinner"></div>
-    <p>Verificando acceso...</p>
+  <div id="auth-container" class="auth-container">
+    <div class="logo">T</div>
+    <h1>Administración TriInfinity</h1>
+    <p>Acceso restringido para administradores</p>
+    
+    <div id="status" class="status" style="display: none;"></div>
+    
+    <div id="auth-buttons">
+      <button class="auth-button" onclick="handleLogin()">Iniciar Sesión</button>
+      <button class="auth-button secondary" onclick="handleSignup()" id="signup-btn" style="display: none;">Registrarse</button>
+    </div>
+    
+    <div id="user-info" style="display: none;">
+      <p>Bienvenido, <span id="user-email"></span></p>
+      <button class="auth-button" onclick="loadCMS()">Acceder al CMS</button>
+      <button class="auth-button secondary" onclick="handleLogout()">Cerrar Sesión</button>
+    </div>
   </div>
 
-  <div id="access-denied" class="access-denied" style="display: none;">
-    <h1>🚫 Acceso Denegado</h1>
-    <p>Esta área está restringida a administradores autorizados.</p>
-    <p>Si necesitas acceso, contacta con el administrador del sistema.</p>
+  <div id="cms-container" class="cms-container">
+    <button class="logout-btn" onclick="showAuth()">← Volver</button>
+    <div id="cms-content"></div>
   </div>
-
-  <div id="cms-container" class="cms-container"></div>
 
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
-    // Emails autorizados - CAMBIAR AQUÍ para añadir más usuarios
-    const AUTHORIZED_EMAILS = [
-      'twitchaitnes@gmail.com'
-    ];
+    // Configuración de seguridad
+    const ADMIN_EMAILS = ['twitchaitnes@gmail.com']; // Emails autorizados
+    const REQUIRE_INVITATION = true; // Requiere invitación previa
+
+    // Estado de la aplicación
+    let currentUser = null;
+    let cmsLoaded = false;
 
     // Elementos DOM
-    const loadingDiv = document.getElementById('loading');
-    const accessDeniedDiv = document.getElementById('access-denied');
+    const authContainer = document.getElementById('auth-container');
     const cmsContainer = document.getElementById('cms-container');
+    const statusDiv = document.getElementById('status');
+    const userInfo = document.getElementById('user-info');
+    const authButtons = document.getElementById('auth-buttons');
+    const userEmailSpan = document.getElementById('user-email');
+    const signupBtn = document.getElementById('signup-btn');
 
-    // Verificación automática al cargar la página
+    // Inicialización
     document.addEventListener('DOMContentLoaded', function() {
-      checkAccess();
+      checkRegistrationMode();
+      checkCurrentUser();
+      setupIdentityListeners();
     });
 
-    async function checkAccess() {
+    // Verificar modo de registro
+    async function checkRegistrationMode() {
       try {
-        // Verificar si hay usuario logueado
-        const currentUser = netlifyIdentity.currentUser();
+        const response = await fetch('/.netlify/identity');
+        const data = await response.json();
         
-        if (currentUser && isAuthorized(currentUser.email)) {
-          // Usuario autorizado - cargar CMS
-          loadCMS();
-        } else if (currentUser) {
-          // Usuario logueado pero no autorizado
-          showAccessDenied();
-        } else {
-          // No hay usuario logueado - intentar login automático
-          checkAutoLogin();
+        // Mostrar botón signup solo si registration está abierto
+        if (data.settings && data.settings.external && data.settings.external.registration) {
+          signupBtn.style.display = 'inline-block';
         }
       } catch (error) {
-        console.error('Error verificando acceso:', error);
-        showAccessDenied();
+        console.log('No se pudo verificar configuración de registro');
       }
     }
 
-    function isAuthorized(email) {
-      return email && AUTHORIZED_EMAILS.includes(email.toLowerCase());
+    // Verificar usuario actual
+    function checkCurrentUser() {
+      currentUser = netlifyIdentity.currentUser();
+      if (currentUser) {
+        if (isAuthorizedUser(currentUser)) {
+          showUserInfo();
+        } else {
+          showError('Usuario no autorizado');
+          handleLogout();
+        }
+      }
     }
 
-    function checkAutoLogin() {
-      // Verificar si hay token de invitación en URL
-      const urlParams = new URLSearchParams(window.location.hash.substring(1));
-      const hasInviteToken = urlParams.has('invite_token') || urlParams.has('confirmation_token');
+    // Configurar listeners de Identity
+    function setupIdentityListeners() {
+      netlifyIdentity.on('login', function(user) {
+        currentUser = user;
+        if (isAuthorizedUser(user)) {
+          showSuccess('Login exitoso');
+          showUserInfo();
+        } else {
+          showError('Usuario no autorizado para acceder al CMS');
+          handleLogout();
+        }
+      });
+
+      netlifyIdentity.on('signup', function(user) {
+        showSuccess('Registro exitoso. Verificando permisos...');
+        setTimeout(() => {
+          if (isAuthorizedUser(user)) {
+            showUserInfo();
+          } else {
+            showError('Usuario registrado pero sin permisos de administrador');
+            handleLogout();
+          }
+        }, 1000);
+      });
+
+      netlifyIdentity.on('logout', function() {
+        currentUser = null;
+        showAuth();
+        showSuccess('Sesión cerrada');
+      });
+
+      netlifyIdentity.on('error', function(err) {
+        showError('Error: ' + err.message);
+      });
+    }
+
+    // Verificar si el usuario está autorizado
+    function isAuthorizedUser(user) {
+      if (!user || !user.email) return false;
       
-      if (hasInviteToken) {
-        // Hay token de invitación - abrir modal de confirmación
-        netlifyIdentity.open('signup');
-      } else {
-        // No hay token - denegar acceso
-        showAccessDenied();
+      // Verificar si el email está en la lista de administradores
+      const isAdminEmail = ADMIN_EMAILS.includes(user.email.toLowerCase());
+      
+      // Verificar si tiene confirmación de email (indica invitación previa)
+      const hasConfirmedEmail = user.email_confirmed_at || user.confirmed_at;
+      
+      if (REQUIRE_INVITATION && !hasConfirmedEmail) {
+        return false;
+      }
+      
+      return isAdminEmail;
+    }
+
+    // Manejar login
+    function handleLogin() {
+      try {
+        netlifyIdentity.open('login');
+      } catch (error) {
+        showError('Error al abrir login: ' + error.message);
       }
     }
 
+    // Manejar signup
+    function handleSignup() {
+      try {
+        netlifyIdentity.open('signup');
+      } catch (error) {
+        showError('Error al abrir registro: ' + error.message);
+      }
+    }
+
+    // Manejar logout
+    function handleLogout() {
+      try {
+        netlifyIdentity.logout();
+      } catch (error) {
+        showError('Error al cerrar sesión: ' + error.message);
+      }
+    }
+
+    // Cargar CMS
     function loadCMS() {
-      loadingDiv.style.display = 'none';
+      if (!currentUser || !isAuthorizedUser(currentUser)) {
+        showError('No autorizado para acceder al CMS');
+        return;
+      }
+
+      authContainer.style.display = 'none';
       cmsContainer.style.display = 'block';
 
-      // Cargar Netlify CMS
-      const script = document.createElement('script');
-      script.src = 'https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js';
-      script.onload = function() {
-        console.log('CMS cargado correctamente');
-      };
-      script.onerror = function() {
-        console.error('Error cargando CMS');
-        showAccessDenied();
-      };
-      cmsContainer.appendChild(script);
+      if (!cmsLoaded) {
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js';
+        script.onload = function() {
+          cmsLoaded = true;
+          showSuccess('CMS cargado correctamente');
+        };
+        script.onerror = function() {
+          showError('Error al cargar el CMS');
+          showAuth();
+        };
+        document.getElementById('cms-content').appendChild(script);
+      }
     }
 
-    function showAccessDenied() {
-      loadingDiv.style.display = 'none';
-      accessDeniedDiv.style.display = 'flex';
+    // Mostrar interfaz de autenticación
+    function showAuth() {
+      authContainer.style.display = 'block';
+      cmsContainer.style.display = 'none';
+      userInfo.style.display = 'none';
+      authButtons.style.display = 'block';
     }
 
-    // Listeners para cambios de estado de autenticación
-    netlifyIdentity.on('login', function(user) {
-      if (isAuthorized(user.email)) {
-        loadCMS();
-      } else {
-        netlifyIdentity.logout();
-        showAccessDenied();
+    // Mostrar información del usuario
+    function showUserInfo() {
+      if (currentUser) {
+        userEmailSpan.textContent = currentUser.email;
+        userInfo.style.display = 'block';
+        authButtons.style.display = 'none';
       }
-    });
+    }
 
-    netlifyIdentity.on('signup', function(user) {
-      if (isAuthorized(user.email)) {
-        loadCMS();
-      } else {
-        netlifyIdentity.logout();
-        showAccessDenied();
-      }
-    });
+    // Mostrar mensaje de estado
+    function showStatus(message, type) {
+      statusDiv.textContent = message;
+      statusDiv.className = 'status ' + type;
+      statusDiv.style.display = 'block';
+      
+      setTimeout(() => {
+        statusDiv.style.display = 'none';
+      }, 5000);
+    }
 
-    netlifyIdentity.on('logout', function() {
-      window.location.reload();
-    });
+    function showError(message) {
+      showStatus(message, 'error');
+    }
 
-    // Prevenir manipulación del DOM
-    Object.defineProperty(window, 'AUTHORIZED_EMAILS', {
-      value: AUTHORIZED_EMAILS,
-      writable: false,
-      configurable: false
+    function showSuccess(message) {
+      showStatus(message, 'success');
+    }
+
+    // Prevenir acceso directo al CMS
+    window.addEventListener('load', function() {
+      // Ocultar cualquier contenido del CMS hasta autenticación
+      const cmsElements = document.querySelectorAll('[data-netlify-cms]');
+      cmsElements.forEach(el => el.style.display = 'none');
     });
   </script>
 </body>

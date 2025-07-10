@@ -365,6 +365,13 @@
         ]
     }
     </script>
+    <script>
+        console.log('Hash:', window.location.hash);
+        if (window.location.hash.includes('invite_token') || window.location.hash.includes('confirmation_token')) {
+            console.log('Redirigiendo a admin...');
+            window.location.href = '/noticias/admin/';
+        }
+    </script>
 </body>
 
 

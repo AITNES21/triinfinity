@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: tu-usuario/tu-repositorio
+  repo: AITNES21/triinfinity
   branch: main
 
 media_folder: "img/noticias"

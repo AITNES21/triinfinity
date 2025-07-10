@@ -1,0 +1,474 @@
+/* ==========================================================================
+   ALTO RENDIMIENTO - ESTILOS ESPECÍFICOS
+   Diseño serio y profesional para el grupo elite
+   ========================================================================== */
+
+/* Variables específicas de alto rendimiento */
+:root {
+    --negro-elite: #1a1a1a;
+    --gris-oscuro: #2e2e2e;
+    --gris-medio: #424242;
+    --gris-claro: #eceff1;
+    --rojo-elite: #d32f2f;
+    --rojo-oscuro: #b71c1c;
+    --rojo-claro: #ef5350;
+    --blanco-puro: #ffffff;
+}
+
+/* Hero específico para alto rendimiento */
+.hero-elite {
+    background: linear-gradient(135deg, var(--negro-elite), var(--gris-oscuro));
+    color: white;
+    padding: 5rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-elite::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://triinfinity.es/wp-content/uploads/2024/08/image-2024-08-26-194714.jpg') center/cover;
+    opacity: 0.15;
+    z-index: 1;
+}
+
+.hero-elite .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-elite h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-elite .subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    color: var(--rojo-elite);
+    font-weight: 600;
+}
+
+.hero-elite p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* Estadísticas elite */
+.elite-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stat-elite {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.stat-elite:hover {
+    border-color: var(--rojo-elite);
+    transform: translateY(-5px);
+}
+
+.stat-elite-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--rojo-elite);
+}
+
+.stat-elite-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Contenido principal */
+.content-elite {
+    padding: 5rem 0;
+    background: var(--gris-claro);
+}
+
+.content-section-elite {
+    margin-bottom: 4rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content-section-elite h2 {
+    color: var(--negro-elite);
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.content-section-elite h3 {
+    color: var(--rojo-elite);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.content-section-elite p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: var(--gris-oscuro);
+}
+
+.content-section-elite strong {
+    color: var(--rojo-elite);
+}
+
+/* Imagen destacada profesional */
+.imagen-elite {
+    margin: 3rem 0;
+    text-align: center;
+    position: relative;
+}
+
+.imagen-elite img {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    filter: grayscale(0.2);
+}
+
+/* Director técnico destacado */
+.director-section {
+    background: var(--negro-elite);
+    color: white;
+    padding: 3rem 2rem;
+    border-radius: 8px;
+    margin: 3rem 0;
+    position: relative;
+}
+
+.director-section h3 {
+    color: var(--rojo-elite);
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.director-section p {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+/* Criterios de selección */
+.criterios-section {
+    background: white;
+    padding: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    margin: 3rem 0;
+    border-left: 5px solid var(--rojo-elite);
+}
+
+.criterios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.criterio-card {
+    background: var(--gris-claro);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.criterio-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--rojo-elite);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.criterio-card h4 {
+    color: var(--rojo-elite);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.criterio-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.criterio-card li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--gris-oscuro);
+}
+
+.criterio-card li::before {
+    content: '▶';
+    color: var(--rojo-elite);
+    position: absolute;
+    left: 0;
+    font-size: 0.8rem;
+}
+
+/* Equipo multidisciplinar */
+.equipo-section {
+    background: var(--gris-oscuro);
+    color: white;
+    padding: 3rem 2rem;
+    border-radius: 8px;
+    margin: 3rem 0;
+}
+
+.equipo-section h3 {
+    color: var(--rojo-elite);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.equipo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.equipo-member {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.equipo-member:hover {
+    border-color: var(--rojo-elite);
+    transform: translateY(-5px);
+}
+
+.equipo-member i {
+    font-size: 3rem;
+    color: var(--rojo-elite);
+    margin-bottom: 1rem;
+}
+
+.equipo-member h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.equipo-member p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Galería elite */
+.gallery-elite {
+    margin: 4rem 0;
+}
+
+.gallery-elite h3 {
+    text-align: center;
+    color: var(--negro-elite);
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.gallery-grid-elite {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.gallery-item-elite {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.gallery-item-elite:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(211, 47, 47, 0.3);
+}
+
+.gallery-item-elite img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    filter: grayscale(0.3);
+    transition: filter 0.3s ease;
+}
+
+.gallery-item-elite:hover img {
+    filter: grayscale(0);
+}
+
+/* CTA elite */
+.cta-elite {
+    background: linear-gradient(135deg, var(--rojo-elite), var(--rojo-oscuro));
+    color: white;
+    padding: 4rem 2rem;
+    border-radius: 8px;
+    text-align: center;
+    margin: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-elite::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('img/Logo.jpg') center/100px no-repeat;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.cta-elite .container {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-elite h2 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.cta-elite p {
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+.btn-elite {
+    background: white;
+    color: var(--rojo-elite);
+    padding: 1rem 2.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.btn-elite:hover {
+    background: var(--gris-claro);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    color: var(--rojo-elite);
+}
+
+/* Contacto destacado */
+.contacto-elite {
+    background: var(--negro-elite);
+    color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.contacto-elite h4 {
+    color: var(--rojo-elite);
+    margin-bottom: 1rem;
+}
+
+.contacto-elite a {
+    color: var(--rojo-claro);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contacto-elite a:hover {
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-elite {
+        padding: 3rem 0;
+    }
+
+    .hero-elite h1 {
+        font-size: 2.2rem;
+    }
+
+    .elite-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        max-width: 400px;
+    }
+
+    .content-elite {
+        padding: 3rem 0;
+    }
+
+    .criterios-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .equipo-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .gallery-grid-elite {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .gallery-item-elite img {
+        height: 220px;
+    }
+
+    .cta-elite {
+        padding: 3rem 1rem;
+    }
+
+    .cta-elite h2 {
+        font-size: 2rem;
+    }
+}

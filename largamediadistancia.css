@@ -1,0 +1,469 @@
+/* ==========================================================================
+   MEDIA Y LARGA DISTANCIA - ESTILOS ESPECÍFICOS
+   Diseño serio con layout alternativo para variedad
+   ========================================================================== */
+
+/* Variables específicas */
+:root {
+    --negro-distancia: #1a1a1a;
+    --gris-oscuro: #2e2e2e;
+    --gris-medio: #424242;
+    --gris-claro: #eceff1;
+    --rojo-distancia: #d32f2f;
+    --rojo-oscuro: #b71c1c;
+    --rojo-claro: #ef5350;
+    --blanco-puro: #ffffff;
+}
+
+/* Header alternativo - layout horizontal */
+.header-distancia {
+    background: var(--negro-distancia);
+    color: white;
+    padding: 0;
+    overflow: hidden;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.header-content-distancia {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    height: 60vh;
+    width: 100%;
+}
+
+.header-text {
+    background: linear-gradient(135deg, var(--negro-distancia), var(--gris-oscuro));
+    padding: 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.header-text::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -50px;
+    width: 100px;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 50%, var(--gris-oscuro) 50%);
+    z-index: 5;
+}
+
+.comando-badge {
+    background: var(--rojo-distancia);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 1rem;
+    width: fit-content;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.header-text h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: white;
+}
+
+.header-text .subtitle {
+    color: var(--rojo-claro);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.header-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.header-image {
+    background: url('https://triinfinity.es/wp-content/uploads/2024/08/image-2024-08-24-195301.jpg') center/cover;
+    position: relative;
+}
+
+.header-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(26, 26, 26, 0.3), transparent 70%);
+}
+
+/* Stats en forma de línea */
+.stats-line {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stat-icon {
+    width: 12px;
+    height: 12px;
+    background: var(--rojo-distancia);
+    border-radius: 50%;
+}
+
+.stat-text {
+    font-size: 0.9rem;
+    color: var(--rojo-claro);
+    font-weight: 600;
+}
+
+/* Contenido principal con diseño alternativo */
+.content-distancia {
+    padding: 5rem 0;
+    background: var(--gris-claro);
+}
+
+.intro-section {
+    max-width: 1000px;
+    margin: 0 auto 4rem;
+    text-align: center;
+}
+
+.intro-section h2 {
+    font-size: 2.5rem;
+    color: var(--negro-distancia);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.intro-section p {
+    font-size: 1.2rem;
+    color: var(--gris-oscuro);
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Características en cards horizontales */
+.caracteristicas-section {
+    margin: 4rem 0;
+}
+
+.caracteristicas-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.caracteristica-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    transition: all 0.3s ease;
+}
+
+.caracteristica-card:hover {
+    transform: translateX(10px);
+    box-shadow: 0 10px 30px rgba(211, 47, 47, 0.2);
+}
+
+.caracteristica-icon {
+    background: var(--rojo-distancia);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.caracteristica-content {
+    padding: 1.5rem 2rem;
+}
+
+.caracteristica-content h3 {
+    color: var(--negro-distancia);
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.caracteristica-content p {
+    color: var(--gris-oscuro);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Tipos de atleta */
+.tipos-section {
+    background: var(--gris-oscuro);
+    color: white;
+    padding: 4rem 2rem;
+    margin: 4rem 0;
+    border-radius: 8px;
+}
+
+.tipos-section h3 {
+    text-align: center;
+    color: var(--rojo-claro);
+    font-size: 2rem;
+    margin-bottom: 3rem;
+}
+
+.tipos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.tipo-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.tipo-card:hover {
+    border-color: var(--rojo-distancia);
+    transform: translateY(-5px);
+}
+
+.tipo-card i {
+    font-size: 3rem;
+    color: var(--rojo-claro);
+    margin-bottom: 1rem;
+}
+
+.tipo-card h4 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.tipo-card p {
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* Imagen destacada con overlay */
+.imagen-destacada-distancia {
+    margin: 4rem 0;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 400px;
+}
+
+.imagen-destacada-distancia img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.3);
+}
+
+.imagen-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(26, 26, 26, 0.8));
+    color: white;
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+}
+
+.imagen-overlay h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--rojo-claro);
+}
+
+/* Galería en mosaico */
+.gallery-mosaico {
+    margin: 4rem 0;
+}
+
+.gallery-mosaico h3 {
+    text-align: center;
+    color: var(--negro-distancia);
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.mosaico-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.mosaico-item {
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    height: 250px;
+    transition: all 0.3s ease;
+}
+
+.mosaico-item:hover {
+    transform: scale(1.02);
+    z-index: 5;
+}
+
+.mosaico-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.4);
+    transition: filter 0.3s ease;
+}
+
+.mosaico-item:hover img {
+    filter: grayscale(0);
+}
+
+/* Call to action con diseño diferente */
+.cta-distancia {
+    background: var(--negro-distancia);
+    color: white;
+    padding: 0;
+    border-radius: 8px;
+    margin: 4rem 0;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    min-height: 300px;
+}
+
+.cta-content {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cta-content h2 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
+}
+
+.cta-content p {
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    line-height: 1.7;
+}
+
+.cta-image {
+    background: url('https://triinfinity.es/wp-content/uploads/2024/05/photo_2024-05-21_16-59-03.jpg') center/cover;
+    position: relative;
+}
+
+.cta-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, rgba(26, 26, 26, 0.7), transparent);
+}
+
+.btn-distancia {
+    background: var(--rojo-distancia);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.3s ease;
+    width: fit-content;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-distancia:hover {
+    background: var(--rojo-claro);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(211, 47, 47, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header-content-distancia {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .header-text {
+        padding: 3rem 2rem;
+    }
+
+    .header-text::after {
+        display: none;
+    }
+
+    .header-image {
+        height: 300px;
+    }
+
+    .header-text h1 {
+        font-size: 2.2rem;
+    }
+
+    .stats-line {
+        gap: 1.5rem;
+    }
+
+    .caracteristica-card {
+        grid-template-columns: 1fr;
+    }
+
+    .caracteristica-icon {
+        height: 60px;
+    }
+
+    .tipos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-distancia {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-image {
+        height: 200px;
+    }
+
+    .mosaico-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mosaico-item {
+        height: 200px;
+    }
+}

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRIINFINITY - Tecnificación</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="inde.css" />
+    <link rel="stylesheet" href="tecnificacion.css" />
+    <link rel="shortcut icon" href="img/Logo.jpg" type="image/x-icon" />
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-content">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <img src="img/Logo.jpg" alt="TriInfinity Logo" />
+                <span class="logo-text">TRIINFINITY</span>
+            </div>
+
+            <nav class="desktop-menu">
+                <ul>
+                    <li><a href="index.html#inicio">Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="#club" class="dropdown-toggle">El Club <i
+                                class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="quienessomos.html">¿Quiénes somos?</a></li>
+                            <li><a href="Organigrama.html">Organigrama</a></li>
+                            <li><a href="competiciones.html">Competiciones</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">Escuela <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="iniciacion.html">Iniciación (6 a 13 años)</a></li>
+                            <li><a href="tecnificacion.html">Tecnificación - Grupo E (14 a 16)</a></li>
+                            <li><a href="alto-rendimiento.html">Rendimiento Deportivo «Grupo R» (16 a 24)</a></li>
+                            <li><a href="horarios-escuela.html">Horarios Escuela</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">Grupos <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="quienessomos.html">Club Triatlón</a></li>
+                            <li><a href="equipofemenino.html">Equipo Femenino</a></li>
+                            <li><a href="las-retadas.html">Las «Retadas»</a></li>
+                            <li><a href="alto-rendimiento.html">Alto Rendimiento</a></li>
+                            <li><a href="media-larga-distancia.html">Media y Larga Distancia</a></li>
+                            <li><a href="raids-aventura.html">Raids Aventura</a></li>
+                            <li><a href="trail-running.html">Trail Running</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="instalaciones.html">Instalaciones</a></li>
+                    <li><a href="noticias.html">Noticias</a></li>
+                    <li><a href="hazte-socio.html">Hazte Socio</a></li>
+                    <li><a href="index.html#equipacion">Equipación</a></li>
+                    <li><a href="index.html#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menú móvil">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li class="mobile-dropdown">
+                    <a class="dropdown-toggle">El Club <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="quienessomos.html">¿Quiénes somos?</a></li>
+                        <li><a href="Organigrama.html">Organigrama</a></li>
+                        <li><a href="competiciones.html">Competiciones</a></li>
+                    </ul>
+                </li>
+                <li class="mobile-dropdown">
+                    <a class="dropdown-toggle">Escuela <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="iniciacion.html">Iniciación (6 a 13 años)</a></li>
+                        <li><a href="tecnificacion.html">Tecnificación - Grupo E (14 a 16)</a></li>
+                        <li><a href="alto-rendimiento.html">Rendimiento Deportivo «Grupo R» (16 a 24)</a></li>
+                        <li><a href="horarios-escuela.html">Horarios Escuela</a></li>
+                    </ul>
+                </li>
+                <li class="mobile-dropdown">
+                    <a class="dropdown-toggle">Grupos <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="quienessomos.html">Club Triatlón</a></li>
+                        <li><a href="equipofemenino.html">Equipo Femenino</a></li>
+                        <li><a href="las-retadas.html">Las «Retadas»</a></li>
+                        <li><a href="alto-rendimiento.html">Alto Rendimiento</a></li>
+                        <li><a href="media-larga-distancia.html">Media y Larga Distancia</a></li>
+                        <li><a href="raids-aventura.html">Raids Aventura</a></li>
+                        <li><a href="trail-running.html">Trail Running</a></li>
+                    </ul>
+                </li>
+                <li><a href="instalaciones.html">Instalaciones</a></li>
+                <li><a href="noticias.html">Noticias</a></li>
+                <li><a href="hazte-socio.html">Hazte Socio</a></li>
+                <li><a href="index.html#equipacion">Equipación</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero-tech">
+        <div class="container">
+            <h1>Tecnificación</h1>
+            <div class="subtitle">Grupo E - 14 a 16 años</div>
+            <div class="quote">"No tengas prisa en llegar muy alto, juega, disfruta, aprende y todo llegará"</div>
+            <p>Después de los años de iniciación, donde hacemos multideporte, toca empezar a entrar y especializarse.
+                Comenzamos con el Grupo E, un grupo de tecnificación deportiva.</p>
+
+            <div class="stats-tech">
+                <div class="stat-tech">
+                    <span class="stat-tech-number">14-16</span>
+                    <span class="stat-tech-label">Años</span>
+                </div>
+                <div class="stat-tech">
+                    <span class="stat-tech-number">Grupo E</span>
+                    <span class="stat-tech-label">Tecnificación</span>
+                </div>
+                <div class="stat-tech">
+                    <span class="stat-tech-number">2</span>
+                    <span class="stat-tech-label">Sedes</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenido -->
+    <section class="content-tech">
+        <div class="container">
+
+            <!-- Imagen principal -->
+            <div class="imagen-principal">
+                <img src="https://triinfinity.es/wp-content/uploads/2024/08/ilustracion_sin_titulo_page-0001.jpg"
+                    alt="Tecnificación Grupo E">
+            </div>
+
+            <!-- Nueva etapa -->
+            <div class="card-tech">
+                <h3>Una Nueva Etapa</h3>
+                <div class="grid-dos">
+                    <div>
+                        <p>Desde los <strong>13 años</strong> comienza una nueva etapa, es momento de empezar a tocar la
+                            <strong>bici de carretera</strong>, aumentar las horas de entrenamiento y tomarse las cosas
+                            más en serio.</p>
+
+                        <p>El cuerpo pide <strong>"marcha"</strong> y la energía nos sobra, así que la mejor manera de
+                            canalizarlo es entrenando. En esta etapa llegan las primeras <strong>competiciones
+                                nacionales</strong>, los viajes con el Club y l@s compañer@s.</p>
+                    </div>
+
+                    <div class="lista-destacada">
+                        <h4>Características de esta etapa:</h4>
+                        <ul>
+                            <li>Introducción a la bicicleta de carretera</li>
+                            <li>Aumento de horas de entrenamiento</li>
+                            <li>Primeras competiciones nacionales</li>
+                            <li>Viajes y experiencias grupales</li>
+                            <li>Mayor seriedad en el entrenamiento</li>
+                            <li>Desarrollo de la disciplina deportiva</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Características -->
+            <div class="seccion-negra">
+                <h3>Lo que Desarrollamos</h3>
+                <div class="caracteristicas">
+                    <div class="caracteristica">
+                        <i class="fas fa-bicycle"></i>
+                        <h4>Técnica Avanzada</h4>
+                        <p>Perfeccionamiento de la técnica en las tres disciplinas con especial atención a la bicicleta
+                            de carretera.</p>
+                    </div>
+
+                    <div class="caracteristica">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Rendimiento</h4>
+                        <p>Entrenamiento estructurado y planificado para mejorar el rendimiento deportivo de forma
+                            progresiva.</p>
+                    </div>
+
+                    <div class="caracteristica">
+                        <i class="fas fa-trophy"></i>
+                        <h4>Competición</h4>
+                        <p>Participación en competiciones nacionales y experiencia competitiva real a nivel federado.
+                        </p>
+                    </div>
+
+                    <div class="caracteristica">
+                        <i class="fas fa-users"></i>
+                        <h4>Trabajo en Equipo</h4>
+                        <p>Viajes, convivencias y experiencias grupales que fortalecen los lazos del equipo.</p>
+                    </div>
+
+                    <div class="caracteristica">
+                        <i class="fas fa-brain"></i>
+                        <h4>Mentalidad</h4>
+                        <p>Desarrollo de la disciplina, constancia y mentalidad competitiva necesaria para el alto
+                            rendimiento.</p>
+                    </div>
+
+                    <div class="caracteristica">
+                        <i class="fas fa-heart"></i>
+                        <h4>Pasión</h4>
+                        <p>Mantenimiento del amor por el deporte mientras se desarrollan las capacidades competitivas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Horarios -->
+            <div class="card-tech">
+                <h3>Horarios de Entrenamiento</h3>
+                <div style="text-align: center; margin: 2rem 0;">
+                    <img src="https://triinfinity.es/wp-content/uploads/2024/08/grupos-escuela-mostoles.png"
+                        alt="Horarios Grupo E"
+                        style="width: 100%; max-width: 900px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+                </div>
+            </div>
+
+            <!-- Sedes -->
+            <div class="section-tech">
+                <h2>Sedes de Entrenamiento</h2>
+                <div class="sedes">
+                    <div class="sede">
+                        <h4><i class="fas fa-building"></i> Body Factory Móstoles</h4>
+                        <p><strong>Dirección:</strong> Avenida de los Deportes esquina con, C. Ciclista David Gea, s/n,
+                            28935 Móstoles, Madrid</p>
+                        <p><strong>Instalaciones:</strong> Piscina, gimnasio, salas multiuso y espacios para
+                            entrenamiento técnico específico.</p>
+                        <div class="contacto-sede">
+                            <p><strong>Teléfono:</strong> <a href="tel:911703453">911 70 34 53</a></p>
+                            <p><a href="https://www.google.es/search?q=body+factory+mostoles+direccion"
+                                    target="_blank">Ver en Google Maps</a></p>
+                        </div>
+                    </div>
+
+                    <div class="sede">
+                        <h4><i class="fas fa-swimming-pool"></i> Centro Deportivo Martín López Zubero</h4>
+                        <p><strong>Ubicación:</strong> Polideportivo y Piscina Municipal Covadonga</p>
+                        <p><strong>Dirección:</strong> Av. de Mariana de Austria, s/n, 28600 Navalcarnero, Madrid</p>
+                        <p><strong>Instalaciones:</strong> Piscina olímpica, pistas de atletismo y espacios para
+                            entrenamiento técnico.</p>
+                        <div class="contacto-sede">
+                            <p><strong>Teléfono:</strong> <a href="tel:911621095">911 62 10 95</a></p>
+                            <p><a href="https://www.google.es/search?q=centro+deportivo+martin+lopez+zubero"
+                                    target="_blank">Ver en Google Maps</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="cta-tech">
+                <h2>¿Preparado para el Siguiente Nivel?</h2>
+                <p>Si tienes entre 14 y 16 años y quieres dar el salto a la tecnificación deportiva, únete al Grupo E.
+                    Donde la pasión por el triatlón se convierte en dedicación y excelencia.</p>
+                <a href="index.html#contacto" class="btn-tech">Únete al Grupo E</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Patrocinadores -->
+    <section id="patrocinadores">
+        <div class="container">
+            <h2 class="section-title">Nuestros Patrocinadores</h2>
+            <div class="sponsors-grid">
+                <a href="https://www.mostoles.es/en/ayuntamiento/concejalias/concejalia-deportes-sanidad"
+                    target="_blank">
+                    <img src="img/logo concejalia mostoles.png" alt="logo-concejalía" class="sponsor-logo">
+                </a>
+                <a href="https://gruposasegur.es" target="_blank">
+                    <img src="img/logo sasegur.png" alt="logo-sasegur" class="sponsor-logo">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>TriInfinity</h3>
+                    <p>Club de triatlón comprometido con el deporte y los valores humanos.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="#inicio" style="color: white; text-decoration: none;">Inicio</a></li>
+                        <li><a href="#club" style="color: white; text-decoration: none;">El Club</a></li>
+                        <li><a href="#equipacion" style="color: white; text-decoration: none;">Equipación</a></li>
+                        <li><a href="#contacto" style="color: white; text-decoration: none;">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <p>info@triinfinity.es</p>
+                    <p>+34 687 528 338</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Síguenos</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/triinfinitymostoles" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/triinfinitymostoles/?hl=es" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@triinfinitymostoles?is_from_webapp=1&sender_device=pc"
+                            target="_blank">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 TriInfinity Club de Triatlón. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

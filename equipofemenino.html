@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRIINFINITY - Equipo Femenino</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="inde.css" />
+    <link rel="stylesheet" href="equipofemenino.css" />
+    <link rel="shortcut icon" href="img/Logo.jpg" type="image/x-icon" />
+</head>
+
+<body>
+    <!-- Header (mismo del index) -->
+    <header id="header">
+        <div class="container header-content">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <img src="img/Logo.jpg" alt="TriInfinity Logo" />
+                <span class="logo-text">TRIINFINITY</span>
+            </div>
+
+            <!-- Menú Desktop -->
+            <nav class="desktop-menu">
+                <ul>
+                    <li><a href="index.html#inicio">Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="#club" class="dropdown-toggle">El Club <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="quienessomos.html">¿Quiénes somos?</a></li>
+                            <li><a href="Organigrama.html">Organigrama</a></li>
+                            <li><a href="competiciones.html">Competiciones</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">Grupos <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="quienessomos.html">Club Triatlón</a></li>
+                            <li><a href="equipofemenino.html">Equipo Femenino</a></li>
+                            <li><a href="las-retadas.html">Las «Retadas»</a></li>
+                            <li><a href="alto-rendimiento.html">Alto Rendimiento</a></li>
+                            <li><a href="media-larga-distancia.html">Media y Larga Distancia</a></li>
+                            <li><a href="raids-aventura.html">Raids Aventura</a></li>
+                            <li><a href="trail-running.html">Trail Running</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="instalaciones.html">Instalaciones</a></li>
+                    <li><a href="index.html#equipacion">Equipación</a></li>
+                    <li><a href="index.html#patrocinadores">Patrocinadores</a></li>
+                    <li><a href="index.html#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+
+            <!-- Botón Hamburguesa -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menú móvil">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Menú Mobile -->
+        <nav class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li class="mobile-dropdown">
+                    <a class="dropdown-toggle">El Club <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="quienessomos.html">¿Quiénes somos?</a></li>
+                        <li><a href="Organigrama.html">Organigrama</a></li>
+                        <li><a href="competiciones.html">Competiciones</a></li>
+                    </ul>
+                </li>
+                <li class="mobile-dropdown">
+                    <a class="dropdown-toggle">Grupos <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="quienessomos.html">Club Triatlón</a></li>
+                        <li><a href="equipofemenino.html">Equipo Femenino</a></li>
+                        <li><a href="las-retadas.html">Las «Retadas»</a></li>
+                        <li><a href="alto-rendimiento.html">Alto Rendimiento</a></li>
+                        <li><a href="media-larga-distancia.html">Media y Larga Distancia</a></li>
+                        <li><a href="raids-aventura.html">Raids Aventura</a></li>
+                        <li><a href="trail-running.html">Trail Running</a></li>
+                    </ul>
+                </li>
+                <li><a href="instalaciones.html">Instalaciones</a></li>
+                <li><a href="index.html#equipacion">Equipación</a></li>
+                <li><a href="index.html#patrocinadores">Patrocinadores</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Equipo Femenino -->
+    <section class="hero-femenino">
+        <div class="container">
+            <h1>Equipo Femenino</h1>
+            <p>Empoderando a las mujeres en el triatlón. Desde nuestros comienzos, nos hemos comprometido con el apoyo y la promoción del deporte femenino.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">38%</span>
+                    <span class="stat-label">Participación Femenina</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">Sedes de Entrenamiento</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Compromiso y Pasión</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenido Principal -->
+    <section class="content-femenino">
+        <div class="container">
+            
+            <!-- Nuestra Misión -->
+            <div class="content-section">
+                <h2>Nuestra Misión</h2>
+                <p>En Tri Infinity Móstoles, desde sus comienzos, nos hemos comprometido con el apoyo y la promoción del deporte femenino. A lo largo de los años, hemos alcanzado un notable éxito gracias al esfuerzo conjunto de nuestra comunidad, logrando una destacada participación de mujeres y niñas de todas las edades y niveles en nuestras actividades.</p>
+                
+                <p>Estamos muy orgullosos del énfasis que hemos puesto en el deporte femenino y de los logros obtenidos gracias al esfuerzo de nuestras triatletas, quienes representan el <strong>38%</strong> de nuestro club.</p>
+                
+                <div class="quote-destacada">
+                    <p>Creemos en el poder transformador del deporte femenino y en su capacidad para formar valores</p>
+                </div>
+            </div>
+
+            <!-- Nuestro Enfoque -->
+            <div class="content-section">
+                <h2>Nuestro Enfoque</h2>
+                <p>Seguimos dedicados a trabajar incansablemente para fomentar una mayor integración de la mujer en el deporte, abarcando todas las edades y niveles. Si bien todas las etapas son importantes, hemos identificado la franja entre los <strong>15 y 25 años</strong> como crucial, ya que es cuando a menudo se produce el abandono femenino.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-child"></i>
+                        <h3>Todas las Edades</h3>
+                        <p>Programas para mujeres desde niñas hasta veteranas</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Todos los Niveles</h3>
+                        <p>Desde principiantes hasta atletas de élite</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Edad Crítica 15-25</h3>
+                        <p>Enfoque especial en la franja de mayor abandono</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nuestros Objetivos -->
+            <div class="content-section">
+                <h2>Nuestros Objetivos</h2>
+                <p>Aspiramos a convertir el Club Tri Infinity Móstoles en un espacio de encuentro donde mujeres de diversas edades y niveles puedan disfrutar del deporte y formar parte de una comunidad femenina que participe en competiciones, tanto individuales como por equipos.</p>
+                
+                <ol class="objetivos-lista">
+                    <li class="objetivo-item">
+                        <div class="objetivo-numero">01</div>
+                        <div>
+                            <h3>Espacio de Encuentro</h3>
+                            <p>Crear un ambiente acogedor donde las mujeres se sientan cómodas y motivadas</p>
+                        </div>
+                    </li>
+                    <li class="objetivo-item">
+                        <div class="objetivo-numero">02</div>
+                        <div>
+                            <h3>Comunidad Femenina</h3>
+                            <p>Fomentar vínculos entre mujeres deportistas de diferentes edades y niveles</p>
+                        </div>
+                    </li>
+                    <li class="objetivo-item">
+                        <div class="objetivo-numero">03</div>
+                        <div>
+                            <h3>Competiciones Adaptadas</h3>
+                            <p>Participar en eventos individuales y por equipos según las habilidades</p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Grupo Elite -->
+            <div class="content-section">
+                <h2>Todos los Niveles</h2>
+                <p>Contamos con mujeres deportistas de todos los niveles, desde principiantes que dan sus primeros pasos en el triatlón hasta atletas de alto rendimiento que compiten por los primeros puestos. Valoramos por igual la participación en todos los niveles y nos enorgullece ver a nuestras triatletas representando al club en diversas categorías de edad y modalidades.</p>
+            </div>
+
+            <!-- Galería -->
+            <div class="content-section">
+                <h2>Nuestras Atletas</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://triinfinity.es/wp-content/uploads/2024/01/imagen-de-whatsapp-2024-01-30-a-las-14.25.04_048b581a.jpg" alt="Equipo femenino competición">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://triinfinity.es/wp-content/uploads/2024/01/imagen-de-whatsapp-2024-01-30-a-las-14.25.09_8e8fe886.jpg" alt="Entrenamiento femenino">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://triinfinity.es/wp-content/uploads/2024/01/image-2023-09-07-142702-1.jpg" alt="Evento deportivo femenino">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://triinfinity.es/wp-content/uploads/2024/01/image-2023-09-07-142649-1.jpg" alt="Espíritu de equipo">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://triinfinity.es/wp-content/uploads/2024/01/image-2023-09-07-142652-1.jpg" alt="Celebración logros">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://triinfinity.es/wp-content/uploads/2024/01/dsc_0184.jpg" alt="Carrera femenina">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="cta-femenino">
+                <h2>¿Lista para Unirte?</h2>
+                <p>Forma parte de una comunidad que empodera a las mujeres a través del deporte.</p>
+                <a href="index.html#contacto" class="btn-femenino">Únete al Equipo Femenino</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Patrocinadores (mismo del index) -->
+    <section id="patrocinadores">
+        <div class="container">
+            <h2 class="section-title">Nuestros Patrocinadores</h2>
+            <div class="sponsors-grid">
+                <a href="https://www.mostoles.es/en/ayuntamiento/concejalias/concejalia-deportes-sanidad" target="_blank">
+                    <img src="img/logo concejalia mostoles.png" alt="logo-concejalía" class="sponsor-logo">
+                </a>
+                <a href="https://gruposasegur.es" target="_blank">
+                    <img src="img/logo sasegur.png" alt="logo-sasegur" class="sponsor-logo">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (mismo del index) -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>TriInfinity</h3>
+                    <p>Club de triatlón comprometido con el deporte y los valores humanos.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="#inicio" style="color: white; text-decoration: none;">Inicio</a></li>
+                        <li><a href="#club" style="color: white; text-decoration: none;">El Club</a></li>
+                        <li><a href="#equipacion" style="color: white; text-decoration: none;">Equipación</a></li>
+                        <li><a href="#contacto" style="color: white; text-decoration: none;">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <p>info@triinfinity.es</p>
+                    <p>+34 687 528 338</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Síguenos</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/triinfinitymostoles" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/triinfinitymostoles/?hl=es" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@triinfinitymostoles?is_from_webapp=1&sender_device=pc" target="_blank">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 TriInfinity Club de Triatlón. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

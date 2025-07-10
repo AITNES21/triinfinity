@@ -1,0 +1,561 @@
+/* ==========================================================================
+   TRAIL RUNNING - ESTILOS ESPECÍFICOS
+   Diseño natural y montañero con layout vertical
+   ========================================================================== */
+
+/* Variables específicas */
+:root {
+    --negro-trail: #1a1a1a;
+    --gris-oscuro: #2e2e2e;
+    --gris-medio: #424242;
+    --gris-claro: #f8f9fa;
+    --rojo-trail: #c62828;
+    --rojo-oscuro: #8e0000;
+    --verde-trail: #2e7d32;
+    --naranja-trail: #f57c00;
+    --blanco-puro: #ffffff;
+}
+
+/* Hero con diseño vertical apilado */
+.hero-trail {
+    background: var(--gris-claro);
+    padding: 0;
+    overflow: hidden;
+}
+
+.hero-trail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.hero-text-trail {
+    background: linear-gradient(135deg, var(--negro-trail), var(--gris-oscuro));
+    color: white;
+    padding: 4rem 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.trail-badge {
+    background: var(--verde-trail);
+    color: white;
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero-text-trail h1 {
+    font-size: 3.2rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: white;
+}
+
+.hero-text-trail .subtitle {
+    color: var(--naranja-trail);
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.hero-text-trail p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+}
+
+/* Hero image */
+.hero-image-trail {
+    height: 400px;
+    background: url('https://triinfinity.es/wp-content/uploads/2024/09/trail-running-1.png') center/cover;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-image-trail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: none;
+}
+
+.hero-image-trail::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(transparent, rgba(26, 26, 26, 0.7));
+}
+
+/* Stats trail específicas */
+.trail-stats {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 2rem;
+    z-index: 3;
+}
+
+.trail-stat {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.trail-stat-number {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--naranja-trail);
+}
+
+.trail-stat-label {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+/* Contenido principal */
+.content-trail {
+    padding: 5rem 0;
+    background: white;
+}
+
+.section-trail {
+    margin-bottom: 4rem;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-trail h2 {
+    font-size: 2.3rem;
+    color: var(--negro-trail);
+    margin-bottom: 2rem;
+    font-weight: 700;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.section-trail h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--rojo-trail), var(--verde-trail));
+    border-radius: 2px;
+}
+
+/* Layout de dos columnas para contenido */
+.content-two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    margin: 2rem 0;
+}
+
+.content-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--gris-oscuro);
+}
+
+.content-text strong {
+    color: var(--rojo-trail);
+}
+
+.content-image {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.content-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.content-image:hover img {
+    transform: scale(1.05);
+}
+
+/* Calendario de pruebas */
+.calendario-section {
+    background: var(--gris-claro);
+    padding: 3rem;
+    border-radius: 12px;
+    margin: 3rem 0;
+    border-left: 5px solid var(--verde-trail);
+}
+
+.calendario-section h3 {
+    color: var(--negro-trail);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.calendario-section h3 i {
+    color: var(--verde-trail);
+    font-size: 1.5rem;
+}
+
+.calendario-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.calendario-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.calendario-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(46, 125, 50, 0.2);
+}
+
+.calendario-item h4 {
+    color: var(--rojo-trail);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.calendario-item p {
+    color: var(--gris-oscuro);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Entrenamientos section */
+.entrenamientos-section {
+    background: var(--negro-trail);
+    color: white;
+    padding: 4rem 3rem;
+    border-radius: 12px;
+    margin: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.entrenamientos-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+    background: url('https://triinfinity.es/wp-content/uploads/2024/09/image-2024-09-16-110532-1.jpg') center/cover;
+    opacity: 0.2;
+    z-index: 1;
+}
+
+.entrenamientos-content {
+    position: relative;
+    z-index: 2;
+}
+
+.entrenamientos-section h3 {
+    color: var(--naranja-trail);
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.entrenamientos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.entrenamiento-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.entrenamiento-card:hover {
+    border-color: var(--verde-trail);
+    transform: translateY(-5px);
+}
+
+.entrenamiento-card i {
+    font-size: 2.5rem;
+    color: var(--verde-trail);
+    margin-bottom: 1rem;
+}
+
+.entrenamiento-card h4 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.entrenamiento-card p {
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* Galería trail */
+.gallery-trail {
+    margin: 4rem 0;
+}
+
+.gallery-trail h3 {
+    text-align: center;
+    color: var(--negro-trail);
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.gallery-trail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.gallery-trail-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 300px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.gallery-trail-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-trail-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-trail-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 2rem 1.5rem 1.5rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.gallery-trail-item:hover .gallery-overlay {
+    transform: translateY(0);
+}
+
+/* CTA trail */
+.cta-trail {
+    background: linear-gradient(135deg, var(--verde-trail), var(--rojo-trail));
+    color: white;
+    padding: 4rem 2rem;
+    border-radius: 12px;
+    text-align: center;
+    margin: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-trail::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('img/Logo.jpg') center/100px no-repeat;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.cta-trail .container {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-trail h2 {
+    color: white;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.cta-trail p {
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-trail {
+    background: white;
+    color: var(--verde-trail);
+    padding: 1.2rem 2.5rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.btn-trail:hover {
+    background: var(--naranja-trail);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-trail {
+        padding: 0;
+    }
+
+    .hero-text-trail {
+        padding: 3rem 2rem;
+    }
+
+    .hero-text-trail h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-text-trail .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .hero-text-trail p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .hero-image-trail {
+        height: 300px;
+        background: none;
+    }
+
+    .hero-image-trail img {
+        display: block;
+    }
+
+    .trail-stats {
+        position: static;
+        transform: none;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 2rem;
+        background: var(--gris-oscuro);
+        margin: 0;
+    }
+
+    .trail-stat {
+        flex: 1;
+        min-width: 120px;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .trail-stat-number {
+        font-size: 1.3rem;
+    }
+
+    .trail-stat-label {
+        font-size: 0.75rem;
+    }
+
+    .content-two-cols {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .calendario-section {
+        padding: 2rem;
+        margin: 2rem 1rem;
+    }
+
+    .calendario-list {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .entrenamientos-section {
+        padding: 3rem 2rem;
+        margin: 3rem 1rem;
+    }
+
+    .entrenamientos-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .gallery-trail-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .gallery-trail-item {
+        height: 250px;
+    }
+
+    .cta-trail {
+        padding: 3rem 1rem;
+        margin: 3rem 1rem;
+    }
+
+    .cta-trail h2 {
+        font-size: 2rem;
+    }
+}

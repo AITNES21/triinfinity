@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin - TriInfinity</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
+
 <body>
+  <div id="netlify-modal"></div>
+  <button id="login-btn" onclick="netlifyIdentity.open()">Abrir Login/Registro</button>
+
   <script>
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
         if (!user) {
-          window.netlifyIdentity.open();
+          // Mostrar botón manualmente si no hay usuario
+          document.getElementById('login-btn').style.display = 'block';
+        } else {
+          // Si hay usuario, cargar CMS
+          document.getElementById('login-btn').style.display = 'none';
+          loadCMS();
         }
       });
+
+      window.netlifyIdentity.on("login", () => {
+        document.getElementById('login-btn').style.display = 'none';
+        loadCMS();
+      });
+    }
+
+    function loadCMS() {
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js';
+      document.body.appendChild(script);
     }
   </script>
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
 </body>
+
 </html>

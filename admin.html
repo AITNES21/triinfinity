@@ -91,31 +91,25 @@
 
     .cms-container {
       display: none;
+      width: 100vw;
+      height: 100vh;
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
       background: white;
-      z-index: 10000;
     }
 
     .logout-btn {
       position: fixed;
       top: 20px;
       right: 20px;
-      z-index: 10001;
+      z-index: 9999;
       background: #dc3545;
       color: white;
       border: none;
       padding: 8px 16px;
       border-radius: 4px;
       cursor: pointer;
-    }
-
-    /* Ocultar header del sitio cuando CMS está activo */
-    body.cms-active header {
-      display: none !important;
     }
   </style>
 </head>
@@ -149,9 +143,7 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     // Configuración de seguridad
-    const ADMIN_EMAILS = [
- 'twitchaitnes@gmail.com',
- 'trimimad@yahoo.es',];
+    const ADMIN_EMAILS = ['twitchaitnes@gmail.com']; // Emails autorizados
     const REQUIRE_INVITATION = true; // Requiere invitación previa
 
     // Estado de la aplicación
@@ -291,7 +283,6 @@
 
       authContainer.style.display = 'none';
       cmsContainer.style.display = 'block';
-      document.body.classList.add('cms-active');
 
       if (!cmsLoaded) {
         const script = document.createElement('script');
@@ -314,7 +305,6 @@
       cmsContainer.style.display = 'none';
       userInfo.style.display = 'none';
       authButtons.style.display = 'block';
-      document.body.classList.remove('cms-active');
     }
 
     // Mostrar información del usuario

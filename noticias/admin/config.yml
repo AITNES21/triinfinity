@@ -5,6 +5,11 @@ backend:
 media_folder: "img/noticias"
 public_folder: "/img/noticias"
 
+# Configuración del sitio - CAMBIA ESTA URL
+site_url: https://incomparable-puffpuff-56cda0.netlify.app
+display_url: https://incomparable-puffpuff-56cda0.netlify.app
+logo_url: /img/Logo.jpg
+
 collections:
   - name: "noticias"
     label: "Noticias"
@@ -20,8 +25,3 @@ collections:
       - {label: "Resumen", name: "excerpt", widget: "text"}
       - {label: "Contenido", name: "body", widget: "markdown"}
       - {label: "Destacada", name: "featured", widget: "boolean", default: false}
-
-# Configuración adicional para solucionar problemas comunes
-site_url: https://tu-sitio.netlify.app
-display_url: https://tu-sitio.netlify.app
-logo_url: /img/Logo.jpg

@@ -5,8 +5,8 @@ backend:
 media_folder: "img/noticias"
 public_folder: "/img/noticias"
 
-site_url: https://incomparable-puffpuff-56cda0.netlify.app
-display_url: https://incomparable-puffpuff-56cda0.netlify.app
+site_url: https://poetic-pegasus-68b943.netlify.app
+display_url: https://poetic-pegasus-68b943.netlify.app
 logo_url: /img/Logo.jpg
 
 # Configuración de autenticación

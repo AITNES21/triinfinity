@@ -2,6 +2,8 @@ backend:
   name: github
   repo: AITNES21/triinfinity
   branch: main
+  client_id: Ov23lipquvktFJHGiWFq
+
 media_folder: "img/noticias"
 public_folder: "/img/noticias"
 

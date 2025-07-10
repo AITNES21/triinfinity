@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,15 +16,17 @@
       align-items: center;
       justify-content: center;
     }
+
     .auth-container {
       background: white;
       padding: 2rem;
       border-radius: 8px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       text-align: center;
       max-width: 400px;
       width: 90%;
     }
+
     .logo {
       width: 80px;
       height: 80px;
@@ -37,10 +40,12 @@
       font-size: 2rem;
       font-weight: bold;
     }
+
     h1 {
       color: #212529;
       margin-bottom: 1rem;
     }
+
     .auth-button {
       background: #e63946;
       color: white;
@@ -52,45 +57,54 @@
       margin: 0.5rem;
       transition: background 0.3s;
     }
+
     .auth-button:hover {
       background: #d62839;
     }
+
     .auth-button.secondary {
       background: #6c757d;
     }
+
     .auth-button.secondary:hover {
       background: #5a6268;
     }
+
     .status {
       margin: 1rem 0;
       padding: 0.5rem;
       border-radius: 4px;
       font-size: 0.9rem;
     }
+
     .status.error {
       background: #f8d7da;
       color: #721c24;
       border: 1px solid #f5c6cb;
     }
+
     .status.success {
       background: #d4edda;
       color: #155724;
       border: 1px solid #c3e6cb;
     }
+
     .cms-container {
       display: none;
-      width: 100vw;
-      height: 100vh;
       position: fixed;
       top: 0;
       left: 0;
+      width: 100vw;
+      height: 100vh;
       background: white;
+      z-index: 10000;
     }
+
     .logout-btn {
       position: fixed;
       top: 20px;
       right: 20px;
-      z-index: 9999;
+      z-index: 10001;
       background: #dc3545;
       color: white;
       border: none;
@@ -98,21 +112,28 @@
       border-radius: 4px;
       cursor: pointer;
     }
+
+    /* Ocultar header del sitio cuando CMS está activo */
+    body.cms-active header {
+      display: none !important;
+    }
   </style>
 </head>
+
 <body>
   <div id="auth-container" class="auth-container">
     <div class="logo">T</div>
     <h1>Administración TriInfinity</h1>
     <p>Acceso restringido para administradores</p>
-    
+
     <div id="status" class="status" style="display: none;"></div>
-    
+
     <div id="auth-buttons">
       <button class="auth-button" onclick="handleLogin()">Iniciar Sesión</button>
-      <button class="auth-button secondary" onclick="handleSignup()" id="signup-btn" style="display: none;">Registrarse</button>
+      <button class="auth-button secondary" onclick="handleSignup()" id="signup-btn"
+        style="display: none;">Registrarse</button>
     </div>
-    
+
     <div id="user-info" style="display: none;">
       <p>Bienvenido, <span id="user-email"></span></p>
       <button class="auth-button" onclick="loadCMS()">Acceder al CMS</button>
@@ -128,10 +149,9 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     // Configuración de seguridad
-   const ADMIN_EMAILS = [
+    const ADMIN_EMAILS = [
  'twitchaitnes@gmail.com',
- 'trimimad@yahoo.es',]
-; // Emails autorizados
+ 'trimimad@yahoo.es',];
     const REQUIRE_INVITATION = true; // Requiere invitación previa
 
     // Estado de la aplicación
@@ -148,7 +168,7 @@
     const signupBtn = document.getElementById('signup-btn');
 
     // Inicialización
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       checkRegistrationMode();
       checkCurrentUser();
       setupIdentityListeners();
@@ -159,7 +179,7 @@
       try {
         const response = await fetch('/.netlify/identity');
         const data = await response.json();
-        
+
         // Mostrar botón signup solo si registration está abierto
         if (data.settings && data.settings.external && data.settings.external.registration) {
           signupBtn.style.display = 'inline-block';
@@ -184,7 +204,7 @@
 
     // Configurar listeners de Identity
     function setupIdentityListeners() {
-      netlifyIdentity.on('login', function(user) {
+      netlifyIdentity.on('login', function (user) {
         currentUser = user;
         if (isAuthorizedUser(user)) {
           showSuccess('Login exitoso');
@@ -195,7 +215,7 @@
         }
       });
 
-      netlifyIdentity.on('signup', function(user) {
+      netlifyIdentity.on('signup', function (user) {
         showSuccess('Registro exitoso. Verificando permisos...');
         setTimeout(() => {
           if (isAuthorizedUser(user)) {
@@ -207,13 +227,13 @@
         }, 1000);
       });
 
-      netlifyIdentity.on('logout', function() {
+      netlifyIdentity.on('logout', function () {
         currentUser = null;
         showAuth();
         showSuccess('Sesión cerrada');
       });
 
-      netlifyIdentity.on('error', function(err) {
+      netlifyIdentity.on('error', function (err) {
         showError('Error: ' + err.message);
       });
     }
@@ -221,17 +241,17 @@
     // Verificar si el usuario está autorizado
     function isAuthorizedUser(user) {
       if (!user || !user.email) return false;
-      
+
       // Verificar si el email está en la lista de administradores
       const isAdminEmail = ADMIN_EMAILS.includes(user.email.toLowerCase());
-      
+
       // Verificar si tiene confirmación de email (indica invitación previa)
       const hasConfirmedEmail = user.email_confirmed_at || user.confirmed_at;
-      
+
       if (REQUIRE_INVITATION && !hasConfirmedEmail) {
         return false;
       }
-      
+
       return isAdminEmail;
     }
 
@@ -271,15 +291,16 @@
 
       authContainer.style.display = 'none';
       cmsContainer.style.display = 'block';
+      document.body.classList.add('cms-active');
 
       if (!cmsLoaded) {
         const script = document.createElement('script');
         script.src = 'https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js';
-        script.onload = function() {
+        script.onload = function () {
           cmsLoaded = true;
           showSuccess('CMS cargado correctamente');
         };
-        script.onerror = function() {
+        script.onerror = function () {
           showError('Error al cargar el CMS');
           showAuth();
         };
@@ -293,6 +314,7 @@
       cmsContainer.style.display = 'none';
       userInfo.style.display = 'none';
       authButtons.style.display = 'block';
+      document.body.classList.remove('cms-active');
     }
 
     // Mostrar información del usuario
@@ -309,7 +331,7 @@
       statusDiv.textContent = message;
       statusDiv.className = 'status ' + type;
       statusDiv.style.display = 'block';
-      
+
       setTimeout(() => {
         statusDiv.style.display = 'none';
       }, 5000);
@@ -324,11 +346,12 @@
     }
 
     // Prevenir acceso directo al CMS
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
       // Ocultar cualquier contenido del CMS hasta autenticación
       const cmsElements = document.querySelectorAll('[data-netlify-cms]');
       cmsElements.forEach(el => el.style.display = 'none');
     });
   </script>
 </body>
+
 </html>

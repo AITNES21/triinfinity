@@ -16,10 +16,8 @@
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
         if (!user) {
-          // Mostrar botón manualmente si no hay usuario
           document.getElementById('login-btn').style.display = 'block';
         } else {
-          // Si hay usuario, cargar CMS
           document.getElementById('login-btn').style.display = 'none';
           loadCMS();
         }
@@ -32,9 +30,11 @@
     }
 
     function loadCMS() {
-      const script = document.createElement('script');
-      script.src = 'https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js';
-      document.body.appendChild(script);
+      if (!document.querySelector('script[src*="netlify-cms"]')) {
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js';
+        document.body.appendChild(script);
+      }
     }
   </script>
 </body>

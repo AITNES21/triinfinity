@@ -54,7 +54,7 @@ class NoticiasManager {
 
     async cargarArchivosMarkdown() {
         try {
-            const response = await fetch('https://api.github.com/repos/TU_USUARIO/TU_REPO/contents/_noticias');
+            const response = await fetch('https://api.github.com/repos/AITNES21/triinfinity/contents/_noticias');
             if (response.ok) {
                 const files = await response.json();
                 const markdownFiles = files.filter(file => file.name.endsWith('.md'));

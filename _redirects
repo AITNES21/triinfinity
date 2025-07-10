@@ -1,5 +1,3 @@
 # Redireccionamientos para Netlify CMS
 /admin/* /admin/index.html 200
-
-# Redireccionamientos para archivos estÃ¡ticos
-/*    /index.html   200
+/noticias/admin/* /noticias/admin/index.html 200

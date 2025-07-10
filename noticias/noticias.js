@@ -18,13 +18,13 @@ class NoticiasManager {
     async cargarNoticias() {
         try {
             // Intentar cargar noticias desde Netlify CMS
-            //   const noticias = await this.cargarNoticiasDesdeNetlify();
-            //   if (noticias && noticias.length > 0) {
-            //   this.noticias = noticias;
-            //  } else {
-            console.log('No se encontraron noticias en Netlify CMS, usando noticias de ejemplo');
-            this.noticias = this.obtenerNoticiasEjemplo();
-            //  }
+            const noticias = await this.cargarNoticiasDesdeNetlify();
+            if (noticias && noticias.length > 0) {
+                this.noticias = noticias;
+            } else {
+                console.log('No se encontraron noticias en Netlify CMS, usando noticias de ejemplo');
+                this.noticias = this.obtenerNoticiasEjemplo();
+            }
 
             this.filtrarNoticias();
             this.mostrarNoticias();
@@ -54,33 +54,31 @@ class NoticiasManager {
 
     async cargarArchivosMarkdown() {
         try {
-            // Lista de archivos que podrían existir
-            const archivos = [
-                '_noticias/2025-01-15-gran-exito-triatlon-madrid.md',
-                '_noticias/2025-01-10-nuevo-entrenador-natacion.md',
-                '_noticias/2025-01-08-apertura-inscripciones-escuela.md'
-            ];
+            const response = await fetch('https://api.github.com/repos/TU_USUARIO/TU_REPO/contents/_noticias');
+            if (response.ok) {
+                const files = await response.json();
+                const markdownFiles = files.filter(file => file.name.endsWith('.md'));
 
-            const noticias = [];
-
-            for (const archivo of archivos) {
-                try {
-                    const response = await fetch(`/${archivo}`);
-                    if (response.ok) {
-                        const contenido = await response.text();
-                        const noticia = this.parsearMarkdown(contenido);
-                        if (noticia) {
-                            noticias.push(noticia);
+                const noticias = [];
+                for (const file of markdownFiles) {
+                    try {
+                        const contentResponse = await fetch(file.download_url);
+                        if (contentResponse.ok) {
+                            const contenido = await contentResponse.text();
+                            const noticia = this.parsearMarkdown(contenido);
+                            if (noticia) {
+                                noticias.push(noticia);
+                            }
                         }
+                    } catch (e) {
+                        console.log(`Error cargando ${file.name}:`, e);
                     }
-                } catch (e) {
-                    console.log(`No se pudo cargar ${archivo}:`, e);
                 }
+                return noticias.length > 0 ? noticias : null;
             }
-
-            return noticias.length > 0 ? noticias : null;
+            return null;
         } catch (error) {
-            console.log('Error cargando archivos markdown:', error);
+            console.log('Error cargando archivos:', error);
             return null;
         }
     }

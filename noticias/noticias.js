@@ -17,7 +17,19 @@ class NoticiasManager {
 
     async cargarNoticias() {
         try {
-            // Intentar cargar noticias desde Netlify CMS
+            // Prioridad 1: Cargar desde panel de admin
+            const noticiasAdmin = localStorage.getItem('triinfinity_noticias_web');
+            if (noticiasAdmin) {
+                const noticias = JSON.parse(noticiasAdmin);
+                if (noticias && noticias.length > 0) {
+                    this.noticias = noticias;
+                    this.filtrarNoticias();
+                    this.mostrarNoticias();
+                    return;
+                }
+            }
+
+            // Prioridad 2: Intentar cargar desde Netlify CMS
             const noticias = await this.cargarNoticiasDesdeNetlify();
             if (noticias && noticias.length > 0) {
                 this.noticias = noticias;
@@ -38,13 +50,10 @@ class NoticiasManager {
 
     async cargarNoticiasDesdeNetlify() {
         try {
-            // Intentar cargar desde la API de Netlify
             const response = await fetch('/.netlify/functions/get-noticias');
             if (response.ok) {
                 return await response.json();
             }
-
-            // Si no hay función, intentar cargar archivos directamente
             return await this.cargarArchivosMarkdown();
         } catch (error) {
             console.log('Error cargando desde Netlify:', error);
@@ -85,7 +94,6 @@ class NoticiasManager {
 
     parsearMarkdown(contenido) {
         try {
-            // Separar frontmatter del contenido
             const frontmatterMatch = contenido.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
             if (!frontmatterMatch) {
                 return null;
@@ -94,7 +102,6 @@ class NoticiasManager {
             const frontmatter = frontmatterMatch[1];
             const body = frontmatterMatch[2];
 
-            // Parsear frontmatter básico
             const metadata = {};
             frontmatter.split('\n').forEach(line => {
                 const [key, ...valueParts] = line.split(':');
@@ -259,14 +266,12 @@ Su lema "Si quieres, puedes" se hace realidad una vez más.
     }
 
     configurarEventos() {
-        // Filtros
         document.querySelectorAll('.filtro-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 this.cambiarFiltro(e.target.dataset.category);
             });
         });
 
-        // Paginación
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
 
@@ -289,21 +294,18 @@ Su lema "Si quieres, puedes" se hace realidad una vez más.
             });
         }
 
-        // Modal
         this.configurarModal();
     }
 
     configurarModal() {
         const modal = document.getElementById('modalNoticia');
 
-        // Cerrar modal con ESC
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.style.display === 'flex') {
                 this.cerrarModal();
             }
         });
 
-        // Cerrar modal al hacer clic fuera
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 this.cerrarModal();
@@ -312,7 +314,6 @@ Su lema "Si quieres, puedes" se hace realidad una vez más.
     }
 
     cambiarFiltro(categoria) {
-        // Actualizar botones
         document.querySelectorAll('.filtro-btn').forEach(btn => {
             btn.classList.remove('active');
         });
@@ -322,7 +323,6 @@ Su lema "Si quieres, puedes" se hace realidad una vez más.
             botonFiltro.classList.add('active');
         }
 
-        // Filtrar y mostrar
         this.categoriaActual = categoria;
         this.paginaActual = 1;
         this.filtrarNoticias();
@@ -338,7 +338,6 @@ Su lema "Si quieres, puedes" se hace realidad una vez más.
             );
         }
 
-        // Ordenar por fecha (más recientes primero)
         this.noticiasFiltradas.sort((a, b) => new Date(b.date) - new Date(a.date));
     }
 
@@ -365,15 +364,12 @@ Su lema "Si quieres, puedes" se hace realidad una vez más.
             return;
         }
 
-        // Calcular noticias para la página actual
         const inicio = (this.paginaActual - 1) * this.noticiasPorPagina;
         const fin = inicio + this.noticiasPorPagina;
         const noticiasPagina = this.noticiasFiltradas.slice(inicio, fin);
 
-        // Generar HTML
         grid.innerHTML = noticiasPagina.map(noticia => this.generarCardNoticia(noticia)).join('');
 
-        // Configurar eventos de click
         grid.querySelectorAll('.noticia-card').forEach(card => {
             card.addEventListener('click', () => {
                 const id = parseInt(card.dataset.id);
@@ -381,7 +377,6 @@ Su lema "Si quieres, puedes" se hace realidad una vez más.
             });
         });
 
-        // Actualizar paginación
         this.actualizarPaginacion();
     }
 
@@ -439,7 +434,6 @@ Su lema "Si quieres, puedes" se hace realidad una vez más.
 
         paginacion.style.display = 'flex';
 
-        // Actualizar estado de botones
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
 
@@ -451,7 +445,6 @@ Su lema "Si quieres, puedes" se hace realidad una vez más.
             nextBtn.disabled = this.paginaActual === totalPaginas;
         }
 
-        // Actualizar información de página
         const infoElemento = document.getElementById('pageInfo');
         if (infoElemento) {
             infoElemento.textContent = `Página ${this.paginaActual} de ${totalPaginas}`;
@@ -472,8 +465,6 @@ Su lema "Si quieres, puedes" se hace realidad una vez más.
         });
 
         const categoriaTexto = this.obtenerTextoCategoria(noticia.category);
-
-        // Convertir markdown a HTML básico
         const contenidoHTML = this.convertirMarkdownAHTML(noticia.content);
 
         modal.innerHTML = `
@@ -508,7 +499,6 @@ Su lema "Si quieres, puedes" se hace realidad una vez más.
     }
 
     convertirMarkdownAHTML(markdown) {
-        // Conversión básica de markdown a HTML
         return markdown
             .replace(/^# (.*$)/gm, '<h1>$1</h1>')
             .replace(/^## (.*$)/gm, '<h2>$1</h2>')
@@ -534,15 +524,12 @@ Su lema "Si quieres, puedes" se hace realidad una vez más.
     }
 }
 
-// Inicializar el gestor de noticias
 document.addEventListener('DOMContentLoaded', () => {
     window.noticiasManager = new NoticiasManager();
 });
 
-// Función global para buscar noticias
 function buscarNoticias(termino) {
     if (window.noticiasManager) {
         window.noticiasManager.buscarNoticias(termino);
     }
 }
-<script src="noticias-data.js"></script>

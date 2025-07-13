@@ -17,22 +17,15 @@ class NoticiasManager {
 
     async cargarNoticias() {
         try {
-            // Cargar desde panel de admin
-            const noticiasAdmin = localStorage.getItem('triinfinity_noticias_web');
-            if (noticiasAdmin) {
-                const noticias = JSON.parse(noticiasAdmin);
-                this.noticias = noticias; // Usar siempre, aunque esté vacío
-                this.filtrarNoticias();
-                this.mostrarNoticias();
-                return;
+            const response = await fetch('/noticias.json');
+            if (response.ok) {
+                this.noticias = await response.json();
+            } else {
+                this.noticias = [];
             }
-
-            // Si no hay noticias del admin, array vacío
-            this.noticias = [];
             this.filtrarNoticias();
             this.mostrarNoticias();
         } catch (error) {
-            console.error('Error cargando noticias:', error);
             this.noticias = [];
             this.filtrarNoticias();
             this.mostrarNoticias();

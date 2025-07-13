@@ -545,3 +545,4 @@ function buscarNoticias(termino) {
         window.noticiasManager.buscarNoticias(termino);
     }
 }
+<script src="noticias-data.js"></script>

@@ -633,9 +633,8 @@
 
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
-    // CONFIGURACIÓN IMPORTANTE - ACTUALIZA ESTOS VALORES
+    // CONFIGURACIÓN - No se necesita token aquí
     const GITHUB_CONFIG = {
-      TOKEN: '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', // TU TOKEN DE GITHUB AQUÍ
       OWNER: 'AITNES21',
       REPO: 'triinfinity',
       FILE_PATH: 'noticias.json'
@@ -788,33 +787,10 @@
       showStatus(message, 'success');
     }
 
-    // INTEGRACIÓN CON GITHUB
+    // INTEGRACIÓN CON GITHUB (Vía Netlify Functions)
     class GitHubService {
       constructor(config) {
         this.config = config;
-      }
-
-      async getFileSHA() {
-        try {
-          const response = await fetch(
-            `https://api.github.com/repos/${this.config.OWNER}/${this.config.REPO}/contents/${this.config.FILE_PATH}`,
-            {
-              headers: {
-                'Authorization': `token ${this.config.TOKEN}`,
-                'Accept': 'application/vnd.github.v3+json'
-              }
-            }
-          );
-
-          if (response.ok) {
-            const data = await response.json();
-            return data.sha;
-          }
-          return null;
-        } catch (error) {
-          console.error('Error obteniendo SHA:', error);
-          return null;
-        }
       }
 
       async saveNoticias(noticias) {
@@ -822,42 +798,24 @@
           // Actualizar estado de sincronización
           this.updateSyncStatus('syncing');
 
-          // Obtener SHA actual
-          const sha = await this.getFileSHA();
-
-          // Codificar contenido
-          const content = btoa(unescape(encodeURIComponent(JSON.stringify(noticias, null, 2))));
-
-          // Preparar body
-          const body = {
-            message: `Actualizar noticias - ${new Date().toLocaleString('es-ES')}`,
-            content: content
-          };
-
-          if (sha) {
-            body.sha = sha;
-          }
-
-          // Hacer commit
-          const response = await fetch(
-            `https://api.github.com/repos/${this.config.OWNER}/${this.config.REPO}/contents/${this.config.FILE_PATH}`,
-            {
-              method: 'PUT',
-              headers: {
-                'Authorization': `token ${this.config.TOKEN}`,
-                'Accept': 'application/vnd.github.v3+json',
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(body)
-            }
-          );
+          // Llamar a la función serverless
+          const response = await fetch('/.netlify/functions/github-proxy', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              action: 'saveNoticias',
+              noticias: noticias
+            })
+          });
 
           if (response.ok) {
             this.updateSyncStatus('synced');
             return true;
           } else {
             const error = await response.text();
-            console.error('Error de GitHub:', error);
+            console.error('Error:', error);
             this.updateSyncStatus('error');
             return false;
           }
@@ -907,20 +865,19 @@
 
       async loadFromGitHub() {
         try {
-          const response = await fetch(
-            `https://api.github.com/repos/${GITHUB_CONFIG.OWNER}/${GITHUB_CONFIG.REPO}/contents/${GITHUB_CONFIG.FILE_PATH}`,
-            {
-              headers: {
-                'Authorization': `token ${GITHUB_CONFIG.TOKEN}`,
-                'Accept': 'application/vnd.github.v3+json'
-              }
-            }
-          );
+          const response = await fetch('/.netlify/functions/github-proxy', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              action: 'loadNoticias'
+            })
+          });
 
           if (response.ok) {
             const data = await response.json();
-            const content = JSON.parse(atob(data.content));
-            this.news = content || [];
+            this.news = data.noticias || [];
             this.renderNews();
             this.showNotification('Noticias cargadas desde GitHub', 'success');
           } else {

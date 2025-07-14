@@ -16,12 +16,12 @@
     <header id="header">
         <div class="container header-content">
             <div class="logo" onclick="window.location.href='index.html'">
-                <img src="img/Logo.jpg" alt="TriInfinity Logo" />
+                <img src="img/Logo.jpg" alt="TriInfinity Logo" loading="eager" />
                 <span class="logo-text">TRIINFINITY</span>
             </div>
 
-            <!-- Menú Desktop -->
-            <nav class="desktop-menu">
+            <!-- Menú Desktop Corregido -->
+            <nav class="desktop-menu" role="navigation" aria-label="Menú principal">
                 <ul>
                     <li><a href="index.html#inicio">Inicio</a></li>
                     <li class="dropdown">
@@ -34,61 +34,111 @@
                         </ul>
                     </li>
                     <li class="dropdown">
+                        <a class="dropdown-toggle">Escuela <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="iniciacion.html">Iniciación (6 a 13 años)</a></li>
+                            <li><a href="tecnificacion.html">Tecnificación - Grupo E (14 a 16)</a></li>
+                            <li><a href="altorendimiento.html">Rendimiento Deportivo «Grupo R» (16 a 24)</a></li>
+                            <li><a href="">Horarios Escuela</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
                         <a class="dropdown-toggle">Grupos <i class="fas fa-chevron-down dropdown-icon"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="quienessomos.html">Club Triatlón</a></li>
                             <li><a href="equipofemenino.html">Equipo Femenino</a></li>
-                            <li><a href="las-retadas.html">Las «Retadas»</a></li>
-                            <li><a href="alto-rendimiento.html">Alto Rendimiento</a></li>
-                            <li><a href="media-larga-distancia.html">Media y Larga Distancia</a></li>
-                            <li><a href="raids-aventura.html">Raids Aventura</a></li>
-                            <li><a href="trail-running.html">Trail Running</a></li>
+                            <li><a href="lasretadas.html">Las «Retadas»</a></li>
+                            <li><a href="altorendimiento.html">Alto Rendimiento</a></li>
+                            <li><a href="largamediadistancia.html">Media y Larga Distancia</a></li>
+                            <li><a href="raidsaventura.html">Raids Aventura</a></li>
+                            <li><a href="trail.html">Trail Running</a></li>
                         </ul>
                     </li>
                     <li><a href="instalaciones.html">Instalaciones</a></li>
+                    <li><a href="noticias/noticias.html">Noticias</a></li>
+                    <li><a href="hazte-socio.html">Hazte Socio</a></li>
                     <li><a href="index.html#equipacion">Equipación</a></li>
-                    <li><a href="index.html#patrocinadores">Patrocinadores</a></li>
                     <li><a href="index.html#contacto">Contacto</a></li>
                 </ul>
             </nav>
 
-            <!-- Botón Hamburguesa -->
-            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menú móvil">
+            <!-- Botón Hamburguesa Mejorado -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menú móvil" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
 
-        <!-- Menú Mobile -->
-        <nav class="mobile-menu" id="mobileMenu">
+        <!-- Menú Mobile Mejorado -->
+        <nav class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Menú móvil">
             <ul>
-                <li><a href="index.html#inicio">Inicio</a></li>
+                <li><a href="index.html#inicio">
+                        <i class="fas fa-home"></i> Inicio</a></li>
                 <li class="mobile-dropdown">
-                    <a class="dropdown-toggle">El Club <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                    <a class="dropdown-toggle" aria-expanded="false">
+                        <i class="fas fa-users"></i> El Club
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </a>
                     <ul class="dropdown-menu">
-                        <li><a href="quienessomos.html">¿Quiénes somos?</a></li>
-                        <li><a href="Organigrama.html">Organigrama</a></li>
-                        <li><a href="competiciones.html">Competiciones</a></li>
+                        <li><a href="quienessomos.html">
+                                <i class="fas fa-info-circle"></i> ¿Quiénes somos?</a></li>
+                        <li><a href="Organigrama.html">
+                                <i class="fas fa-sitemap"></i> Organigrama</a></li>
+                        <li><a href="competiciones.html">
+                                <i class="fas fa-trophy"></i> Competiciones</a></li>
                     </ul>
                 </li>
                 <li class="mobile-dropdown">
-                    <a class="dropdown-toggle">Grupos <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                    <a class="dropdown-toggle" aria-expanded="false">
+                        <i class="fas fa-graduation-cap"></i> Escuela
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </a>
                     <ul class="dropdown-menu">
-                        <li><a href="quienessomos.html">Club Triatlón</a></li>
-                        <li><a href="equipofemenino.html">Equipo Femenino</a></li>
-                        <li><a href="las-retadas.html">Las «Retadas»</a></li>
-                        <li><a href="alto-rendimiento.html">Alto Rendimiento</a></li>
-                        <li><a href="media-larga-distancia.html">Media y Larga Distancia</a></li>
-                        <li><a href="raids-aventura.html">Raids Aventura</a></li>
-                        <li><a href="trail-running.html">Trail Running</a></li>
+                        <li><a href="iniciacion.html">
+                                <i class="fas fa-child"></i> Iniciación (6 a 13 años)</a></li>
+                        <li><a href="tecnificacion.html">
+                                <i class="fas fa-user-graduate"></i> Tecnificación - Grupo E (14 a 16)</a></li>
+                        <li><a href="altorendimiento.html">
+                                <i class="fas fa-medal"></i> Rendimiento Deportivo «Grupo R» (16 a 24)</a></li>
+                        <li><a href="">
+                                <i class="fas fa-clock"></i> Horarios Escuela</a></li>
                     </ul>
                 </li>
-                <li><a href="instalaciones.html">Instalaciones</a></li>
-                <li><a href="index.html#equipacion">Equipación</a></li>
-                <li><a href="index.html#patrocinadores">Patrocinadores</a></li>
-                <li><a href="index.html#contacto">Contacto</a></li>
+                <li class="mobile-dropdown">
+                    <a class="dropdown-toggle" aria-expanded="false">
+                        <i class="fas fa-layer-group"></i> Grupos
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="quienessomos.html">
+                                <i class="fas fa-swimmer"></i> Club Triatlón</a></li>
+                        <li><a href="equipofemenino.html">
+                                <i class="fas fa-venus"></i> Equipo Femenino</a></li>
+                        <li><a href="lasretadas.html">
+                                <i class="fas fa-heart"></i> Las «Retadas»</a></li>
+                        <li><a href="altorendimiento.html">
+                                <i class="fas fa-medal"></i> Alto Rendimiento</a></li>
+                        <li><a href="largamediadistancia.html">
+                                <i class="fas fa-route"></i> Media y Larga Distancia</a></li>
+                        <li><a href="raidsaventura.html">
+                                <i class="fas fa-mountain"></i> Raids Aventura</a></li>
+                        <li><a href="trail.html">
+                                <i class="fas fa-running"></i> Trail Running</a></li>
+                    </ul>
+                </li>
+                <li><a href="instalaciones.html">
+                        <i class="fas fa-building"></i> Instalaciones</a></li>
+                <li><a href="noticias/noticias.html">
+                        <i class="fas fa-newspaper"></i> Noticias</a></li>
+                <li><a href="index.html#contacto">
+                        <i class="fas fa-user-plus"></i> Hazte Socio</a></li>
+                <li><a href="index.html#equipacion">
+                        <i class="fas fa-tshirt"></i> Equipación</a></li>
+                <li><a href="index.html#contacto">
+                        <i class="fas fa-envelope"></i> Contacto</a></li>
             </ul>
         </nav>
     </header>
+
 
     <!-- Hero Alto Rendimiento -->
     <section class="hero-elite">

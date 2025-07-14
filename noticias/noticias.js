@@ -17,9 +17,9 @@ class NoticiasManager {
 
     async cargarNoticias() {
         try {
-            const noticiasLocal = localStorage.getItem('triinfinity_noticias_web');
-            if (noticiasLocal) {
-                this.noticias = JSON.parse(noticiasLocal);
+            const response = await fetch('/noticias.json');
+            if (response.ok) {
+                this.noticias = await response.json();
             } else {
                 this.noticias = [];
             }

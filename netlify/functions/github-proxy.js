@@ -50,7 +50,87 @@ exports.handler = async (event, context) => {
                 body: JSON.stringify({ sha: null })
             };
         }
+        // Añadir ANTES de: if (action === 'saveNoticias') {
 
+        if (action === 'uploadImage') {
+            const { fileName, content, path } = JSON.parse(event.body);
+
+            // Verificar que exista la carpeta img/noticias
+            // Si no existe, GitHub la creará automáticamente
+
+            try {
+                // Intentar obtener SHA si la imagen ya existe (para reemplazarla)
+                let sha = null;
+                try {
+                    const checkResponse = await fetch(
+                        `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`,
+                        {
+                            headers: {
+                                'Authorization': `token ${GITHUB_TOKEN}`,
+                                'Accept': 'application/vnd.github.v3+json'
+                            }
+                        }
+                    );
+
+                    if (checkResponse.ok) {
+                        const fileData = await checkResponse.json();
+                        sha = fileData.sha;
+                    }
+                } catch (e) {
+                    // Archivo no existe, está bien
+                }
+
+                // Subir la imagen
+                const body = {
+                    message: `Subir imagen: ${fileName}`,
+                    content: content
+                };
+
+                if (sha) {
+                    body.sha = sha;
+                }
+
+                const uploadResponse = await fetch(
+                    `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${GITHUB_TOKEN}`,
+                            'Accept': 'application/vnd.github.v3+json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(body)
+                    }
+                );
+
+                if (uploadResponse.ok) {
+                    // Construir URL de la imagen
+                    // Para GitHub Pages será: https://[usuario].github.io/[repo]/[path]
+                    // Para desarrollo/preview: usar raw.githubusercontent.com
+                    const imageUrl = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/${path}`;
+
+                    return {
+                        statusCode: 200,
+                        body: JSON.stringify({
+                            success: true,
+                            url: imageUrl
+                        })
+                    };
+                } else {
+                    const error = await uploadResponse.text();
+                    return {
+                        statusCode: uploadResponse.status,
+                        body: JSON.stringify({ error: error })
+                    };
+                }
+            } catch (error) {
+                console.error('Error subiendo imagen:', error);
+                return {
+                    statusCode: 500,
+                    body: JSON.stringify({ error: error.message })
+                };
+            }
+        }
         if (action === 'saveNoticias') {
             // Primero obtener SHA
             const shaResponse = await fetch(

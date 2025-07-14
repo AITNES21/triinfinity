@@ -575,11 +575,21 @@
             </div>
 
             <div class="form-group">
-              <label for="image">URL de imagen (opcional)</label>
-              <input type="url" id="image" name="image" placeholder="https://ejemplo.com/imagen.jpg">
+              <label for="image">Imagen de la noticia (opcional)</label>
+              <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)">
               <small style="color: var(--gris-oscuro); display: block; margin-top: 0.5rem;">
-                Por ahora usa URLs externas. Próximamente: subida directa.
+                Formatos: JPG, PNG, GIF, WebP. Máximo: 2MB
               </small>
+
+              <!-- Preview de imagen -->
+              <div id="imagePreview" style="margin-top: 1rem; display: none;">
+                <img id="previewImg"
+                  style="max-width: 100%; max-height: 300px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <button type="button" class="btn btn-danger"
+                  style="margin-top: 0.5rem; padding: 0.5rem 1rem; font-size: 0.9rem;" onclick="removeImage()">
+                  <i class="fas fa-trash"></i> Eliminar imagen
+                </button>
+              </div>
             </div>
 
             <div class="form-group">
@@ -895,6 +905,50 @@
 
       async handleSubmit() {
         const formData = new FormData(document.getElementById('newsForm'));
+        const imageFile = document.getElementById('image').files[0];
+
+        let imageUrl = null;
+
+        // Si hay una imagen nueva, subirla primero
+        if (imageFile) {
+          this.showNotification('Subiendo imagen...', 'success');
+
+          try {
+            // Convertir imagen a base64
+            const base64 = await this.fileToBase64(imageFile);
+            const fileName = generateImageFileName(imageFile.name);
+
+            // Subir imagen a GitHub
+            const response = await fetch('/.netlify/functions/github-proxy', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                action: 'uploadImage',
+                fileName: fileName,
+                content: base64.split(',')[1], // Quitar el prefijo data:image/...;base64,
+                path: `img/noticias/${fileName}`
+              })
+            });
+
+            if (response.ok) {
+              const data = await response.json();
+              imageUrl = data.url;
+              this.showNotification('Imagen subida correctamente', 'success');
+            } else {
+              throw new Error('Error subiendo imagen');
+            }
+          } catch (error) {
+            console.error('Error subiendo imagen:', error);
+            this.showNotification('Error al subir la imagen', 'error');
+            return; // Detener si falla la subida
+          }
+        } else if (this.editingId) {
+          // Si estamos editando y no hay imagen nueva, mantener la existente
+          const existingNews = this.news.find(n => n.id === this.editingId);
+          imageUrl = existingNews ? existingNews.image : null;
+        }
 
         const newsData = {
           id: this.editingId || Date.now(),
@@ -904,7 +958,7 @@
           content: formData.get('content').trim(),
           author: formData.get('author').trim(),
           featured: formData.get('featured') === 'true',
-          image: formData.get('image').trim() || null,
+          image: imageUrl,
           date: this.editingId ? this.news.find(n => n.id === this.editingId).date : new Date().toISOString().split('T')[0]
         };
 
@@ -917,6 +971,16 @@
         this.resetForm();
         await this.saveToStorage();
         this.renderNews();
+      }
+
+      // Añadir este método después de handleSubmit
+      fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = error => reject(error);
+        });
       }
 
       addNews(newsData) {
@@ -944,7 +1008,17 @@
           document.getElementById('content').value = news.content;
           document.getElementById('author').value = news.author;
           document.getElementById('featured').value = news.featured.toString();
-          document.getElementById('image').value = news.image || '';
+
+          // Limpiar input de archivo (no se puede pre-llenar)
+          document.getElementById('image').value = '';
+
+          // Mostrar imagen existente si la hay
+          if (news.image) {
+            document.getElementById('previewImg').src = news.image;
+            document.getElementById('imagePreview').style.display = 'block';
+          } else {
+            document.getElementById('imagePreview').style.display = 'none';
+          }
 
           document.getElementById('submitBtn').innerHTML = '<i class="fas fa-edit"></i> Actualizar Noticia';
           document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth' });
@@ -965,6 +1039,10 @@
         document.getElementById('author').value = 'TriInfinity';
         this.editingId = null;
         document.getElementById('submitBtn').innerHTML = '<i class="fas fa-newspaper"></i> Publicar Noticia';
+
+        // Limpiar preview de imagen
+        document.getElementById('imagePreview').style.display = 'none';
+        document.getElementById('previewImg').src = '';
       }
 
       async saveToStorage() {
@@ -1074,6 +1152,54 @@
       if (!newsManager) {
         newsManager = new NewsManager();
       }
+    }
+    // FUNCIONES DE IMAGEN - Añadir antes de "let newsManager;"
+
+    // Preview de imagen
+    function previewImage(event) {
+      const file = event.target.files[0];
+      const preview = document.getElementById('imagePreview');
+      const previewImg = document.getElementById('previewImg');
+
+      if (file) {
+        // Validar tamaño (2MB máximo)
+        if (file.size > 2 * 1024 * 1024) {
+          alert('La imagen es muy grande. Máximo 2MB.');
+          event.target.value = '';
+          return;
+        }
+
+        // Validar formato
+        const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+        if (!validTypes.includes(file.type)) {
+          alert('Formato no válido. Usa: JPG, PNG, GIF o WebP');
+          event.target.value = '';
+          return;
+        }
+
+        // Mostrar preview
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          previewImg.src = e.target.result;
+          preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Eliminar imagen seleccionada
+    function removeImage() {
+      document.getElementById('image').value = '';
+      document.getElementById('imagePreview').style.display = 'none';
+      document.getElementById('previewImg').src = '';
+    }
+
+    // Función para generar nombre único para la imagen
+    function generateImageFileName(originalName) {
+      const timestamp = Date.now();
+      const randomStr = Math.random().toString(36).substring(7);
+      const extension = originalName.split('.').pop().toLowerCase();
+      return `noticia-${timestamp}-${randomStr}.${extension}`;
     }
   </script>
 </body>

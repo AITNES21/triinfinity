@@ -159,10 +159,10 @@ class NoticiasManager {
         return `
             <div class="noticia-card ${noticia.featured ? 'destacada' : ''}" data-id="${noticia.id}">
                 <div class="noticia-imagen ${!noticia.image ? 'no-image' : ''}">
-                    ${noticia.image
-                ? `<img src="${noticia.image}" alt="${noticia.title}" onerror="this.parentElement.classList.add('no-image'); this.style.display='none'; this.parentElement.innerHTML+='<i class=\\"fas fa-newspaper\\"></i>'">`
-                : '<i class="fas fa-newspaper"></i>'
-            }
+                    ${noticia.image 
+                        ? `<img src="${noticia.image}" alt="${noticia.title}" loading="lazy" onerror="handleImageError(this)">`
+                        : '<i class="fas fa-newspaper"></i>'
+                    }
                 </div>
                 <div class="noticia-content">
                     <div class="noticia-meta">
@@ -240,10 +240,10 @@ class NoticiasManager {
                     <i class="fas fa-times"></i>
                 </button>
                 <div class="modal-noticia-header ${!noticia.image ? 'no-image' : ''}">
-                    ${noticia.image
-                ? `<img src="${noticia.image}" alt="${noticia.title}" onerror="this.parentElement.classList.add('no-image'); this.style.display='none'; this.parentElement.innerHTML+='<i class=\\"fas fa-newspaper\\"></i>'">`
-                : '<i class="fas fa-newspaper"></i>'
-            }
+                    ${noticia.image 
+                        ? `<img src="${noticia.image}" alt="${noticia.title}" onerror="handleModalImageError(this)">`
+                        : '<i class="fas fa-newspaper"></i>'
+                    }
                 </div>
                 <div class="modal-noticia-body">
                     <div class="modal-noticia-meta">
@@ -289,6 +289,26 @@ class NoticiasManager {
             document.body.style.overflow = 'auto';
         }
     }
+}
+
+// Función para manejar errores de imagen en las tarjetas
+function handleImageError(img) {
+    img.style.display = 'none';
+    const parent = img.parentElement;
+    parent.classList.add('no-image');
+    const icon = document.createElement('i');
+    icon.className = 'fas fa-newspaper';
+    parent.appendChild(icon);
+}
+
+// Función para manejar errores de imagen en el modal
+function handleModalImageError(img) {
+    img.style.display = 'none';
+    const parent = img.parentElement;
+    parent.classList.add('no-image');
+    const icon = document.createElement('i');
+    icon.className = 'fas fa-newspaper';
+    parent.appendChild(icon);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

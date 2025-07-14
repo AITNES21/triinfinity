@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración - TriInfinity Noticias</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --rojo-principal: #e63946;
+      --rojo-oscuro: #d62839;
+      --negro: #212529;
+      --gris-oscuro: #495057;
+      --gris-claro: #f8f9fa;
+      --azul: #0d6efd;
+      --verde: #198754;
+      --blanco: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--rojo-principal), var(--negro));
+      min-height: 100vh;
+      line-height: 1.6;
+      color: var(--negro);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    /* Auth Styles */
+    .auth-container {
+      background: white;
+      border-radius: 12px;
+      padding: 3rem;
+      margin: 10vh auto;
+      max-width: 400px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .auth-logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1rem;
+      background: var(--rojo-principal);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .auth-button {
+      background: var(--rojo-principal);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin: 0.5rem;
+      transition: all 0.3s;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .auth-button:hover {
+      background: var(--rojo-oscuro);
+    }
+
+    .auth-button.secondary {
+      background: var(--gris-oscuro);
+    }
+
+    .auth-button.secondary:hover {
+      background: #373e47;
+    }
+
+    .status {
+      margin: 1rem 0;
+      padding: 0.5rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .logout-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10001;
+      background: var(--rojo-principal);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .logout-btn:hover {
+      background: var(--rojo-oscuro);
+    }
+
+    /* Main App Styles */
+    .main-app {
+      display: none;
+    }
+
+    .header {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      background: var(--rojo-principal);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      color: var(--negro);
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--gris-oscuro);
+      font-size: 1.1rem;
+    }
+
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .form-section,
+    .news-section {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--negro);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 3px solid var(--rojo-principal);
+      padding-bottom: 0.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--negro);
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--rojo-principal);
+      box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+      font-family: inherit;
+    }
+
+    .btn {
+      background: var(--rojo-principal);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn:hover {
+      background: var(--rojo-oscuro);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-danger {
+      background: #dc3545;
+    }
+
+    .btn-danger:hover {
+      background: #c82333;
+      box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+    }
+
+    .btn-edit {
+      background: var(--verde);
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+    }
+
+    .btn-edit:hover {
+      background: #157347;
+      box-shadow: 0 5px 15px rgba(25, 135, 84, 0.3);
+    }
+
+    .news-list {
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .news-item {
+      background: var(--gris-claro);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--rojo-principal);
+      transition: all 0.3s ease;
+    }
+
+    .news-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .news-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--gris-oscuro);
+    }
+
+    .news-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--negro);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .news-content {
+      color: var(--gris-oscuro);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .news-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .category-badge {
+      background: var(--rojo-principal);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: var(--gris-oscuro);
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--rojo-principal);
+    }
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      color: white;
+      font-weight: 600;
+      transform: translateX(400px);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    .notification.success {
+      background: var(--verde);
+    }
+
+    .notification.error {
+      background: #dc3545;
+    }
+
+    .export-section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 2px solid var(--gris-claro);
+    }
+
+    .export-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-secondary {
+      background: var(--gris-oscuro);
+    }
+
+    .btn-secondary:hover {
+      background: #373e47;
+      box-shadow: 0 5px 15px rgba(73, 80, 87, 0.3);
+    }
+
+    .sync-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--gris-claro);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 1rem;
+    }
+
+    .sync-status.synced {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .sync-status.error {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .sync-status.syncing {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 968px) {
+      .main-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+
+      .header,
+      .form-section,
+      .news-section {
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .news-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .news-actions {
+        flex-wrap: wrap;
+      }
+
+      .export-buttons {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+
+      .header,
+      .form-section,
+      .news-section {
+        padding: 1rem;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .news-actions .btn {
+        width: auto;
+        flex: 1;
+      }
+    }
+
+    /* Scrollbar personalizado */
+    .news-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .news-list::-webkit-scrollbar-track {
+      background: var(--gris-claro);
+      border-radius: 3px;
+    }
+
+    .news-list::-webkit-scrollbar-thumb {
+      background: var(--rojo-principal);
+      border-radius: 3px;
+    }
+
+    .news-list::-webkit-scrollbar-thumb:hover {
+      background: var(--rojo-oscuro);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Pantalla de autenticación -->
+  <div id="authContainer" class="auth-container">
+    <div class="auth-logo">T</div>
+    <h1>Administración TriInfinity</h1>
+    <p>Acceso restringido para administradores</p>
+
+    <div id="status" class="status" style="display: none;"></div>
+
+    <div id="authButtons">
+      <button class="auth-button" onclick="handleLogin()">Iniciar Sesión</button>
+    </div>
+
+    <div id="userInfo" style="display: none;">
+      <p>Bienvenido, <span id="userEmail"></span></p>
+      <button class="auth-button" onclick="showMainApp()">Acceder al Panel</button>
+      <button class="auth-button secondary" onclick="handleLogout()">Cerrar Sesión</button>
+    </div>
+  </div>
+
+  <!-- Aplicación principal -->
+  <div id="mainApp" class="main-app">
+    <button class="logout-btn" onclick="showAuth()">
+      <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+    </button>
+
+    <div class="container">
+      <header class="header">
+        <div class="logo">T</div>
+        <h1>Panel de Noticias</h1>
+        <p class="subtitle">Administra las noticias de TriInfinity de forma sencilla</p>
+        <span id="syncStatus" class="sync-status">
+          <i class="fas fa-check-circle"></i> Sincronizado
+        </span>
+      </header>
+
+      <main class="main-content">
+        <section class="form-section">
+          <h2 class="section-title">
+            <i class="fas fa-plus-circle"></i> Nueva Noticia
+          </h2>
+          <form id="newsForm">
+            <div class="form-group">
+              <label for="title">Título de la noticia</label>
+              <input type="text" id="title" name="title" placeholder="Ej: Gran éxito en el Triatlón de Madrid" required>
+            </div>
+
+            <div class="form-group">
+              <label for="category">Categoría</label>
+              <select id="category" name="category" required>
+                <option value="">Seleccionar categoría</option>
+                <option value="competiciones">Competiciones</option>
+                <option value="entrenamientos">Entrenamientos</option>
+                <option value="eventos">Eventos</option>
+                <option value="club">Club</option>
+                <option value="logros">Logros</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="excerpt">Resumen breve</label>
+              <textarea id="excerpt" name="excerpt"
+                placeholder="Breve descripción que aparecerá en la lista de noticias..." rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="content">Contenido completo</label>
+              <textarea id="content" name="content" placeholder="Escribe aquí el contenido completo de la noticia..."
+                rows="8" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="image">URL de imagen (opcional)</label>
+              <input type="url" id="image" name="image" placeholder="https://ejemplo.com/imagen.jpg">
+              <small style="color: var(--gris-oscuro); display: block; margin-top: 0.5rem;">
+                Por ahora usa URLs externas. Próximamente: subida directa.
+              </small>
+            </div>
+
+            <div class="form-group">
+              <label for="author">Autor</label>
+              <input type="text" id="author" name="author" placeholder="Nombre del autor" value="TriInfinity" required>
+            </div>
+
+            <div class="form-group">
+              <label for="featured">Noticia destacada</label>
+              <select id="featured" name="featured">
+                <option value="false">No</option>
+                <option value="true">Sí, destacar esta noticia</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn" id="submitBtn">
+              <i class="fas fa-newspaper"></i> Publicar Noticia
+            </button>
+          </form>
+        </section>
+
+        <section class="news-section">
+          <h2 class="section-title">
+            <i class="fas fa-list"></i> Noticias Publicadas
+          </h2>
+          <div id="newsList" class="news-list">
+            <div class="empty-state">
+              <i class="fas fa-newspaper"></i>
+              <h3>No hay noticias publicadas</h3>
+              <p>Comienza creando tu primera noticia</p>
+            </div>
+          </div>
+
+          <div class="export-section">
+            <h3 style="margin-bottom: 1rem;">Herramientas</h3>
+            <div class="export-buttons">
+              <button class="btn btn-secondary" onclick="newsManager.exportarJSON()">
+                <i class="fas fa-download"></i> Exportar JSON
+              </button>
+              <button class="btn btn-secondary" onclick="newsManager.sincronizarConGitHub()">
+                <i class="fas fa-sync"></i> Sincronizar Manual
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="notification" class="notification"></div>
+
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    // CONFIGURACIÓN IMPORTANTE - ACTUALIZA ESTOS VALORES
+    const GITHUB_CONFIG = {
+      TOKEN: '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', // TU TOKEN DE GITHUB AQUÍ
+      OWNER: 'AITNES21',
+      REPO: 'triinfinity',
+      FILE_PATH: 'noticias.json'
+    };
+
+    // Configuración de seguridad
+    const ADMIN_EMAILS = ['twitchaitnes@gmail.com']; // Emails autorizados
+
+    // Estado de la aplicación
+    let currentUser = null;
+
+    // Elementos DOM
+    const authContainer = document.getElementById('authContainer');
+    const mainApp = document.getElementById('mainApp');
+    const statusDiv = document.getElementById('status');
+    const userInfo = document.getElementById('userInfo');
+    const authButtons = document.getElementById('authButtons');
+    const userEmailSpan = document.getElementById('userEmail');
+
+    // Inicialización
+    document.addEventListener('DOMContentLoaded', function () {
+      // Esperar a que Netlify Identity cargue
+      if (typeof netlifyIdentity === 'undefined') {
+        setTimeout(() => {
+          if (typeof netlifyIdentity !== 'undefined') {
+            checkCurrentUser();
+            setupIdentityListeners();
+          } else {
+            showError('Error cargando sistema de autenticación');
+          }
+        }, 1000);
+      } else {
+        checkCurrentUser();
+        setupIdentityListeners();
+      }
+    });
+
+    // Verificar usuario actual
+    function checkCurrentUser() {
+      if (typeof netlifyIdentity === 'undefined') {
+        // Para testing - saltar autenticación
+        currentUser = { email: 'twitchaitnes@gmail.com' };
+        showUserInfo();
+        return;
+      }
+
+      currentUser = netlifyIdentity.currentUser();
+      if (currentUser) {
+        if (isAuthorizedUser(currentUser)) {
+          showUserInfo();
+        } else {
+          showError('Usuario no autorizado');
+          handleLogout();
+        }
+      }
+    }
+
+    // Configurar listeners de Identity
+    function setupIdentityListeners() {
+      netlifyIdentity.on('login', function (user) {
+        currentUser = user;
+        if (isAuthorizedUser(user)) {
+          showSuccess('Login exitoso');
+          showUserInfo();
+        } else {
+          showError('Usuario no autorizado para acceder al panel');
+          handleLogout();
+        }
+      });
+
+      netlifyIdentity.on('logout', function () {
+        currentUser = null;
+        showAuth();
+        showSuccess('Sesión cerrada');
+      });
+
+      netlifyIdentity.on('error', function (err) {
+        showError('Error: ' + err.message);
+      });
+    }
+
+    // Verificar si el usuario está autorizado
+    function isAuthorizedUser(user) {
+      if (!user || !user.email) return false;
+      return ADMIN_EMAILS.includes(user.email.toLowerCase());
+    }
+
+    // Manejar login
+    function handleLogin() {
+      try {
+        netlifyIdentity.open('login');
+      } catch (error) {
+        showError('Error al abrir login: ' + error.message);
+      }
+    }
+
+    // Manejar logout
+    function handleLogout() {
+      try {
+        netlifyIdentity.logout();
+      } catch (error) {
+        showError('Error al cerrar sesión: ' + error.message);
+      }
+    }
+
+    // Mostrar información del usuario
+    function showUserInfo() {
+      if (currentUser) {
+        userEmailSpan.textContent = currentUser.email;
+        userInfo.style.display = 'block';
+        authButtons.style.display = 'none';
+      }
+    }
+
+    // Mostrar pantalla de autenticación
+    function showAuth() {
+      authContainer.style.display = 'block';
+      mainApp.style.display = 'none';
+      userInfo.style.display = 'none';
+      authButtons.style.display = 'block';
+    }
+
+    // Mostrar aplicación principal
+    function showMainApp() {
+      if (!currentUser || !isAuthorizedUser(currentUser)) {
+        showError('No autorizado para acceder al panel');
+        return;
+      }
+      authContainer.style.display = 'none';
+      mainApp.style.display = 'block';
+      initNewsManager();
+    }
+
+    // Mostrar mensaje de estado
+    function showStatus(message, type) {
+      statusDiv.textContent = message;
+      statusDiv.className = 'status ' + type;
+      statusDiv.style.display = 'block';
+
+      setTimeout(() => {
+        statusDiv.style.display = 'none';
+      }, 5000);
+    }
+
+    function showError(message) {
+      showStatus(message, 'error');
+    }
+
+    function showSuccess(message) {
+      showStatus(message, 'success');
+    }
+
+    // INTEGRACIÓN CON GITHUB
+    class GitHubService {
+      constructor(config) {
+        this.config = config;
+      }
+
+      async getFileSHA() {
+        try {
+          const response = await fetch(
+            `https://api.github.com/repos/${this.config.OWNER}/${this.config.REPO}/contents/${this.config.FILE_PATH}`,
+            {
+              headers: {
+                'Authorization': `token ${this.config.TOKEN}`,
+                'Accept': 'application/vnd.github.v3+json'
+              }
+            }
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+            return data.sha;
+          }
+          return null;
+        } catch (error) {
+          console.error('Error obteniendo SHA:', error);
+          return null;
+        }
+      }
+
+      async saveNoticias(noticias) {
+        try {
+          // Actualizar estado de sincronización
+          this.updateSyncStatus('syncing');
+
+          // Obtener SHA actual
+          const sha = await this.getFileSHA();
+
+          // Codificar contenido
+          const content = btoa(unescape(encodeURIComponent(JSON.stringify(noticias, null, 2))));
+
+          // Preparar body
+          const body = {
+            message: `Actualizar noticias - ${new Date().toLocaleString('es-ES')}`,
+            content: content
+          };
+
+          if (sha) {
+            body.sha = sha;
+          }
+
+          // Hacer commit
+          const response = await fetch(
+            `https://api.github.com/repos/${this.config.OWNER}/${this.config.REPO}/contents/${this.config.FILE_PATH}`,
+            {
+              method: 'PUT',
+              headers: {
+                'Authorization': `token ${this.config.TOKEN}`,
+                'Accept': 'application/vnd.github.v3+json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(body)
+            }
+          );
+
+          if (response.ok) {
+            this.updateSyncStatus('synced');
+            return true;
+          } else {
+            const error = await response.text();
+            console.error('Error de GitHub:', error);
+            this.updateSyncStatus('error');
+            return false;
+          }
+        } catch (error) {
+          console.error('Error guardando en GitHub:', error);
+          this.updateSyncStatus('error');
+          return false;
+        }
+      }
+
+      updateSyncStatus(status) {
+        const syncStatus = document.getElementById('syncStatus');
+        if (!syncStatus) return;
+
+        syncStatus.className = 'sync-status ' + status;
+
+        switch (status) {
+          case 'syncing':
+            syncStatus.innerHTML = '<i class="fas fa-sync fa-spin"></i> Sincronizando...';
+            break;
+          case 'synced':
+            syncStatus.innerHTML = '<i class="fas fa-check-circle"></i> Sincronizado';
+            break;
+          case 'error':
+            syncStatus.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error al sincronizar';
+            break;
+        }
+      }
+    }
+
+    // GESTOR DE NOTICIAS
+    class NewsManager {
+      constructor() {
+        this.news = [];
+        this.editingId = null;
+        this.githubService = new GitHubService(GITHUB_CONFIG);
+        this.initializeEventListeners();
+        this.loadFromGitHub();
+      }
+
+      initializeEventListeners() {
+        document.getElementById('newsForm').addEventListener('submit', (e) => {
+          e.preventDefault();
+          this.handleSubmit();
+        });
+      }
+
+      async loadFromGitHub() {
+        try {
+          const response = await fetch(
+            `https://api.github.com/repos/${GITHUB_CONFIG.OWNER}/${GITHUB_CONFIG.REPO}/contents/${GITHUB_CONFIG.FILE_PATH}`,
+            {
+              headers: {
+                'Authorization': `token ${GITHUB_CONFIG.TOKEN}`,
+                'Accept': 'application/vnd.github.v3+json'
+              }
+            }
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+            const content = JSON.parse(atob(data.content));
+            this.news = content || [];
+            this.renderNews();
+            this.showNotification('Noticias cargadas desde GitHub', 'success');
+          } else {
+            // Si no existe el archivo, cargar de localStorage
+            this.news = JSON.parse(localStorage.getItem('triinfinity_news')) || [];
+            this.renderNews();
+          }
+        } catch (error) {
+          console.error('Error cargando de GitHub:', error);
+          // Fallback a localStorage
+          this.news = JSON.parse(localStorage.getItem('triinfinity_news')) || [];
+          this.renderNews();
+        }
+      }
+
+      async handleSubmit() {
+        const formData = new FormData(document.getElementById('newsForm'));
+
+        const newsData = {
+          id: this.editingId || Date.now(),
+          title: formData.get('title').trim(),
+          category: formData.get('category'),
+          excerpt: formData.get('excerpt').trim(),
+          content: formData.get('content').trim(),
+          author: formData.get('author').trim(),
+          featured: formData.get('featured') === 'true',
+          image: formData.get('image').trim() || null,
+          date: this.editingId ? this.news.find(n => n.id === this.editingId).date : new Date().toISOString().split('T')[0]
+        };
+
+        if (this.editingId) {
+          this.updateNews(newsData);
+        } else {
+          this.addNews(newsData);
+        }
+
+        this.resetForm();
+        await this.saveToStorage();
+        this.renderNews();
+      }
+
+      addNews(newsData) {
+        this.news.unshift(newsData);
+        this.showNotification('Noticia publicada correctamente', 'success');
+      }
+
+      updateNews(newsData) {
+        const index = this.news.findIndex(n => n.id === this.editingId);
+        if (index !== -1) {
+          this.news[index] = newsData;
+          this.showNotification('Noticia actualizada correctamente', 'success');
+        }
+        this.editingId = null;
+        document.getElementById('submitBtn').innerHTML = '<i class="fas fa-newspaper"></i> Publicar Noticia';
+      }
+
+      editNews(id) {
+        const news = this.news.find(n => n.id === id);
+        if (news) {
+          this.editingId = id;
+          document.getElementById('title').value = news.title;
+          document.getElementById('category').value = news.category;
+          document.getElementById('excerpt').value = news.excerpt;
+          document.getElementById('content').value = news.content;
+          document.getElementById('author').value = news.author;
+          document.getElementById('featured').value = news.featured.toString();
+          document.getElementById('image').value = news.image || '';
+
+          document.getElementById('submitBtn').innerHTML = '<i class="fas fa-edit"></i> Actualizar Noticia';
+          document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+
+      deleteNews(id) {
+        if (confirm('¿Estás seguro de que quieres eliminar esta noticia?')) {
+          this.news = this.news.filter(n => n.id !== id);
+          this.saveToStorage();
+          this.renderNews();
+          this.showNotification('Noticia eliminada correctamente', 'success');
+        }
+      }
+
+      resetForm() {
+        document.getElementById('newsForm').reset();
+        document.getElementById('author').value = 'TriInfinity';
+        this.editingId = null;
+        document.getElementById('submitBtn').innerHTML = '<i class="fas fa-newspaper"></i> Publicar Noticia';
+      }
+
+      async saveToStorage() {
+        // Guardar en localStorage
+        localStorage.setItem('triinfinity_news', JSON.stringify(this.news));
+
+        // Guardar en GitHub
+        const saved = await this.githubService.saveNoticias(this.news);
+
+        if (saved) {
+          this.showNotification('✅ Noticias publicadas en la web', 'success');
+        } else {
+          this.showNotification('⚠️ Guardado local. Error al publicar en web.', 'error');
+        }
+      }
+
+      async sincronizarConGitHub() {
+        const saved = await this.githubService.saveNoticias(this.news);
+
+        if (saved) {
+          this.showNotification('✅ Sincronización completada', 'success');
+        } else {
+          this.showNotification('❌ Error en la sincronización', 'error');
+        }
+      }
+
+      exportarJSON() {
+        const dataStr = JSON.stringify(this.news, null, 2);
+        const dataBlob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(dataBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'noticias.json';
+        link.click();
+        URL.revokeObjectURL(url);
+        this.showNotification('Archivo JSON descargado', 'success');
+      }
+
+      renderNews() {
+        const newsList = document.getElementById('newsList');
+
+        if (this.news.length === 0) {
+          newsList.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-newspaper"></i>
+                            <h3>No hay noticias publicadas</h3>
+                            <p>Comienza creando tu primera noticia</p>
+                        </div>
+                    `;
+          return;
+        }
+
+        newsList.innerHTML = this.news.map(news => `
+                    <div class="news-item">
+                        <div class="news-meta">
+                            <span class="category-badge">${this.getCategoryName(news.category)}</span>
+                            <span>${this.formatDate(news.date)} • ${news.author}${news.featured ? ' • ⭐ DESTACADA' : ''}</span>
+                        </div>
+                        <h3 class="news-title">${news.title}</h3>
+                        <p class="news-content">${news.excerpt}</p>
+                        <div class="news-actions">
+                            <button class="btn btn-edit" onclick="newsManager.editNews(${news.id})">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="btn btn-danger" onclick="newsManager.deleteNews(${news.id})">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+      }
+
+      getCategoryName(category) {
+        const categories = {
+          'competiciones': 'Competiciones',
+          'entrenamientos': 'Entrenamientos',
+          'eventos': 'Eventos',
+          'club': 'Club',
+          'logros': 'Logros'
+        };
+        return categories[category] || 'General';
+      }
+
+      formatDate(dateString) {
+        return new Date(dateString).toLocaleDateString('es-ES', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        });
+      }
+
+      showNotification(message, type) {
+        const notification = document.getElementById('notification');
+        notification.textContent = message;
+        notification.className = `notification ${type}`;
+        notification.classList.add('show');
+
+        setTimeout(() => {
+          notification.classList.remove('show');
+        }, 3000);
+      }
+    }
+
+    // Inicializar la aplicación
+    let newsManager;
+    function initNewsManager() {
+      if (!newsManager) {
+        newsManager = new NewsManager();
+      }
+    }
+  </script>
+</body>
+
+</html>

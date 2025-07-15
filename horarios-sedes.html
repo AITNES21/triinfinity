@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Horarios y Sedes - TRIINFINITY</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="inde.css" />
+    <link rel="stylesheet" href="horarios-sedes.css" />
+    <link rel="shortcut icon" href="/img/Logo.jpg" type="image/x-icon" />
+</head>
+
+<body>
+    <!-- Header (mismo que el principal) -->
+    <header id="header">
+        <div class="container header-content">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <img src="img/Logo.jpg" alt="TriInfinity Logo" loading="eager" />
+                <span class="logo-text">TRIINFINITY</span>
+            </div>
+
+            <!-- Menú Desktop Corregido -->
+            <nav class="desktop-menu" role="navigation" aria-label="Menú principal">
+                <ul>
+                    <li><a href="index.html#inicio">Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="#club" class="dropdown-toggle">El Club <i
+                                class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="quienessomos.html">¿Quiénes somos?</a></li>
+                            <li><a href="Organigrama.html">Organigrama</a></li>
+                            <li><a href="competiciones.html">Competiciones</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">Escuela <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="iniciacion.html">Iniciación (6 a 13 años)</a></li>
+                            <li><a href="tecnificacion.html">Tecnificación - Grupo E (14 a 16)</a></li>
+                            <li><a href="altorendimiento.html">Rendimiento Deportivo «Grupo R» (16 a 24)</a></li>
+                            <li><a href="">Horarios Escuela</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle">Grupos <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="quienessomos.html">Club Triatlón</a></li>
+                            <li><a href="equipofemenino.html">Equipo Femenino</a></li>
+                            <li><a href="lasretadas.html">Las «Retadas»</a></li>
+                            <li><a href="altorendimiento.html">Alto Rendimiento</a></li>
+                            <li><a href="largamediadistancia.html">Media y Larga Distancia</a></li>
+                            <li><a href="raidsaventura.html">Raids Aventura</a></li>
+                            <li><a href="trail.html">Trail Running</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="instalaciones.html">Instalaciones</a></li>
+                    <li><a href="noticias/noticias.html">Noticias</a></li>
+                    <li><a href="hazte-socio.html">Hazte Socio</a></li>
+                    <li><a href="index.html#equipacion">Equipación</a></li>
+                    <li><a href="index.html#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+
+            <!-- Botón Hamburguesa Mejorado -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menú móvil" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Menú Mobile Mejorado -->
+        <nav class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Menú móvil">
+            <ul>
+                <li><a href="index.html#inicio">
+                        <i class="fas fa-home"></i> Inicio</a></li>
+                <li class="mobile-dropdown">
+                    <a class="dropdown-toggle" aria-expanded="false">
+                        <i class="fas fa-users"></i> El Club
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="quienessomos.html">
+                                <i class="fas fa-info-circle"></i> ¿Quiénes somos?</a></li>
+                        <li><a href="Organigrama.html">
+                                <i class="fas fa-sitemap"></i> Organigrama</a></li>
+                        <li><a href="competiciones.html">
+                                <i class="fas fa-trophy"></i> Competiciones</a></li>
+                    </ul>
+                </li>
+                <li class="mobile-dropdown">
+                    <a class="dropdown-toggle" aria-expanded="false">
+                        <i class="fas fa-graduation-cap"></i> Escuela
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="iniciacion.html">
+                                <i class="fas fa-child"></i> Iniciación (6 a 13 años)</a></li>
+                        <li><a href="tecnificacion.html">
+                                <i class="fas fa-user-graduate"></i> Tecnificación - Grupo E (14 a 16)</a></li>
+                        <li><a href="altorendimiento.html">
+                                <i class="fas fa-medal"></i> Rendimiento Deportivo «Grupo R» (16 a 24)</a></li>
+                        <li><a href="">
+                                <i class="fas fa-clock"></i> Horarios Escuela</a></li>
+                    </ul>
+                </li>
+                <li class="mobile-dropdown">
+                    <a class="dropdown-toggle" aria-expanded="false">
+                        <i class="fas fa-layer-group"></i> Grupos
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="quienessomos.html">
+                                <i class="fas fa-swimmer"></i> Club Triatlón</a></li>
+                        <li><a href="equipofemenino.html">
+                                <i class="fas fa-venus"></i> Equipo Femenino</a></li>
+                        <li><a href="lasretadas.html">
+                                <i class="fas fa-heart"></i> Las «Retadas»</a></li>
+                        <li><a href="altorendimiento.html">
+                                <i class="fas fa-medal"></i> Alto Rendimiento</a></li>
+                        <li><a href="largamediadistancia.html">
+                                <i class="fas fa-route"></i> Media y Larga Distancia</a></li>
+                        <li><a href="raidsaventura.html">
+                                <i class="fas fa-mountain"></i> Raids Aventura</a></li>
+                        <li><a href="trail.html">
+                                <i class="fas fa-running"></i> Trail Running</a></li>
+                    </ul>
+                </li>
+                <li><a href="instalaciones.html">
+                        <i class="fas fa-building"></i> Instalaciones</a></li>
+                <li><a href="noticias/noticias.html">
+                        <i class="fas fa-newspaper"></i> Noticias</a></li>
+                <li><a href="index.html#contacto">
+                        <i class="fas fa-user-plus"></i> Hazte Socio</a></li>
+                <li><a href="index.html#equipacion">
+                        <i class="fas fa-tshirt"></i> Equipación</a></li>
+                <li><a href="index.html#contacto">
+                        <i class="fas fa-envelope"></i> Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Banner Específico -->
+    <section class="hero-schedules">
+        <div class="container hero-content">
+            <h1><i class="fas fa-calendar-alt"></i> Horarios y Sedes</h1>
+            <p>Encuentra los horarios de entrenamiento y nuestras ubicaciones en Móstoles y Navalcarnero.
+                Entrenamientos adaptados a todos los niveles y edades.</p>
+        </div>
+    </section>
+
+    <!-- Navegación Rápida -->
+    <section class="quick-navigation">
+        <div class="container">
+            <div class="nav-pills">
+                <a href="#sede-mostoles" class="nav-pill active">
+                    <i class="fas fa-map-marker-alt"></i> Móstoles
+                </a>
+                <a href="#sede-navalcarnero" class="nav-pill">
+                    <i class="fas fa-map-marker-alt"></i> Navalcarnero
+                </a>
+                <a href="#escuela-horarios" class="nav-pill">
+                    <i class="fas fa-graduation-cap"></i> Escuela
+                </a>
+                <a href="#precios" class="nav-pill">
+                    <i class="fas fa-euro-sign"></i> Precios
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sede Móstoles -->
+    <section id="sede-mostoles" class="schedule-section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-building"></i> Sede Móstoles
+            </h2>
+
+            <div class="sede-info">
+                <div class="info-card">
+                    <h3><i class="fas fa-dumbbell"></i> Body Factory</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Centro de entrenamiento principal</p>
+                    <p><i class="fas fa-phone"></i> +34 687 528 338</p>
+                </div>
+            </div>
+
+            <div class="schedule-grid">
+                <!-- Adultos Móstoles -->
+                <div class="schedule-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-users"></i> Adultos</h3>
+                        <span class="level-badge level-general">General</span>
+                    </div>
+                    <div class="schedule-content">
+                        <div class="time-slot">
+                            <div class="day-time">
+                                <span class="day">Lunes y Miércoles</span>
+                                <span class="time">19:00 - 20:30</span>
+                            </div>
+                            <div class="activity">
+                                <i class="fas fa-swimmer"></i> Natación + Técnica
+                            </div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="day-time">
+                                <span class="day">Martes y Jueves</span>
+                                <span class="time">19:30 - 21:00</span>
+                            </div>
+                            <div class="activity">
+                                <i class="fas fa-biking"></i> Ciclismo + Transiciones
+                            </div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="day-time">
+                                <span class="day">Sábados</span>
+                                <span class="time">09:00 - 11:00</span>
+                            </div>
+                            <div class="activity">
+                                <i class="fas fa-running"></i> Carrera a pie + Brick
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Escuela Móstoles -->
+                <div class="schedule-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-graduation-cap"></i> Escuela Móstoles</h3>
+                        <span class="level-badge level-school">6-24 años</span>
+                    </div>
+                    <div class="schedule-content">
+                        <div class="time-slot">
+                            <div class="day-time">
+                                <span class="day">Lunes y Miércoles</span>
+                                <span class="time">17:30 - 19:00</span>
+                            </div>
+                            <div class="activity">
+                                <i class="fas fa-child"></i> Iniciación (6-13 años)
+                            </div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="day-time">
+                                <span class="day">Martes y Jueves</span>
+                                <span class="time">18:00 - 19:30</span>
+                            </div>
+                            <div class="activity">
+                                <i class="fas fa-user-graduate"></i> Tecnificación (14-16 años)
+                            </div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="day-time">
+                                <span class="day">Viernes</span>
+                                <span class="time">18:30 - 20:00</span>
+                            </div>
+                            <div class="activity">
+                                <i class="fas fa-medal"></i> Alto Rendimiento (16-24 años)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sede Navalcarnero -->
+    <section id="sede-navalcarnero" class="schedule-section alt-bg">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-building"></i> Sede Navalcarnero
+            </h2>
+
+            <div class="sede-info">
+                <div class="info-card">
+                    <h3><i class="fas fa-swimming-pool"></i> Polideportivo Martín López Zubero</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Instalaciones municipales</p>
+                    <p><i class="fas fa-phone"></i> +34 687 528 338</p>
+                </div>
+            </div>
+
+            <div class="schedule-grid">
+                <!-- Adultos Navalcarnero -->
+                <div class="schedule-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-users"></i> Adultos</h3>
+                        <span class="level-badge level-general">General</span>
+                    </div>
+                    <div class="schedule-content">
+                        <div class="time-slot">
+                            <div class="day-time">
+                                <span class="day">Martes y Jueves</span>
+                                <span class="time">20:00 - 21:30</span>
+                            </div>
+                            <div class="activity">
+                                <i class="fas fa-swimmer"></i> Natación técnica
+                            </div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="day-time">
+                                <span class="day">Sábados</span>
+                                <span class="time">10:00 - 12:00</span>
+                            </div>
+                            <div class="activity">
+                                <i class="fas fa-biking"></i> Entrenamiento combinado
+                            </div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="day-time">
+                                <span class="day">Domingos</span>
+                                <span class="time">09:00 - 11:00</span>
+                            </div>
+                            <div class="activity">
+                                <i class="fas fa-running"></i> Sesión larga
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Escuela Navalcarnero -->
+                <div class="schedule-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-graduation-cap"></i> Escuela Navalcarnero</h3>
+                        <span class="level-badge level-school">6-24 años</span>
+                    </div>
+                    <div class="schedule-content">
+                        <div class="time-slot">
+                            <div class="day-time">
+                                <span class="day">Lunes y Miércoles</span>
+                                <span class="time">18:00 - 19:30</span>
+                            </div>
+                            <div class="activity">
+                                <i class="fas fa-child"></i> Iniciación (6-13 años)
+                            </div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="day-time">
+                                <span class="day">Viernes</span>
+                                <span class="time">17:30 - 19:00</span>
+                            </div>
+                            <div class="activity">
+                                <i class="fas fa-user-graduate"></i> Tecnificación (14-16 años)
+                            </div>
+                        </div>
+                        <div class="time-slot">
+                            <div class="day-time">
+                                <span class="day">Sábados</span>
+                                <span class="time">08:30 - 10:00</span>
+                            </div>
+                            <div class="activity">
+                                <i class="fas fa-medal"></i> Alto Rendimiento (16-24 años)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Información Escuela -->
+    <section id="escuela-horarios" class="schedule-section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-graduation-cap"></i> Escuela TriInfinity
+            </h2>
+
+            <div class="school-info-grid">
+                <div class="school-level-card">
+                    <div class="level-header iniciacion">
+                        <i class="fas fa-child"></i>
+                        <h3>Iniciación</h3>
+                        <span class="age-range">6 - 13 años</span>
+                    </div>
+                    <div class="level-content">
+                        <p>Primeros pasos en el triatlón con enfoque lúdico y formativo. Desarrollo de habilidades
+                            básicas en las tres disciplinas.</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Técnica básica de natación</li>
+                            <li><i class="fas fa-check"></i> Equilibrio en bicicleta</li>
+                            <li><i class="fas fa-check"></i> Coordinación en carrera</li>
+                            <li><i class="fas fa-check"></i> Juegos y actividades</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="school-level-card">
+                    <div class="level-header tecnificacion">
+                        <i class="fas fa-user-graduate"></i>
+                        <h3>Tecnificación - Grupo E</h3>
+                        <span class="age-range">14 - 16 años</span>
+                    </div>
+                    <div class="level-content">
+                        <p>Perfeccionamiento técnico y introducción al entrenamiento estructurado. Participación en
+                            competiciones juveniles.</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Técnica avanzada</li>
+                            <li><i class="fas fa-check"></i> Entrenamiento planificado</li>
+                            <li><i class="fas fa-check"></i> Transiciones</li>
+                            <li><i class="fas fa-check"></i> Primeras competiciones</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="school-level-card">
+                    <div class="level-header rendimiento">
+                        <i class="fas fa-medal"></i>
+                        <h3>Rendimiento Deportivo - Grupo R</h3>
+                        <span class="age-range">16 - 24 años</span>
+                    </div>
+                    <div class="level-content">
+                        <p>Entrenamiento de alto nivel para jóvenes triatletas con ambiciones competitivas. Preparación
+                            para competiciones nacionales.</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Entrenamiento específico</li>
+                            <li><i class="fas fa-check"></i> Periodización avanzada</li>
+                            <li><i class="fas fa-check"></i> Competiciones nacionales</li>
+                            <li><i class="fas fa-check"></i> Seguimiento personalizado</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Precios -->
+    <section id="precios" class="schedule-section alt-bg">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-euro-sign"></i> Tarifas y Precios
+            </h2>
+
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3><i class="fas fa-child"></i> Escuela</h3>
+                        <div class="price">
+                            <span class="amount">45€</span>
+                            <span class="period">/mes</span>
+                        </div>
+                    </div>
+                    <div class="pricing-content">
+                        <ul>
+                            <li><i class="fas fa-check"></i> 2 entrenamientos/semana</li>
+                            <li><i class="fas fa-check"></i> Material incluido</li>
+                            <li><i class="fas fa-check"></i> Seguro deportivo</li>
+                            <li><i class="fas fa-check"></i> Seguimiento técnico</li>
+                        </ul>
+                        <p class="age-info">Iniciación (6-13 años)</p>
+                    </div>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-header">
+                        <h3><i class="fas fa-user-graduate"></i> Tecnificación</h3>
+                        <div class="price">
+                            <span class="amount">55€</span>
+                            <span class="period">/mes</span>
+                        </div>
+                    </div>
+                    <div class="pricing-content">
+                        <ul>
+                            <li><i class="fas fa-check"></i> 3 entrenamientos/semana</li>
+                            <li><i class="fas fa-check"></i> Plan personalizado</li>
+                            <li><i class="fas fa-check"></i> Competiciones incluidas</li>
+                            <li><i class="fas fa-check"></i> Nutrición deportiva</li>
+                        </ul>
+                        <p class="age-info">Grupo E (14-16 años)</p>
+                    </div>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3><i class="fas fa-medal"></i> Alto Rendimiento</h3>
+                        <div class="price">
+                            <span class="amount">65€</span>
+                            <span class="period">/mes</span>
+                        </div>
+                    </div>
+                    <div class="pricing-content">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Entrenamientos ilimitados</li>
+                            <li><i class="fas fa-check"></i> Entrenador personal</li>
+                            <li><i class="fas fa-check"></i> Análisis técnico</li>
+                            <li><i class="fas fa-check"></i> Competiciones nacionales</li>
+                        </ul>
+                        <p class="age-info">Grupo R (16-24 años)</p>
+                    </div>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3><i class="fas fa-users"></i> Adultos</h3>
+                        <div class="price">
+                            <span class="amount">50€</span>
+                            <span class="period">/mes</span>
+                        </div>
+                    </div>
+                    <div class="pricing-content">
+                        <ul>
+                            <li><i class="fas fa-check"></i> 3 entrenamientos/semana</li>
+                            <li><i class="fas fa-check"></i> Grupos por nivel</li>
+                            <li><i class="fas fa-check"></i> Asesoramiento técnico</li>
+                            <li><i class="fas fa-check"></i> Actividades sociales</li>
+                        </ul>
+                        <p class="age-info">A partir de 18 años</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="additional-info">
+                <div class="info-box">
+                    <h4><i class="fas fa-info-circle"></i> Información Adicional</h4>
+                    <ul>
+                        <li><i class="fas fa-percent"></i> <strong>Descuento familiar:</strong> 10% para hermanos</li>
+                        <li><i class="fas fa-calendar"></i> <strong>Matrícula:</strong> 30€ (solo primer año)</li>
+                        <li><i class="fas fa-user-plus"></i> <strong>Clase de prueba:</strong> Gratuita</li>
+                        <li><i class="fas fa-credit-card"></i> <strong>Formas de pago:</strong> Mensual, trimestral o
+                            anual</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2><i class="fas fa-rocket"></i> ¿Listo para comenzar?</h2>
+                <p>Únete a la familia TriInfinity y descubre tu potencial en el triatlón.
+                    Contáctanos para más información o para agendar tu clase de prueba gratuita.</p>
+                <div class="cta-buttons">
+                    <a href="index.html#contacto" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> Hazte Socio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (mismo que el principal) -->
+    <footer role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3><i class="fas fa-swimmer"></i> TriInfinity</h3>
+                    <p>Club de triatlón comprometido con la excelencia deportiva, los valores humanos y el desarrollo
+                        integral de nuestros atletas en Móstoles y Navalcarnero.</p>
+                </div>
+                <div class="footer-column">
+                    <h3><i class="fas fa-sitemap"></i> Navegación</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="../index.html#inicio" style="color: white; text-decoration: none;">
+                                <i class="fas fa-home"></i> Inicio</a></li>
+                        <li><a href="../index.html#club" style="color: white; text-decoration: none;">
+                                <i class="fas fa-users"></i> El Club</a></li>
+                        <li><a href="index.html" style="color: white; text-decoration: none;">
+                                <i class="fas fa-clock"></i> Horarios</a></li>
+                        <li><a href="../index.html#contacto" style="color: white; text-decoration: none;">
+                                <i class="fas fa-envelope"></i> Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3><i class="fas fa-map-marker-alt"></i> Contacto</h3>
+                    <p><i class="fas fa-envelope"></i> info@triinfinity.es</p>
+                    <p><i class="fas fa-phone"></i> +34 687 528 338</p>
+                    <p><i class="fas fa-clock"></i> Lun-Vie: 6:00-22:00 | Sáb-Dom: 8:00-20:00</p>
+                </div>
+                <div class="footer-column">
+                    <h3><i class="fas fa-share-alt"></i> Síguenos</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/triinfinitymostoles" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/triinfinitymostoles/?hl=es" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@triinfinitymostoles?is_from_webapp=1&sender_device=pc"
+                            target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 TriInfinity Club de Triatlón. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="main.js"></script>
+    <script>
+        // Navegación suave para las pills
+        document.querySelectorAll('.nav-pill').forEach(pill => {
+            pill.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Remover clase active de todas las pills
+                document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+
+                // Agregar clase active a la pill clickeada
+                this.classList.add('active');
+
+                // Navegar a la sección
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Actualizar pill activa en scroll
+        window.addEventListener('scroll', function () {
+            const sections = ['sede-mostoles', 'sede-navalcarnero', 'escuela-horarios', 'precios'];
+            const scrollPos = window.scrollY + 200;
+
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                const pill = document.querySelector(`a[href="#${sectionId}"]`);
+
+                if (section && pill) {
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+
+                    if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                        document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+                        pill.classList.add('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

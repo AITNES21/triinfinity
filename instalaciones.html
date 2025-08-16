@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tri Infinity</title>
+    <title>Instalaciones - Tri Infinity</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="instalaciones.css" />
     <link rel="stylesheet" href="inde.css" />
+    <link rel="stylesheet" href="instalaciones.css" />
     <link rel="shortcut icon" href="img/Logo.jpg" type="image/x-icon" />
 </head>
 
@@ -20,7 +20,7 @@
                 <span class="logo-text">Tri Infinity</span>
             </div>
 
-            <!-- Menú Desktop Corregido -->
+            <!-- Menú Desktop -->
             <nav class="desktop-menu" role="navigation" aria-label="Menú principal">
                 <ul>
                     <li><a href="index.html#inicio">INICIO</a></li>
@@ -61,14 +61,14 @@
                     <li><a href="index.html#contacto">CONTACTO</a></li>
                 </ul>
             </nav>
-            
-            <!-- Botón Hamburguesa Mejorado -->
+
+            <!-- Botón Hamburguesa -->
             <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menú móvil" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
 
-        <!-- Menú Mobile Mejorado -->
+        <!-- Menú Mobile -->
         <nav class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Menú móvil">
             <ul>
                 <li><a href="index.html#inicio">
@@ -139,55 +139,210 @@
         </nav>
     </header>
 
-
-    <h1>SEDE MÓSTOLES</h1>
-
-    <div class="carruseles-container">
-
-        <div class="carousel-wrapper">
-            <h2 class="titulo-carrusel">BODY FACTORY MÓSTOLES</h2>
-            <p class="descripcion-carrusel">(Escuela de 6 a 18 años) Grupos de adultos de mañana de 9:30 a 12:00 y Grupo
-                de Adultos y Retadas de 19:30 a 22:00. Avenida de los Deportes esquina con, C. Ciclista David Gea, s/n,
-                28935 Móstoles, Madrid
-            </p>
-            <div class="carousel">
-                <img src="img/M1.jpg" class="active" />
-                <img src="img/M2.jpg" />
-                <img src="img/M4.jpg" />
+    <!-- Hero Section -->
+    <section class="hero-instalaciones">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Nuestras Instalaciones</h1>
+                <p class="hero-subtitle">Espacios equipados para alcanzar tu máximo potencial deportivo</p>
             </div>
         </div>
+    </section>
 
-        <div class="carousel-wrapper">
-            <h2 class="titulo-carrusel">PISTA DE ATLETISMO «EL SOTO«</h2>
-            <p class="descripcion-carrusel">En esta instalación se realizarán los entrenamientos específicos de carrera
-                a pie planeados para los sábados. Además también se realizarán varios test en este lugar durante el
-                desarrollo de la temporada. Av. de los Deportes, 80, 28935 Móstoles, Madrid
-            </p>
-            <div class="carousel">
-                <img src="img/M5.jpg" class="active" />
-                <img src="img/M3.jpeg" />
+    <!-- Sede Móstoles -->
+    <section class="sede-section">
+        <div class="container">
+            <div class="sede-header">
+                <h2 class="sede-title">SEDE MÓSTOLES</h2>
+            </div>
+
+            <div class="instalaciones-grid">
+                <!-- Body Factory -->
+                <div class="instalacion-card">
+                    <div class="card-header">
+                        <div class="carousel-container" id="carousel-bodyfactory">
+                            <img src="img/M1.jpg" class="carousel-image active" alt="Body Factory 1" />
+                            <img src="img/M2.jpg" class="carousel-image" alt="Body Factory 2" />
+                            <img src="img/M4.jpg" class="carousel-image" alt="Body Factory 3" />
+                        </div>
+                        <div class="carousel-controls">
+                            <button class="carousel-btn prev-btn" data-carousel="carousel-bodyfactory"
+                                aria-label="Imagen anterior">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="carousel-btn next-btn" data-carousel="carousel-bodyfactory"
+                                aria-label="Siguiente imagen">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="instalacion-title">
+                            <i class="fas fa-swimming-pool"></i>
+                            BODY FACTORY MÓSTOLES
+                        </h3>
+                        <p class="instalacion-description">
+                            (Escuela de 6 a 18 años) Grupos de adultos de mañana de 9:30 a 12:00 y
+                            Grupo de Adultos y Retadas de 19:30 a 22:00.
+                        </p>
+
+                        <div class="instalacion-details">
+                            <div class="detail-item">
+                                <i class="fas fa-users"></i>
+                                <span>Escuela 6-18 años</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>9:30 - 12:00</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-moon"></i>
+                                <span>19:30 - 22:00</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-heart"></i>
+                                <span>Grupo Retadas</span>
+                            </div>
+                        </div>
+
+                        <div class="address-section">
+                            <div class="address-title">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Dirección
+                            </div>
+                            <p class="address-text">
+                                Avenida de los Deportes esquina con, C. Ciclista David Gea, s/n,<br>
+                                28935 Móstoles, Madrid
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pista El Soto -->
+                <div class="instalacion-card">
+                    <div class="card-header">
+                        <div class="carousel-container" id="carousel-elsoto">
+                            <img src="img/M5.jpg" class="carousel-image active" alt="Pista El Soto 1" />
+                            <img src="img/M3.jpeg" class="carousel-image" alt="Pista El Soto 2" />
+                        </div>
+                        <div class="carousel-controls">
+                            <button class="carousel-btn prev-btn" data-carousel="carousel-elsoto"
+                                aria-label="Imagen anterior">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="carousel-btn next-btn" data-carousel="carousel-elsoto"
+                                aria-label="Siguiente imagen">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="instalacion-title">
+                            <i class="fas fa-running"></i>
+                            PISTA DE ATLETISMO «EL SOTO»
+                        </h3>
+                        <p class="instalacion-description">
+                            En esta instalación se realizarán los entrenamientos específicos de carrera
+                            a pie planeados para los sábados. Además también se realizarán varios test
+                            en este lugar durante el desarrollo de la temporada.
+                        </p>
+
+                        <div class="instalacion-details">
+                            <div class="detail-item">
+                                <i class="fas fa-stopwatch"></i>
+                                <span>Tests específicos</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-calendar"></i>
+                                <span>Entrenamientos sábados</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Análisis rendimiento</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-medal"></i>
+                                <span>Competiciones</span>
+                            </div>
+                        </div>
+
+                        <div class="address-section">
+                            <div class="address-title">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Dirección
+                            </div>
+                            <p class="address-text">
+                                Av. de los Deportes, 80<br>
+                                28935 Móstoles, Madrid
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-    </div>
+    <!-- Sede Navalcarnero -->
+    <section class="sede-section">
+        <div class="container">
+            <div class="sede-header">
+                <h2 class="sede-title">SEDE NAVALCARNERO</h2>
+            </div>
 
-    <h1>SEDE NAVALCARNERO</h1>
+            <div class="instalaciones-grid">
+                <!-- Piscina Navalcarnero -->
+                <div class="instalacion-card">
+                    <div class="card-header">
+                        <div class="carousel-container" id="carousel-navalcarnero">
+                            <img src="img/N2.jpeg" class="carousel-image active" alt="Piscina Navalcarnero" />
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="instalacion-title">
+                            <i class="fas fa-swimmer"></i>
+                            PISCINA MARTÍN LÓPEZ ZUBERO
+                        </h3>
+                        <p class="instalacion-description">
+                            Esta es una de las dos instalaciones con las que cuentan en Navalcarnero.
+                            Grupos de la escuela de 11 a 15 años, Adultos y Retadas de 19:30 a 21:30,
+                            además de un nuevo grupo de 14:30 a 16:30. Para 2025 contaremos con la nueva
+                            pista de Atletismo de Navalcarnero.
+                        </p>
 
-    <div class="carruseles-container">
+                        <div class="instalacion-details">
+                            <div class="detail-item">
+                                <i class="fas fa-child"></i>
+                                <span>Escuela 11-15 años</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>14:30 - 16:30</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-moon"></i>
+                                <span>19:30 - 21:30</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-calendar-plus"></i>
+                                <span>Nueva pista 2025</span>
+                            </div>
+                        </div>
 
-        <div class="carousel-wrapper">
-            <h2 class="titulo-carrusel">PISCINA MARTÍN LÓPEZ ZUBERO (Navalcarnero)</h2>
-            <p class="descripcion-carrusel">Esta es una de las dos instalaciones con las que cuentan en Navalcarnero.
-                Grupos de la escuela de 11 a 15 años, Adultos y Retadas de 19:30 a 21:30, además de un nuevo grupo de
-                14:30 a 16:30. Para 2025 contaremos con la nueva pista de Atletismo de Navalcarnero.
-            </p>
-            <div class="carousel">
-                <img src="img/N2.jpeg" class="active" />
-                <img src="img/N2.jpeg" />
+                        <div class="address-section">
+                            <div class="address-title">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Dirección
+                            </div>
+                            <p class="address-text">
+                                Piscina Municipal Martín López Zubero<br>
+                                Navalcarnero, Madrid
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
+    </section>
 
     <!-- Patrocinadores -->
     <section id="patrocinadores">
@@ -216,7 +371,8 @@
                     <ul style="list-style: none;">
                         <li><a href="index.html#inicio" style="color: white; text-decoration: none;">Inicio</a></li>
                         <li><a href="index.html#club" style="color: white; text-decoration: none;">El Club</a></li>
-                        <li><a href="index.html#equipacion" style="color: white; text-decoration: none;">Equipación</a></li>
+                        <li><a href="index.html#equipacion" style="color: white; text-decoration: none;">Equipación</a>
+                        </li>
                         <li><a href="index.html#contacto" style="color: white; text-decoration: none;">Contacto</a></li>
                     </ul>
                 </div>
@@ -243,9 +399,209 @@
         </div>
     </footer>
 
-   <script src="main.js"></script>
+    <script src="main.js"></script>
+    <script>
+        // JAVASCRIPT PARA CARRUSELES DE INSTALACIONES
 
+        /**
+         * Clase específica para carruseles de instalaciones
+         */
+        class InstalacionCarousel {
+            constructor(containerId) {
+                this.containerId = containerId;
+                this.container = document.getElementById(containerId);
 
+                if (!this.container) {
+                    console.log('No se encontró el contenedor:', containerId);
+                    return;
+                }
+
+                this.images = this.container.querySelectorAll('.carousel-image');
+                this.currentIndex = 0;
+                this.autoPlayInterval = null;
+                this.autoPlayDelay = 3500; // 3.5 segundos
+
+                console.log(`Iniciando carousel ${containerId} con ${this.images.length} imágenes`);
+
+                this.init();
+            }
+
+            init() {
+                if (this.images.length <= 1) {
+                    console.log('Solo hay una imagen, no se inicia el carousel');
+                    return;
+                }
+
+                // Configurar botones de control
+                this.setupControls();
+
+                // Configurar eventos de hover
+                this.setupHoverEvents();
+
+                // Configurar touch events para móviles
+                this.setupTouchEvents();
+
+                // Asegurar que la primera imagen esté activa
+                this.showSlide(0);
+
+                // Iniciar autoplay después de un pequeño delay
+                setTimeout(() => {
+                    this.startAutoPlay();
+                }, 1000);
+            }
+
+            setupControls() {
+                const card = this.container.closest('.instalacion-card');
+                if (!card) return;
+
+                const prevBtn = card.querySelector('.prev-btn');
+                const nextBtn = card.querySelector('.next-btn');
+
+                if (prevBtn && nextBtn) {
+                    prevBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.previousSlide();
+                    });
+
+                    nextBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.nextSlide();
+                    });
+
+                    console.log('Controles configurados para', this.containerId);
+                }
+            }
+
+            setupHoverEvents() {
+                const card = this.container.closest('.instalacion-card');
+                if (card) {
+                    card.addEventListener('mouseenter', () => {
+                        this.pauseAutoPlay();
+                    });
+
+                    card.addEventListener('mouseleave', () => {
+                        this.startAutoPlay();
+                    });
+                }
+            }
+
+            setupTouchEvents() {
+                let startX = 0;
+                let endX = 0;
+
+                this.container.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    this.pauseAutoPlay();
+                }, { passive: true });
+
+                this.container.addEventListener('touchend', (e) => {
+                    endX = e.changedTouches[0].clientX;
+                    this.handleSwipe(startX, endX);
+                    this.startAutoPlay();
+                }, { passive: true });
+            }
+
+            handleSwipe(startX, endX) {
+                const threshold = 50;
+                const diff = startX - endX;
+
+                if (Math.abs(diff) > threshold) {
+                    if (diff > 0) {
+                        this.nextSlide();
+                    } else {
+                        this.previousSlide();
+                    }
+                }
+            }
+
+            showSlide(index) {
+                // Remover clase active de todas las imágenes
+                this.images.forEach((img, i) => {
+                    img.classList.remove('active');
+                });
+
+                // Activar la imagen actual
+                if (this.images[index]) {
+                    this.images[index].classList.add('active');
+                    this.currentIndex = index;
+                    console.log(`Mostrando imagen ${index + 1} de ${this.images.length} en ${this.containerId}`);
+                }
+            }
+
+            nextSlide() {
+                const nextIndex = (this.currentIndex + 1) % this.images.length;
+                this.showSlide(nextIndex);
+            }
+
+            previousSlide() {
+                const prevIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+                this.showSlide(prevIndex);
+            }
+
+            startAutoPlay() {
+                this.pauseAutoPlay(); // Limpiar cualquier interval anterior
+
+                if (this.images.length > 1) {
+                    this.autoPlayInterval = setInterval(() => {
+                        this.nextSlide();
+                    }, this.autoPlayDelay);
+
+                    console.log(`Autoplay iniciado para ${this.containerId}`);
+                }
+            }
+
+            pauseAutoPlay() {
+                if (this.autoPlayInterval) {
+                    clearInterval(this.autoPlayInterval);
+                    this.autoPlayInterval = null;
+                    console.log(`Autoplay pausado para ${this.containerId}`);
+                }
+            }
+        }
+
+        /**
+         * Inicializar carruseles cuando el DOM esté listo
+         */
+        function initInstalacionesCarousels() {
+            console.log('Inicializando carruseles de instalaciones...');
+
+            const carouselIds = [
+                'carousel-bodyfactory',
+                'carousel-elsoto',
+                'carousel-navalcarnero'
+            ];
+
+            const carousels = [];
+
+            carouselIds.forEach(id => {
+                console.log('Intentando crear carousel:', id);
+                const carousel = new InstalacionCarousel(id);
+                if (carousel.container) {
+                    carousels.push(carousel);
+                    console.log('Carousel creado exitosamente:', id);
+                }
+            });
+
+            console.log(`Total de carousels inicializados: ${carousels.length}`);
+            return carousels;
+        }
+
+        /**
+         * Esperar a que el DOM esté completamente cargado
+         */
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(initInstalacionesCarousels, 500);
+            });
+        } else {
+            setTimeout(initInstalacionesCarousels, 500);
+        }
+
+        // También inicializar cuando la página esté completamente cargada
+        window.addEventListener('load', () => {
+            setTimeout(initInstalacionesCarousels, 1000);
+        });
+    </script>
 </body>
 
 </html>

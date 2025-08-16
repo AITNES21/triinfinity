@@ -4,16 +4,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tri Infinity</title>
+    <title>Organigrama - Tri Infinity</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="Organigrama.css" />
     <link rel="stylesheet" href="inde.css" />
+    <link rel="stylesheet" href="organigrama.css" />
     <link rel="shortcut icon" href="img/Logo.jpg" type="image/x-icon" />
 </head>
 
 <body>
-    <!-- Header -->
-    <body>
     <!-- Header -->
     <header id="header">
         <div class="container header-content">
@@ -22,7 +20,7 @@
                 <span class="logo-text">Tri Infinity</span>
             </div>
 
-            <!-- Menú Desktop Corregido -->
+            <!-- Menú Desktop -->
             <nav class="desktop-menu" role="navigation" aria-label="Menú principal">
                 <ul>
                     <li><a href="index.html#inicio">INICIO</a></li>
@@ -64,13 +62,13 @@
                 </ul>
             </nav>
 
-            <!-- Botón Hamburguesa Mejorado -->
+            <!-- Botón Hamburguesa -->
             <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menú móvil" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
 
-        <!-- Menú Mobile Mejorado -->
+        <!-- Menú Mobile -->
         <nav class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Menú móvil">
             <ul>
                 <li><a href="index.html#inicio">
@@ -141,98 +139,114 @@
         </nav>
     </header>
 
+    <!-- Hero Simple -->
+    <section class="hero-simple">
+        <div class="container">
+            <h1 class="main-title">Nuestro Equipo</h1>
+            <p class="main-subtitle">Conoce a los profesionales que hacen posible Tri Infinity</p>
+        </div>
+    </section>
 
-    <h2>Nuestro equipo</h2>
+    <!-- Equipo -->
+    <section class="equipo-section">
+        <div class="container">
+            <div class="equipo-grid">
 
-    <div class="equipo-container">
+                <!-- Miguel Ángel -->
+                <div class="member-card">
+                    <div class="card-image">
+                        <img src="img/miguel.jpg" alt="Miguel Ángel Díaz García" />
+                    </div>
+                    <div class="card-content">
+                        <h3 class="member-name">Miguel Ángel Díaz García</h3>
+                        <p class="member-role">Presidente y Gestor</p>
+                        <div class="member-skills">
+                            <span class="skill">Entrenador Triatlón Nivel 3</span>
+                            <span class="skill">Especialista Larga Distancia</span>
+                            <span class="skill">Entrenador Nacional Ciclismo</span>
+                            <span class="skill">Gestión socios y patrocinadores</span>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="miembro">
-            <img src="img/miguel.jpg" alt="Miguel Ángel Díaz García">
-            <div class="nombre">Miguel Ángel Díaz García</div>
-            <div class="cargo">Presidente y Gestor</div>
-            <div class="descripcion">
-                <ul>
-                    <li>Entrenador Triatlón Nivel 3</li>
-                    <li>Especialista en Larga Distancia</li>
-                    <li>Entrenador Nacional Ciclismo</li>
-                    <li>Gestión de socios y patrocinadores</li>
-                </ul>
+                <!-- Arturo -->
+                <div class="member-card">
+                    <div class="card-image">
+                        <img src="img/Arturo.png" alt="Arturo Tonda Ariza" />
+                    </div>
+                    <div class="card-content">
+                        <h3 class="member-name">Arturo Tonda Ariza</h3>
+                        <p class="member-role">Entrenador Adultos, Retadas y Escuelas</p>
+                        <div class="member-skills">
+                            <span class="skill">Entrenador Triatlón Nivel 3</span>
+                            <span class="skill">Grado TAFAD</span>
+                            <span class="skill">Coordinador Escuelas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Óscar -->
+                <div class="member-card">
+                    <div class="card-image">
+                        <img src="img/Oscar.png" alt="Óscar Cabanillas Núñez" />
+                    </div>
+                    <div class="card-content">
+                        <h3 class="member-name">Óscar Cabanillas Núñez</h3>
+                        <p class="member-role">Tesorero</p>
+                        <div class="member-skills">
+                            <span class="skill">Informático</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alberto -->
+                <div class="member-card">
+                    <div class="card-image">
+                        <img src="img/Alberto.jpg" alt="Alberto Prado" />
+                    </div>
+                    <div class="card-content">
+                        <h3 class="member-name">Alberto Prado</h3>
+                        <p class="member-role">Grupo Adultos y Retadas Móstoles</p>
+                        <div class="member-skills">
+                            <span class="skill">Profesor de Natación</span>
+                            <span class="skill">Técnico Deportivo</span>
+                            <span class="skill">Entrenador Triatlón Nivel 2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daniel -->
+                <div class="member-card">
+                    <div class="card-image">
+                        <img src="img/Dani.png" alt="Daniel Martín" />
+                    </div>
+                    <div class="card-content">
+                        <h3 class="member-name">Daniel Martín</h3>
+                        <p class="member-role">Entrenador Escuelas</p>
+                        <div class="member-skills">
+                            <span class="skill">Entrenador Triatlón Nivel 1</span>
+                            <span class="skill">Grado TAFAD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- José Miguel -->
+                <div class="member-card">
+                    <div class="card-image">
+                        <img src="img/Josemi.webp" alt="José Miguel Gómez" />
+                    </div>
+                    <div class="card-content">
+                        <h3 class="member-name">José Miguel Gómez</h3>
+                        <p class="member-role">Entrenador Escuelas</p>
+                        <div class="member-skills">
+                            <span class="skill">Entrenador Triatlón Nivel 1</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-
-        <div class="miembro">
-            <img src="img/Arturo.png" alt="Arturo Tonda Ariza">
-            <div class="nombre">Arturo Tonda Ariza</div>
-            <div class="cargo">Entrenador Adultos, Retadas y Escuelas</div>
-            <div class="descripcion">
-                <ul>
-                    <li>Entrenador Triatlón Nivel 3</li>
-                    <li>Grado TAFAD</li>
-                    <li>Coordinador Escuelas</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="miembro">
-            <img src="img/Oscar.png" alt="Óscar Cabanillas Núñez">
-            <div class="nombre">Óscar Cabanillas Núñez</div>
-            <div class="cargo">Tesorero</div>
-            <div class="descripcion">
-                <ul>
-                    <li>Informático</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="miembro">
-            <img src="img/Alberto.jpg" alt="Alberto Prado">
-            <div class="nombre">Alberto Prado</div>
-            <div class="cargo">Grupo Adultos y Retadas Móstoles</div>
-            <div class="descripcion">
-                <ul>
-                    <li>Profesor de Natación</li>
-                    <li>Técnico Deportivo</li>
-                    <li>Entrenador Triatlón Nivel 2</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="miembro">
-            <img src="img/Dani.png" alt="Daniel Martín">
-            <div class="nombre">Daniel Martín</div>
-            <div class="cargo">Entrenador Escuelas</div>
-            <div class="descripcion">
-                <ul>
-                    <li>Entrenador Triatlón Nivel 1</li>
-                    <li>Grado TAFAD</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- <div class="miembro">
-            <img src="img/aitor.jpg" alt="Aitor Díaz Hernando">
-            <div class="nombre">Aitor Díaz Hernando</div>
-            <div class="cargo">Entrenador Escuelas</div>
-            <div class="descripcion">
-                <ul>
-                    <li>Licenciado CCAFyD</li>
-                    <li>Entrenador Triatlón Nivel 1</li>
-                </ul>
-            </div>
-        </div> -->
-
-        <div class="miembro">
-            <img src="img/Josemi.webp" alt="José Miguel Gómez">
-            <div class="nombre">José Miguel Gómez</div>
-            <div class="cargo">Entrenador Escuelas</div>
-            <div class="descripcion">
-                <ul>
-                    <li>Entrenador Triatlón Nivel 1</li>
-                </ul>
-            </div>
-        </div>
-
-    </div>
+    </section>
 
     <!-- Patrocinadores -->
     <section id="patrocinadores">
@@ -290,8 +304,37 @@
     </footer>
 
     <script src="main.js"></script>
+    <script>
+        // Animaciones simples al hacer scroll
+        function initSimpleAnimations() {
+            const cards = document.querySelectorAll('.member-card');
 
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            }, { threshold: 0.1 });
 
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        }
+
+        // Inicializar cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initSimpleAnimations);
+        } else {
+            initSimpleAnimations();
+        }
+    </script>
 </body>
 
 </html>

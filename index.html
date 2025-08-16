@@ -170,8 +170,7 @@
 
             <!-- Card 2 - Entrenamientos -->
             <article class="card">
-                <a href="hazte-socio.html" class="card-link no-underline"
-                    aria-label="Descubre nuestros entrenamientos">
+                <a href="hazte-socio.html" class="card-link no-underline" aria-label="Descubre nuestros entrenamientos">
                     <img src="img/foto3.jpg" alt="Sesión de natación en grupo en nuestras instalaciones" loading="lazy">
                     <div class="card-content">
                         <h3 class="card-title">
@@ -265,7 +264,8 @@
     <section id="contacto">
         <div class="container">
             <h2 class="section-title">Contacta con Nosotros</h2>
-            <form class="contact-form" role="form" aria-label="Formulario de contacto">
+            <form class="contact-form" role="form" aria-label="Formulario de contacto"
+                action="https://formspree.io/f/xrblvzaa" method="POST">
                 <input type="text" name="nombre" placeholder="Tu nombre completo" required
                     aria-label="Introduce tu nombre completo">
                 <input type="email" name="email" placeholder="Tu email" required
@@ -275,6 +275,8 @@
                 <textarea name="mensaje"
                     placeholder="Cuéntanos sobre tus objetivos deportivos y cómo podemos ayudarte..." rows="5" required
                     aria-label="Escribe tu mensaje"></textarea>
+
+                <!-- Botón de envío -->
                 <button type="submit" class="btn">
                     <i class="fas fa-paper-plane"></i> Enviar Mensaje
                 </button>

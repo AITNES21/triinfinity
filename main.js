@@ -29,6 +29,7 @@ class TriInfinityApp {
         this.initMobileMenu();
         this.initDropdowns();
         this.initCarousels();
+        this.initTimeline(); // Nueva función para timeline
     }
 
     /**
@@ -144,6 +145,79 @@ class TriInfinityApp {
             carousel.currentIndex = (carousel.currentIndex + 1) % carousel.images.length;
             carousel.images[carousel.currentIndex].classList.add('active');
         }, 3000);
+    }
+
+    /**
+     * NUEVA FUNCIÓN: Inicializar timeline
+     */
+    initTimeline() {
+        // Observador para animaciones al hacer scroll
+        const timelineCards = document.querySelectorAll('.timeline-card');
+
+        if (timelineCards.length === 0) return;
+
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('visible')) {
+                    entry.target.classList.add('visible');
+
+                    // Animar los números de las estadísticas
+                    const numbers = entry.target.querySelectorAll('.stat-item .number');
+                    numbers.forEach(num => {
+                        animateNumber(num);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        timelineCards.forEach(card => {
+            observer.observe(card);
+        });
+
+        // Función para animar números
+        function animateNumber(element) {
+            const text = element.innerText;
+            const isTopTen = text.includes('Top');
+            const isPodio = text.includes('º');
+
+            if (isTopTen || isPodio || isNaN(text)) {
+                return; // No animar textos especiales
+            }
+
+            const target = parseInt(text);
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    element.innerText = target.toLocaleString('es-ES');
+                    clearInterval(timer);
+                } else {
+                    element.innerText = Math.floor(current).toLocaleString('es-ES');
+                }
+            }, 16);
+        }
+
+        // Animación del año al hacer hover (más sutil)
+        const yearBadges = document.querySelectorAll('.timeline-year');
+
+        yearBadges.forEach(year => {
+            year.addEventListener('mouseenter', function () {
+                this.style.transform = 'translate(-50%, -50%) scale(1.1)';
+                this.style.transition = 'all 0.3s ease';
+            });
+
+            year.addEventListener('mouseleave', function () {
+                this.style.transform = 'translate(-50%, -50%) scale(1)';
+            });
+        });
     }
 }
 

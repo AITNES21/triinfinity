@@ -1,5 +1,20 @@
 [
   {
+    "id": 1756224168051,
+    "title": "prueba",
+    "category": "club",
+    "excerpt": "prueba",
+    "content": "prueba",
+    "author": "TriInfinity",
+    "featured": false,
+    "images": [
+      "https://raw.githubusercontent.com/AITNES21/triinfinity/main/img/noticias/noticia-1756224164886-iu70kr.png",
+      "https://raw.githubusercontent.com/AITNES21/triinfinity/main/img/noticias/noticia-1756224166306-693vga.jpg",
+      "https://raw.githubusercontent.com/AITNES21/triinfinity/main/img/noticias/noticia-1756224167074-uuy5d.png"
+    ],
+    "date": "2025-08-26"
+  },
+  {
     "id": 1755516391540,
     "title": "MARIA VARO ZUBIRI BRILLA EN LOS WORLDGAMES",
     "category": "competiciones",

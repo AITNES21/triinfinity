@@ -466,9 +466,34 @@
         gap: 1.5rem;
     }
 
+    /* Fix específico para capacidades responsive */
+    .capacidades-section {
+        padding: 3rem 1rem;
+    }
+
     .capacidades-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
+        margin: 1.5rem 0;
+    }
+
+    .capacidad-item {
+        padding: 1.5rem 1rem;
+    }
+
+    .capacidad-item .emoji {
+        font-size: 2.5rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .capacidad-item h4 {
+        font-size: 1.1rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .capacidad-item p {
+        font-size: 0.85rem;
+        line-height: 1.4;
     }
 
     .valores-grid {
@@ -481,5 +506,68 @@
 
     .cta-iniciacion h2 {
         font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .capacidades-section {
+        padding: 2.5rem 1rem;
+    }
+
+    .capacidades-section h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .capacidades-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+        margin: 1.2rem 0;
+    }
+
+    .capacidad-item {
+        padding: 1.2rem 0.8rem;
+        border-radius: 12px;
+    }
+
+    .capacidad-item .emoji {
+        font-size: 2.2rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .capacidad-item h4 {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .capacidad-item p {
+        font-size: 0.8rem;
+        line-height: 1.3;
+    }
+}
+
+@media (max-width: 360px) {
+    .capacidades-section {
+        padding: 2rem 0.8rem;
+    }
+
+    .capacidades-grid {
+        gap: 1rem;
+    }
+
+    .capacidad-item {
+        padding: 1rem 0.6rem;
+    }
+
+    .capacidad-item .emoji {
+        font-size: 2rem;
+    }
+
+    .capacidad-item h4 {
+        font-size: 0.95rem;
+    }
+
+    .capacidad-item p {
+        font-size: 0.75rem;
     }
 }

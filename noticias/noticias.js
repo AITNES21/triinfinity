@@ -1,4 +1,4 @@
-// Sistema de gestión de noticias para TriInfinity
+// Sistema de gestión de noticias para TriInfinity - ACTUALIZADO para múltiples imágenes
 class NoticiasManager {
     constructor() {
         this.noticias = [];
@@ -137,14 +137,82 @@ class NoticiasManager {
 
         grid.innerHTML = noticiasPagina.map(noticia => this.generarCardNoticia(noticia)).join('');
 
+        // Configurar galerías de imágenes en cards
+        this.configurarGaleriasCards();
+
         grid.querySelectorAll('.noticia-card').forEach(card => {
-            card.addEventListener('click', () => {
+            card.addEventListener('click', (e) => {
+                // No abrir modal si se hace clic en controles de galería
+                if (e.target.closest('.gallery-controls') || e.target.closest('.gallery-dot')) {
+                    return;
+                }
                 const id = parseInt(card.dataset.id);
                 this.abrirModal(id);
             });
         });
 
         this.actualizarPaginacion();
+    }
+
+    // NUEVA FUNCIÓN: Configurar galerías en las cards
+    configurarGaleriasCards() {
+        document.querySelectorAll('.noticia-imagenes-gallery').forEach(gallery => {
+            const images = gallery.querySelectorAll('.gallery-image');
+            const dots = gallery.querySelectorAll('.gallery-dot');
+            let currentIndex = 0;
+            let interval = null;
+
+            // Función para mostrar imagen específica
+            const mostrarImagen = (index) => {
+                images.forEach((img, i) => {
+                    img.classList.toggle('active', i === index);
+                });
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+                currentIndex = index;
+
+                // Actualizar contador
+                const counter = gallery.querySelector('.gallery-counter');
+                if (counter && images.length > 1) {
+                    counter.textContent = `${index + 1}/${images.length}`;
+                }
+            };
+
+            // Configurar dots
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    mostrarImagen(index);
+                    // Reiniciar autoplay
+                    clearInterval(interval);
+                    iniciarAutoplay();
+                });
+            });
+
+            // Autoplay solo si hay más de una imagen
+            const iniciarAutoplay = () => {
+                if (images.length > 1) {
+                    interval = setInterval(() => {
+                        currentIndex = (currentIndex + 1) % images.length;
+                        mostrarImagen(currentIndex);
+                    }, 4000);
+                }
+            };
+
+            // Pausar en hover
+            gallery.addEventListener('mouseenter', () => {
+                clearInterval(interval);
+            });
+
+            gallery.addEventListener('mouseleave', () => {
+                iniciarAutoplay();
+            });
+
+            // Mostrar primera imagen e iniciar autoplay
+            mostrarImagen(0);
+            iniciarAutoplay();
+        });
     }
 
     generarCardNoticia(noticia) {
@@ -156,14 +224,47 @@ class NoticiasManager {
 
         const categoriaTexto = this.obtenerTextoCategoria(noticia.category);
 
+        // ACTUALIZADO: Manejar múltiples imágenes
+        const imagenesArray = Array.isArray(noticia.images) ? noticia.images :
+            (noticia.image ? [noticia.image] : []); // Compatibilidad con formato anterior
+
+        let contenidoImagen = '';
+
+        if (imagenesArray.length === 0) {
+            contenidoImagen = `
+                <div class="noticia-imagen no-image">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+            `;
+        } else if (imagenesArray.length === 1) {
+            contenidoImagen = `
+                <div class="noticia-imagen">
+                    <img src="${imagenesArray[0]}" alt="${noticia.title}" loading="lazy" onerror="handleImageError(this)">
+                </div>
+            `;
+        } else {
+            const imagenesHtml = imagenesArray.map((img, index) =>
+                `<img src="${img}" alt="${noticia.title}" class="gallery-image ${index === 0 ? 'active' : ''}" loading="lazy" onerror="handleImageError(this)">`
+            ).join('');
+
+            const dotsHtml = imagenesArray.map((_, index) =>
+                `<div class="gallery-dot ${index === 0 ? 'active' : ''}" data-index="${index}"></div>`
+            ).join('');
+
+            contenidoImagen = `
+                <div class="noticia-imagenes-gallery">
+                    ${imagenesHtml}
+                    <div class="gallery-controls">
+                        ${dotsHtml}
+                    </div>
+                    <div class="gallery-counter">1/${imagenesArray.length}</div>
+                </div>
+            `;
+        }
+
         return `
             <div class="noticia-card ${noticia.featured ? 'destacada' : ''}" data-id="${noticia.id}">
-                <div class="noticia-imagen ${!noticia.image ? 'no-image' : ''}">
-                    ${noticia.image 
-                        ? `<img src="${noticia.image}" alt="${noticia.title}" loading="lazy" onerror="handleImageError(this)">`
-                        : '<i class="fas fa-newspaper"></i>'
-                    }
-                </div>
+                ${contenidoImagen}
                 <div class="noticia-content">
                     <div class="noticia-meta">
                         <span class="noticia-fecha">${fecha}</span>
@@ -218,6 +319,7 @@ class NoticiasManager {
         }
     }
 
+    // ACTUALIZADA: Modal con soporte para múltiples imágenes
     abrirModal(id) {
         const noticia = this.noticias.find(n => n.id === id);
         if (!noticia) return;
@@ -234,17 +336,56 @@ class NoticiasManager {
         const categoriaTexto = this.obtenerTextoCategoria(noticia.category);
         const contenidoHTML = this.convertirMarkdownAHTML(noticia.content);
 
+        // Manejar múltiples imágenes
+        const imagenesArray = Array.isArray(noticia.images) ? noticia.images :
+            (noticia.image ? [noticia.image] : []);
+
+        let headerContent = '';
+
+        if (imagenesArray.length === 0) {
+            headerContent = `
+                <div class="modal-noticia-header no-image">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+            `;
+        } else if (imagenesArray.length === 1) {
+            headerContent = `
+                <div class="modal-noticia-header">
+                    <img src="${imagenesArray[0]}" alt="${noticia.title}" onerror="handleModalImageError(this)">
+                </div>
+            `;
+        } else {
+            const imagenesHtml = imagenesArray.map((img, index) =>
+                `<img src="${img}" alt="${noticia.title}" class="modal-gallery-image ${index === 0 ? 'active' : ''}" onerror="handleModalImageError(this)">`
+            ).join('');
+
+            const dotsHtml = imagenesArray.map((_, index) =>
+                `<div class="modal-gallery-dot ${index === 0 ? 'active' : ''}" data-index="${index}"></div>`
+            ).join('');
+
+            headerContent = `
+                <div class="modal-gallery">
+                    ${imagenesHtml}
+                    <button class="modal-gallery-nav prev" onclick="noticiasManager.cambiarImagenModal(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="modal-gallery-nav next" onclick="noticiasManager.cambiarImagenModal(1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="modal-gallery-controls">
+                        ${dotsHtml}
+                    </div>
+                    <div class="modal-gallery-counter">1/${imagenesArray.length}</div>
+                </div>
+            `;
+        }
+
         modal.innerHTML = `
             <div class="modal-content">
                 <button class="modal-close" onclick="noticiasManager.cerrarModal()">
                     <i class="fas fa-times"></i>
                 </button>
-                <div class="modal-noticia-header ${!noticia.image ? 'no-image' : ''}">
-                    ${noticia.image 
-                        ? `<img src="${noticia.image}" alt="${noticia.title}" onerror="handleModalImageError(this)">`
-                        : '<i class="fas fa-newspaper"></i>'
-                    }
-                </div>
+                ${headerContent}
                 <div class="modal-noticia-body">
                     <div class="modal-noticia-meta">
                         <div>
@@ -261,8 +402,66 @@ class NoticiasManager {
             </div>
         `;
 
+        // Configurar galería del modal si hay múltiples imágenes
+        this.modalImageIndex = 0;
+        this.modalImages = imagenesArray;
+
+        if (imagenesArray.length > 1) {
+            this.configurarGaleriaModal();
+        }
+
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
+    }
+
+    // NUEVA FUNCIÓN: Configurar galería del modal
+    configurarGaleriaModal() {
+        const dots = document.querySelectorAll('.modal-gallery-dot');
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                this.cambiarImagenModal(index, true);
+            });
+        });
+
+        this.actualizarContadorModal();
+    }
+
+    // NUEVA FUNCIÓN: Cambiar imagen en modal
+    cambiarImagenModal(direction, absolute = false) {
+        if (!this.modalImages || this.modalImages.length <= 1) return;
+
+        const images = document.querySelectorAll('.modal-gallery-image');
+        const dots = document.querySelectorAll('.modal-gallery-dot');
+
+        if (absolute) {
+            this.modalImageIndex = direction;
+        } else {
+            this.modalImageIndex += direction;
+            if (this.modalImageIndex < 0) {
+                this.modalImageIndex = this.modalImages.length - 1;
+            } else if (this.modalImageIndex >= this.modalImages.length) {
+                this.modalImageIndex = 0;
+            }
+        }
+
+        images.forEach((img, index) => {
+            img.classList.toggle('active', index === this.modalImageIndex);
+        });
+
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === this.modalImageIndex);
+        });
+
+        this.actualizarContadorModal();
+    }
+
+    // NUEVA FUNCIÓN: Actualizar contador de imágenes en modal
+    actualizarContadorModal() {
+        const counter = document.querySelector('.modal-gallery-counter');
+        if (counter && this.modalImages) {
+            counter.textContent = `${this.modalImageIndex + 1}/${this.modalImages.length}`;
+        }
     }
 
     convertirMarkdownAHTML(markdown) {
@@ -288,27 +487,34 @@ class NoticiasManager {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
+        // Limpiar datos de modal
+        this.modalImageIndex = 0;
+        this.modalImages = [];
     }
 }
 
-// Función para manejar errores de imagen en las tarjetas
+// ACTUALIZADA: Función para manejar errores de imagen en las tarjetas
 function handleImageError(img) {
     img.style.display = 'none';
     const parent = img.parentElement;
-    parent.classList.add('no-image');
-    const icon = document.createElement('i');
-    icon.className = 'fas fa-newspaper';
-    parent.appendChild(icon);
+    if (!parent.classList.contains('no-image')) {
+        parent.classList.add('no-image');
+        const icon = document.createElement('i');
+        icon.className = 'fas fa-newspaper';
+        parent.appendChild(icon);
+    }
 }
 
-// Función para manejar errores de imagen en el modal
+// ACTUALIZADA: Función para manejar errores de imagen en el modal
 function handleModalImageError(img) {
     img.style.display = 'none';
     const parent = img.parentElement;
-    parent.classList.add('no-image');
-    const icon = document.createElement('i');
-    icon.className = 'fas fa-newspaper';
-    parent.appendChild(icon);
+    if (!parent.classList.contains('no-image')) {
+        parent.classList.add('no-image');
+        const icon = document.createElement('i');
+        icon.className = 'fas fa-newspaper';
+        parent.appendChild(icon);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

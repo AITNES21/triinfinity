@@ -282,6 +282,66 @@
       box-shadow: 0 5px 15px rgba(25, 135, 84, 0.3);
     }
 
+    /* NUEVO: Estilos para múltiples imágenes */
+    .images-container {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .image-preview {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .preview-img {
+      max-width: 100%;
+      max-height: 200px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .remove-image-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: var(--rojo-principal);
+      color: white;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .remove-image-btn:hover {
+      background: var(--rojo-oscuro);
+      transform: scale(1.1);
+    }
+
+    .add-more-images {
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+      background: var(--verde);
+    }
+
+    .add-more-images:hover {
+      background: #157347;
+    }
+
+    .images-counter {
+      font-size: 0.9rem;
+      color: var(--gris-oscuro);
+      margin-top: 0.5rem;
+    }
+
     .news-list {
       max-height: 600px;
       overflow-y: auto;
@@ -327,6 +387,30 @@
     .news-actions {
       display: flex;
       gap: 0.5rem;
+    }
+
+    .news-images-preview {
+      display: flex;
+      gap: 0.5rem;
+      margin: 0.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .news-images-preview img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 2px solid var(--gris-claro);
+    }
+
+    .images-count {
+      background: var(--rojo-principal);
+      color: white;
+      padding: 0.2rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
     }
 
     .category-badge {
@@ -376,27 +460,6 @@
 
     .notification.error {
       background: #dc3545;
-    }
-
-    .export-section {
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 2px solid var(--gris-claro);
-    }
-
-    .export-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn-secondary {
-      background: var(--gris-oscuro);
-    }
-
-    .btn-secondary:hover {
-      background: #373e47;
-      box-shadow: 0 5px 15px rgba(73, 80, 87, 0.3);
     }
 
     .sync-status {
@@ -456,10 +519,6 @@
 
       .news-actions {
         flex-wrap: wrap;
-      }
-
-      .export-buttons {
-        flex-direction: column;
       }
     }
 
@@ -574,22 +633,25 @@
                 rows="8" required></textarea>
             </div>
 
+            <!-- ACTUALIZADO: Múltiples imágenes -->
             <div class="form-group">
-              <label for="image">Imagen de la noticia (opcional)</label>
-              <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)">
+              <label for="images">Imágenes de la noticia (opcional)</label>
+              <input type="file" id="images" name="images" accept="image/*" multiple onchange="previewImages(event)">
               <small style="color: var(--gris-oscuro); display: block; margin-top: 0.5rem;">
-                Formatos: JPG, PNG, GIF, WebP. Máximo: 2MB
+                Formatos: JPG, PNG, GIF, WebP. Máximo: 2MB por imagen. Puedes seleccionar múltiples imágenes.
               </small>
 
-              <!-- Preview de imagen -->
-              <div id="imagePreview" style="margin-top: 1rem; display: none;">
-                <img id="previewImg"
-                  style="max-width: 100%; max-height: 300px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <button type="button" class="btn btn-danger"
-                  style="margin-top: 0.5rem; padding: 0.5rem 1rem; font-size: 0.9rem;" onclick="removeImage()">
-                  <i class="fas fa-trash"></i> Eliminar imagen
-                </button>
+              <!-- Preview de múltiples imágenes -->
+              <div id="imagesPreview" class="images-container">
+                <!-- Las previews de imágenes se mostrarán aquí -->
               </div>
+
+              <div id="imagesCounter" class="images-counter" style="display: none;"></div>
+
+              <button type="button" class="btn add-more-images" id="addMoreImages" style="display: none;"
+                onclick="addMoreImages()">
+                <i class="fas fa-plus"></i> Agregar más imágenes
+              </button>
             </div>
 
             <div class="form-group">
@@ -622,18 +684,6 @@
               <p>Comienza creando tu primera noticia</p>
             </div>
           </div>
-
-          <div class="export-section">
-            <h3 style="margin-bottom: 1rem;">Herramientas</h3>
-            <div class="export-buttons">
-              <button class="btn btn-secondary" onclick="newsManager.exportarJSON()">
-                <i class="fas fa-download"></i> Exportar JSON
-              </button>
-              <button class="btn btn-secondary" onclick="newsManager.sincronizarConGitHub()">
-                <i class="fas fa-sync"></i> Sincronizar Manual
-              </button>
-            </div>
-          </div>
         </section>
       </main>
     </div>
@@ -655,6 +705,7 @@
 
     // Estado de la aplicación
     let currentUser = null;
+    let selectedImages = []; // NUEVO: Array para múltiples imágenes
 
     // Elementos DOM
     const authContainer = document.getElementById('authContainer');
@@ -856,7 +907,7 @@
       }
     }
 
-    // GESTOR DE NOTICIAS
+    // GESTOR DE NOTICIAS - ACTUALIZADO para múltiples imágenes
     class NewsManager {
       constructor() {
         this.news = [];
@@ -903,51 +954,51 @@
         }
       }
 
+      // ACTUALIZADO: Manejar múltiples imágenes
       async handleSubmit() {
         const formData = new FormData(document.getElementById('newsForm'));
-        const imageFile = document.getElementById('image').files[0];
 
-        let imageUrl = null;
+        let imageUrls = [];
 
-        // Si hay una imagen nueva, subirla primero
-        if (imageFile) {
-          this.showNotification('Subiendo imagen...', 'success');
+        // Si hay imágenes nuevas, subirlas
+        if (selectedImages.length > 0) {
+          this.showNotification(`Subiendo ${selectedImages.length} imágenes...`, 'success');
 
           try {
-            // Convertir imagen a base64
-            const base64 = await this.fileToBase64(imageFile);
-            const fileName = generateImageFileName(imageFile.name);
+            for (const imageData of selectedImages) {
+              const fileName = generateImageFileName(imageData.name);
 
-            // Subir imagen a GitHub
-            const response = await fetch('/.netlify/functions/github-proxy', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                action: 'uploadImage',
-                fileName: fileName,
-                content: base64.split(',')[1], // Quitar el prefijo data:image/...;base64,
-                path: `img/noticias/${fileName}`
-              })
-            });
+              // Subir imagen a GitHub
+              const response = await fetch('/.netlify/functions/github-proxy', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  action: 'uploadImage',
+                  fileName: fileName,
+                  content: imageData.base64.split(',')[1], // Quitar prefijo
+                  path: `img/noticias/${fileName}`
+                })
+              });
 
-            if (response.ok) {
-              const data = await response.json();
-              imageUrl = data.url;
-              this.showNotification('Imagen subida correctamente', 'success');
-            } else {
-              throw new Error('Error subiendo imagen');
+              if (response.ok) {
+                const data = await response.json();
+                imageUrls.push(data.url);
+              } else {
+                throw new Error(`Error subiendo imagen ${imageData.name}`);
+              }
             }
+            this.showNotification('Imágenes subidas correctamente', 'success');
           } catch (error) {
-            console.error('Error subiendo imagen:', error);
-            this.showNotification('Error al subir la imagen', 'error');
+            console.error('Error subiendo imágenes:', error);
+            this.showNotification('Error al subir las imágenes', 'error');
             return; // Detener si falla la subida
           }
         } else if (this.editingId) {
-          // Si estamos editando y no hay imagen nueva, mantener la existente
+          // Si estamos editando y no hay imágenes nuevas, mantener las existentes
           const existingNews = this.news.find(n => n.id === this.editingId);
-          imageUrl = existingNews ? existingNews.image : null;
+          imageUrls = existingNews ? (existingNews.images || [existingNews.image].filter(Boolean)) : [];
         }
 
         const newsData = {
@@ -958,7 +1009,7 @@
           content: formData.get('content').trim(),
           author: formData.get('author').trim(),
           featured: formData.get('featured') === 'true',
-          image: imageUrl,
+          images: imageUrls, // CAMBIADO: Array de imágenes
           date: this.editingId ? this.news.find(n => n.id === this.editingId).date : new Date().toISOString().split('T')[0]
         };
 
@@ -971,16 +1022,6 @@
         this.resetForm();
         await this.saveToStorage();
         this.renderNews();
-      }
-
-      // Añadir este método después de handleSubmit
-      fileToBase64(file) {
-        return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = () => resolve(reader.result);
-          reader.onerror = error => reject(error);
-        });
       }
 
       addNews(newsData) {
@@ -998,6 +1039,7 @@
         document.getElementById('submitBtn').innerHTML = '<i class="fas fa-newspaper"></i> Publicar Noticia';
       }
 
+      // ACTUALIZADO: Editar noticia con múltiples imágenes
       editNews(id) {
         const news = this.news.find(n => n.id === id);
         if (news) {
@@ -1009,15 +1051,27 @@
           document.getElementById('author').value = news.author;
           document.getElementById('featured').value = news.featured.toString();
 
-          // Limpiar input de archivo (no se puede pre-llenar)
-          document.getElementById('image').value = '';
+          // Limpiar input de archivo
+          document.getElementById('images').value = '';
+          selectedImages = [];
 
-          // Mostrar imagen existente si la hay
-          if (news.image) {
-            document.getElementById('previewImg').src = news.image;
-            document.getElementById('imagePreview').style.display = 'block';
+          // Mostrar imágenes existentes
+          const imageUrls = news.images || [news.image].filter(Boolean);
+          if (imageUrls.length > 0) {
+            const previewContainer = document.getElementById('imagesPreview');
+            previewContainer.innerHTML = imageUrls.map((url, index) => `
+              <div class="image-preview">
+                <img src="${url}" class="preview-img" alt="Imagen ${index + 1}">
+                <button type="button" class="remove-image-btn" onclick="removeExistingImage('${url}')">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            `).join('');
+
+            updateImagesCounter(imageUrls.length);
           } else {
-            document.getElementById('imagePreview').style.display = 'none';
+            document.getElementById('imagesPreview').innerHTML = '';
+            document.getElementById('imagesCounter').style.display = 'none';
           }
 
           document.getElementById('submitBtn').innerHTML = '<i class="fas fa-edit"></i> Actualizar Noticia';
@@ -1040,9 +1094,11 @@
         this.editingId = null;
         document.getElementById('submitBtn').innerHTML = '<i class="fas fa-newspaper"></i> Publicar Noticia';
 
-        // Limpiar preview de imagen
-        document.getElementById('imagePreview').style.display = 'none';
-        document.getElementById('previewImg').src = '';
+        // Limpiar imágenes
+        selectedImages = [];
+        document.getElementById('imagesPreview').innerHTML = '';
+        document.getElementById('imagesCounter').style.display = 'none';
+        document.getElementById('addMoreImages').style.display = 'none';
       }
 
       async saveToStorage() {
@@ -1059,60 +1115,51 @@
         }
       }
 
-      async sincronizarConGitHub() {
-        const saved = await this.githubService.saveNoticias(this.news);
-
-        if (saved) {
-          this.showNotification('✅ Sincronización completada', 'success');
-        } else {
-          this.showNotification('❌ Error en la sincronización', 'error');
-        }
-      }
-
-      exportarJSON() {
-        const dataStr = JSON.stringify(this.news, null, 2);
-        const dataBlob = new Blob([dataStr], { type: 'application/json' });
-        const url = URL.createObjectURL(dataBlob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'noticias.json';
-        link.click();
-        URL.revokeObjectURL(url);
-        this.showNotification('Archivo JSON descargado', 'success');
-      }
-
+      // ACTUALIZADO: Renderizar con múltiples imágenes
       renderNews() {
         const newsList = document.getElementById('newsList');
 
         if (this.news.length === 0) {
           newsList.innerHTML = `
-                        <div class="empty-state">
-                            <i class="fas fa-newspaper"></i>
-                            <h3>No hay noticias publicadas</h3>
-                            <p>Comienza creando tu primera noticia</p>
-                        </div>
-                    `;
+            <div class="empty-state">
+              <i class="fas fa-newspaper"></i>
+              <h3>No hay noticias publicadas</h3>
+              <p>Comienza creando tu primera noticia</p>
+            </div>
+          `;
           return;
         }
 
-        newsList.innerHTML = this.news.map(news => `
-                    <div class="news-item">
-                        <div class="news-meta">
-                            <span class="category-badge">${this.getCategoryName(news.category)}</span>
-                            <span>${this.formatDate(news.date)} • ${news.author}${news.featured ? ' • ⭐ DESTACADA' : ''}</span>
-                        </div>
-                        <h3 class="news-title">${news.title}</h3>
-                        <p class="news-content">${news.excerpt}</p>
-                        <div class="news-actions">
-                            <button class="btn btn-edit" onclick="newsManager.editNews(${news.id})">
-                                <i class="fas fa-edit"></i> Editar
-                            </button>
-                            <button class="btn btn-danger" onclick="newsManager.deleteNews(${news.id})">
-                                <i class="fas fa-trash"></i> Eliminar
-                            </button>
-                        </div>
-                    </div>
-                `).join('');
+        newsList.innerHTML = this.news.map(news => {
+          const imageUrls = news.images || [news.image].filter(Boolean);
+          const imagesPreview = imageUrls.length > 0 ? `
+            <div class="news-images-preview">
+              ${imageUrls.slice(0, 3).map(url => `<img src="${url}" alt="Preview">`).join('')}
+              ${imageUrls.length > 3 ? `<span class="images-count">+${imageUrls.length - 3}</span>` : ''}
+              ${imageUrls.length > 1 ? `<span class="images-count">${imageUrls.length} imágenes</span>` : ''}
+            </div>
+          ` : '';
+
+          return `
+            <div class="news-item">
+              <div class="news-meta">
+                <span class="category-badge">${this.getCategoryName(news.category)}</span>
+                <span>${this.formatDate(news.date)} • ${news.author}${news.featured ? ' • ⭐ DESTACADA' : ''}</span>
+              </div>
+              <h3 class="news-title">${news.title}</h3>
+              ${imagesPreview}
+              <p class="news-content">${news.excerpt}</p>
+              <div class="news-actions">
+                <button class="btn btn-edit" onclick="newsManager.editNews(${news.id})">
+                  <i class="fas fa-edit"></i> Editar
+                </button>
+                <button class="btn btn-danger" onclick="newsManager.deleteNews(${news.id})">
+                  <i class="fas fa-trash"></i> Eliminar
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
       }
 
       getCategoryName(category) {
@@ -1146,52 +1193,94 @@
       }
     }
 
-    // Inicializar la aplicación
-    let newsManager;
-    function initNewsManager() {
-      if (!newsManager) {
-        newsManager = new NewsManager();
-      }
-    }
-    // FUNCIONES DE IMAGEN - Añadir antes de "let newsManager;"
+    // FUNCIONES PARA MÚLTIPLES IMÁGENES
 
-    // Preview de imagen
-    function previewImage(event) {
-      const file = event.target.files[0];
-      const preview = document.getElementById('imagePreview');
-      const previewImg = document.getElementById('previewImg');
+    // Preview de múltiples imágenes
+    function previewImages(event) {
+      const files = Array.from(event.target.files);
 
-      if (file) {
+      files.forEach(file => {
         // Validar tamaño (2MB máximo)
         if (file.size > 2 * 1024 * 1024) {
-          alert('La imagen es muy grande. Máximo 2MB.');
-          event.target.value = '';
+          alert(`La imagen ${file.name} es muy grande. Máximo 2MB.`);
           return;
         }
 
         // Validar formato
         const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
         if (!validTypes.includes(file.type)) {
-          alert('Formato no válido. Usa: JPG, PNG, GIF o WebP');
-          event.target.value = '';
+          alert(`Formato no válido para ${file.name}. Usa: JPG, PNG, GIF o WebP`);
           return;
         }
 
-        // Mostrar preview
+        // Convertir a base64
         const reader = new FileReader();
         reader.onload = function (e) {
-          previewImg.src = e.target.result;
-          preview.style.display = 'block';
+          selectedImages.push({
+            name: file.name,
+            base64: e.target.result
+          });
+
+          // Añadir preview
+          addImagePreview(e.target.result, selectedImages.length - 1);
+          updateImagesCounter();
         };
         reader.readAsDataURL(file);
-      }
+      });
+
+      // Limpiar input
+      event.target.value = '';
+    }
+
+    // Añadir preview de imagen
+    function addImagePreview(src, index) {
+      const container = document.getElementById('imagesPreview');
+      const preview = document.createElement('div');
+      preview.className = 'image-preview';
+      preview.innerHTML = `
+        <img src="${src}" class="preview-img" alt="Preview ${index + 1}">
+        <button type="button" class="remove-image-btn" onclick="removeImagePreview(${index})">
+          <i class="fas fa-times"></i>
+        </button>
+      `;
+      container.appendChild(preview);
     }
 
     // Eliminar imagen seleccionada
-    function removeImage() {
-      document.getElementById('image').value = '';
-      document.getElementById('imagePreview').style.display = 'none';
-      document.getElementById('previewImg').src = '';
+    function removeImagePreview(index) {
+      selectedImages.splice(index, 1);
+      refreshImagePreviews();
+      updateImagesCounter();
+    }
+
+    // Refrescar previews después de eliminar
+    function refreshImagePreviews() {
+      const container = document.getElementById('imagesPreview');
+      container.innerHTML = '';
+      selectedImages.forEach((image, index) => {
+        addImagePreview(image.base64, index);
+      });
+    }
+
+    // Actualizar contador de imágenes
+    function updateImagesCounter(customCount = null) {
+      const counter = document.getElementById('imagesCounter');
+      const addBtn = document.getElementById('addMoreImages');
+      const count = customCount !== null ? customCount : selectedImages.length;
+
+      if (count > 0) {
+        counter.style.display = 'block';
+        counter.textContent = `${count} imagen${count !== 1 ? 'es' : ''} seleccionada${count !== 1 ? 's' : ''}`;
+        addBtn.style.display = 'block';
+      } else {
+        counter.style.display = 'none';
+        addBtn.style.display = 'none';
+      }
+    }
+
+    // Agregar más imágenes
+    function addMoreImages() {
+      document.getElementById('images').click();
     }
 
     // Función para generar nombre único para la imagen
@@ -1200,6 +1289,14 @@
       const randomStr = Math.random().toString(36).substring(7);
       const extension = originalName.split('.').pop().toLowerCase();
       return `noticia-${timestamp}-${randomStr}.${extension}`;
+    }
+
+    // Inicializar la aplicación
+    let newsManager;
+    function initNewsManager() {
+      if (!newsManager) {
+        newsManager = new NewsManager();
+      }
     }
   </script>
 </body>

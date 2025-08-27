@@ -457,7 +457,7 @@ section {
 }
 
 .card:nth-child(3)::after {
-    content: 'HOT';
+    content: 'NUEVA';
     position: absolute;
     top: 20px;
     right: -30px;
